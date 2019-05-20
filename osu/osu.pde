@@ -24,14 +24,22 @@ class Circle {
   }
 }
 
+class Cursor {
+  
+}
+
 Circle c; 
+PImage photo;
 
 void setup() {
   size(1000, 800);
   c = new Circle(400,400);
+  photo = loadImage("cursor@2x.png");
+  photo.resize(40,40);
 }
 
 void draw() { 
   background(20);
   c.display();
+  cursor(photo);
 }
