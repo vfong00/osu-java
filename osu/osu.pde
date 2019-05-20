@@ -25,10 +25,22 @@ class Circle {
 }
 
 class Cursor {
-  
+  float x, y;
+  PImage photo;
+  public Cursor(float x, float y, PImage photo) {
+      this.x = x;
+      this.y = y;
+      this.photo = photo;
+  }
+  void display() {
+    imageMode(CENTER);
+    image(photo, mouseX, mouseY);
+  }
+    
 }
 
 Circle c; 
+Cursor p;
 PImage photo;
 
 void setup() {
@@ -36,10 +48,12 @@ void setup() {
   c = new Circle(400,400);
   photo = loadImage("cursor@2x.png");
   photo.resize(40,40);
+  p = new Cursor(width / 2, height / 2, photo);
 }
 
 void draw() { 
   background(20);
+  noCursor();
   c.display();
-  cursor(photo);
+  p.display();
 }
