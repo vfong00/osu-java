@@ -1,20 +1,23 @@
 class Circle {
-  float x,y;
+  float x,y,r;
   boolean clicked;
+  ApproachCircle c;
   
-  public Circle(float x, float y) {
+  public Circle(float x, float y, float r) {
     this.x = x;
     this.y = y;
+    this.r = r;
     clicked = false;
+    c = new ApproachCircle(x, y);
   }
   
   void display() {
     if (!isClicked()){
       fill(255);
-      ellipse(x,y,50,50);
+      ellipse(x,y,r,r);
       noStroke();
       fill(20);
-      ellipse(x,y,45,45);
+      ellipse(x,y,r - (r / 10),r - (r / 10));
     }
   }
   
@@ -39,13 +42,21 @@ class Cursor {
     
 }
 
+class ApproachCircle {
+  float x, y, r;
+  public ApproachCircle(float x, float y, float r) {
+    
+    
+  }
+}
+
 Circle c; 
 Cursor p;
 PImage photo;
 
 void setup() {
   size(1000, 800);
-  c = new Circle(400,400);
+  c = new Circle(400, 400, 50);
   photo = loadImage("cursor@2x.png");
   photo.resize(40,40);
   p = new Cursor(width / 2, height / 2, photo);
