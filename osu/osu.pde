@@ -1,13 +1,20 @@
 class Circle {
   float x,y;
+  boolean clicked;
   
   public Circle(float x, float y) {
     this.x = x;
     this.y = y;
+    clicked = false;
   }
   
   void display() {
-    circle(x,y,25.0);
+    if (!isClicked()) circle(x,y,25.0);
+  }
+  
+  boolean isClicked() {
+    if (!clicked) clicked = dist(mouseX, mouseY, this.x, this.y) < 25.0/2 && mousePressed;
+    return clicked;
   }
 }
 
@@ -19,5 +26,6 @@ void setup() {
 }
 
 void draw() { 
+  background(255);
   c.display();
 }
