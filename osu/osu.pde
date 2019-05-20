@@ -9,7 +9,13 @@ class Circle {
   }
   
   void display() {
-    if (!isClicked()) circle(x,y,25.0);
+    if (!isClicked()){
+      fill(255);
+      ellipse(x,y,50,50);
+      noStroke();
+      fill(20);
+      ellipse(x,y,45,45);
+    }
   }
   
   boolean isClicked() {
@@ -26,6 +32,6 @@ void setup() {
 }
 
 void draw() { 
-  background(255);
+  background(20);
   c.display();
 }
