@@ -8,11 +8,11 @@ class Circle implements Displayable {
   int score;
   ApproachCircle c;
   
-  public Circle(float x, float y, float r, String num) {
+  public Circle(float x, float y, float r, int num) {
     this.x = x;
     this.y = y;
     this.r = r;
-    this.num = num;
+    this.num =  "" + num;
     dead = false;
     score = 0;
     c = new ApproachCircle(x, y, 2.5 * r);
