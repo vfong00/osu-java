@@ -5,6 +5,7 @@ class Circle implements Displayable {
   float x,y,r;
   String num;
   boolean dead;
+  boolean clicked;
   int score;
   ApproachCircle c;
   
@@ -14,6 +15,7 @@ class Circle implements Displayable {
     this.r = r;
     this.num =  "" + num;
     dead = false;
+    clicked = false;
     score = 0;
     c = new ApproachCircle(x, y, 2.5 * r);
   }
@@ -29,7 +31,7 @@ class Circle implements Displayable {
       //fill(20);
       //ellipse(x,y,r - (r / 10),r - (r / 10));
       fill(255);
-      text(num, x-12, y+5);
+      text(num, x-10, y+10);
     }
   }
   
@@ -53,9 +55,14 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
     endShape(); 
 }
 
-
+  boolean isClicked(){
+    return clicked;
+  }
   boolean isDead() {
-    if (!dead) dead = dist(mouseX, mouseY, this.x, this.y) < 40.0/2 && mousePressed;
+    if (!dead){
+      clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
+      dead = clicked;
+    }
     return dead;
   }
 }
