@@ -55,7 +55,7 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
 
 
   boolean isDead() {
-    if (!dead) dead = dist(mouseX, mouseY, this.x, this.y) < 40.0/2 && mousePressed;
+    if (!dead) dead = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
     return dead;
   }
 }
