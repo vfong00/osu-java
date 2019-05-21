@@ -45,14 +45,14 @@ void setup() {
   thingsToDisplay = new ArrayList<Displayable>();
   circles = new ArrayList<Circle>();
   dead = new ArrayList<Circle>();
-  a = new Circle(400, 400, 80, "1");
+  a = new Circle(400, 400, 80, 1);
   thingsToDisplay.add(a);
   circles.add(a);
-  b = new Circle(500, 480, 80, "2");
+  b = new Circle(500, 480, 80, 2);
   circles.add(b);
-  c = new Circle(650, 600, 80, "3");
+  c = new Circle(650, 600, 80, 3);
   circles.add(c);
-  d = new Circle(750, 600, 80, "4");
+  d = new Circle(750, 600, 80, 4);
   photo = loadImage("cursor@2x.png");
   photo.resize(40,40);
   p = new Cursor(width / 2, height / 2, photo);
