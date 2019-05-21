@@ -32,6 +32,7 @@ Circle b;
 Circle c; 
 Circle d; 
 Cursor p;
+int timer = 0;
 PImage photo;
 int streak = 0;
 
@@ -47,9 +48,11 @@ void setup() {
   a = new Circle(400, 400, 80, "1");
   thingsToDisplay.add(a);
   circles.add(a);
-  //b = new Circle(500, 480, 80, "2");
-  //c = new Circle(600, 600, 80, "3");
-  //d = new Circle(700, 600, 80, "4");
+  b = new Circle(500, 480, 80, "2");
+  circles.add(b);
+  c = new Circle(650, 600, 80, "3");
+  circles.add(c);
+  d = new Circle(750, 600, 80, "4");
   photo = loadImage("cursor@2x.png");
   photo.resize(40,40);
   p = new Cursor(width / 2, height / 2, photo);
@@ -68,8 +71,11 @@ void circles(){
 void draw() { 
   background(20);
   noCursor();
-  
+  timer++;
   a.display();
+  if (timer > 50) b.display();
+  if (timer > 100) c.display();
+  //if (timer > 150) d.display();
   p.display();
   for( Circle c : circles){
     if (c.isDead() == true && dead.contains(c)== false) dead.add(c);;
