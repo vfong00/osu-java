@@ -11,11 +11,10 @@ class ApproachCircle implements Displayable {
   }
   
   void display() {
-    fill(255);
+    fill(0,0,0,0);
+    stroke(255, 255);
+    strokeWeight(2.5);
     ellipse(x,y,r,r);
-    noStroke();
-    fill(20);
-    ellipse(x,y,r - 1, r - 1);
     r -= 0.75;
   }
 }
