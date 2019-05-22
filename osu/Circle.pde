@@ -6,7 +6,7 @@ class Circle implements Displayable {
   String num;
   boolean dead;
   boolean clicked;
-  int score;
+  float score;
   ApproachCircle c;
   
   public Circle(float x, float y, float r, int num) {
@@ -24,6 +24,7 @@ class Circle implements Displayable {
     if (!isDead()) {
       if (c.getRadius() >= r) c.display();
       else dead = true;
+      noStroke();
       fill(255);
       ellipse(x,y,r,r);
       
@@ -60,6 +61,10 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
   boolean isDead() {
     if (!dead){
       clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
+      if (clicked) {
+        score = c.getRadius() / r;
+        print(score);
+      }
       dead = clicked;
     }
     return dead;

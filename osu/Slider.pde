@@ -27,12 +27,12 @@ class Slider extends Circle implements Displayable{
   }
   
   int g = 0;
-  void display(){
-    
+  void display() {
     if ( g < time){
       horizontalSlider();
       if (!isDead()) {
         if (c.getRadius() >= r) c.display();
+        noStroke();
         else dead = true;
         fill(255);
         ellipse(x,y,r,r);
@@ -51,7 +51,6 @@ class Slider extends Circle implements Displayable{
       }
     }
     g++;
-    print(g);
   }
   
   
