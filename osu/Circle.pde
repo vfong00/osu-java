@@ -42,15 +42,14 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
     beginShape(TRIANGLE_STRIP);
     int halfC = lerpColor(fromC,toC,0.5);
     
-    for(float theta=0; theta<TWO_PI; theta+=TWO_PI/36)
-    { 
-    fill(halfC);  
-    vertex(x,y);
-    if ( theta <= PI )
-    fill(lerpColor(fromC, toC, (theta%PI)/PI ));
-    else
-    fill(lerpColor(toC, fromC, (theta%PI)/PI ));
-    vertex(x+radiusX*cos(theta),y+radiusY*sin(theta));
+    for(float theta=0; theta<TWO_PI; theta+=TWO_PI/36){ 
+      fill(halfC);  
+      vertex(x,y);
+      if ( theta <= PI )
+      fill(lerpColor(fromC, toC, (theta%PI)/PI ));
+      else
+      fill(lerpColor(toC, fromC, (theta%PI)/PI ));
+      vertex(x+radiusX*cos(theta),y+radiusY*sin(theta));
     } 
     endShape(); 
 }
