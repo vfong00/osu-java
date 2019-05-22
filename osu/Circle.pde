@@ -63,10 +63,15 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
       clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
       if (clicked) {
         score = c.getRadius() / r;
-        print(score);
       }
       dead = clicked;
     }
     return dead;
+  }
+  int getScore() {
+    if (score < 1.25) return 300;
+    else if (score < 1.6) return 100;
+    else if (score < 1.95) return 50;
+    return 0;
   }
 }
