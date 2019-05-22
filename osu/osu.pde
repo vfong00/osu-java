@@ -95,5 +95,5 @@ void draw() {
   textSize(32);
   fill(255);
   text("Streak:" + dead.size() + "x", 15, 790);
- 
+  print(d.accuracy());
 }

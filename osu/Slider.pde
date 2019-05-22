@@ -3,6 +3,7 @@ class Slider extends Circle implements Displayable{
   String num;
   boolean dead;
   boolean clicked;
+  float in;
   int score;
   float start;
   float end;
@@ -48,12 +49,17 @@ class Slider extends Circle implements Displayable{
         fill(255);
         ellipse(x,y,r,r);
         drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-      }
+        if (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r) in++;  
     }
+    }
+    
     g++;
-    print(g);
+     
   }
   
+  float accuracy(){
+    return in/(float)time;
+  }
   
   void horizontalSlider(){
     fill(0,0,0,0);
