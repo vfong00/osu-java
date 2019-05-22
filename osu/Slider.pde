@@ -8,8 +8,9 @@ class Slider extends Circle implements Displayable{
   float end;
   ApproachCircle c;
   float len;
+  int time;
   
-  public Slider(float x, float y, float r, int num, float len){
+  public Slider(float x, float y, float r, int num, float len, int time){
     super(x,y,r,num);
     this.x = x;
     this.y = y;
@@ -20,29 +21,37 @@ class Slider extends Circle implements Displayable{
     clicked = false;
     score = 0;
     this.len = len;
+    this.time = time;
     end = x + len;
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   
+  int g = 0;
   void display(){
-    slidershape();
-    if (!isDead()) {
-      if (c.getRadius() >= r) c.display();
-      else dead = true;
-      fill(255);
-      ellipse(x,y,r,r);
-      
-      drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-      //fill(20);
-      //ellipse(x,y,r - (r / 10),r - (r / 10));
-      fill(255);
-      text(num, x-12, y+5);
-    }else{
-      if(x< (end)) x++;
-      fill(255);
-      ellipse(x,y,r,r);
-      drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
+    
+    if ( g < time){
+      slidershape();
+      if (!isDead()) {
+        if (c.getRadius() >= r) c.display();
+        else dead = true;
+        fill(255);
+        ellipse(x,y,r,r);
+        
+        drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
+        //fill(20);
+        //ellipse(x,y,r - (r / 10),r - (r / 10));
+        fill(255);
+        text(num, x-12, y+5);
+      }else{
+        if(x< (end)) x++;
+        
+        fill(255);
+        ellipse(x,y,r,r);
+        drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
+      }
     }
+    g++;
+    print(g);
   }
   
   
@@ -57,6 +66,10 @@ class Slider extends Circle implements Displayable{
     arc(end, y , r, r, 0, PI / 2);
   }
  
+  boolean isClicked(){
+    return clicked;
+  }
+  
   boolean isDead() {
     if (!dead){
       clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
