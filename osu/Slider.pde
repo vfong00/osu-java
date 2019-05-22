@@ -30,7 +30,7 @@ class Slider extends Circle implements Displayable{
   void display(){
     
     if ( g < time){
-      slidershape();
+      horizontalSlider();
       if (!isDead()) {
         if (c.getRadius() >= r) c.display();
         else dead = true;
@@ -55,7 +55,7 @@ class Slider extends Circle implements Displayable{
   }
   
   
-  void slidershape(){
+  void horizontalSlider(){
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
