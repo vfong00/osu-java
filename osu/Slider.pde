@@ -1,11 +1,18 @@
 class Slider extends Circle implements Displayable{
   float x,y,r;
-  int num; 
-  float len; 
+  String num;
+  boolean dead;
+  boolean clicked;
+  int score;
+  ApproachCircle c;
+  int len;
   
-  public Slider(float x, float y, float r, int num){
+  public Slider(float x, float y, float r, int num, int len){
     super(x,y,r,num);
-    
+    dead = false;
+    clicked = false;
+    score = 0;
+    c = new ApproachCircle(x, y, 2.5 * r);
   }
   
   void display(){
@@ -20,6 +27,10 @@ class Slider extends Circle implements Displayable{
       //ellipse(x,y,r - (r / 10),r - (r / 10));
       fill(255);
       text(num, x-12, y+5);
+    }else{
+      for(int i = 0; i <= len; i++){
+         drawLinearGradientDisc(x+i,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
+      }
     }
   }
  

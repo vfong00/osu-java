@@ -52,7 +52,7 @@ void setup() {
   circles.add(b);
   c = new Circle(650, 600, 80, 3);
   circles.add(c);
-  d = new Circle(750, 600, 80, 4);
+  d = new Slider(500, 250, 80, 4, 200);
   photo = loadImage("cursor@2x.png");
   photo.resize(40,40);
   p = new Cursor(width / 2, height / 2, photo);
@@ -75,10 +75,12 @@ void draw() {
   a.display();
   if (timer > 50) b.display();
   if (timer > 100) c.display();
+  
+  d.display();
   //if (timer > 150) d.display();
   p.display();
   for( Circle c : circles){
-    if (c.isDead() == true && dead.contains(c)== false) dead.add(c);;
+    if (c.isClicked() == true && dead.contains(c)== false) dead.add(c);;
   }
   textSize(32);
   text("Streak:" + dead.size() + "x", 15, 790);
