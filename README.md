@@ -18,3 +18,9 @@ did nothing except research.
 
 ### 5-20-19
 wrote a clickable circle
+
+### 5-21-19
+wrote accuracy/score attributes and printed them
+
+### 5-22/23-19
+i died because of APs i am sorry
