@@ -1,3 +1,6 @@
+import processing.opengl.*;
+
+
 interface Displayable {
   void display();
 }
@@ -22,6 +25,10 @@ class Cursor extends Thing implements Displayable{
   void display() {
     imageMode(CENTER);
     image(photo, mouseX, mouseY);
+    fill(255);
+    text(mouseX+"", 50, 70);
+    text(mouseY+"", 50, 100);
+    text(mousePressed+"", 130,100);
   }
     
 }
@@ -83,13 +90,13 @@ void circles(){
 void draw() { 
   background(20);
   noCursor();
+ 
   timer++;
   a.display();
   if (timer > 50) b.display();
   if (timer > 100) c.display();
   
   if (timer > 150) d.display();
-  
   p.display();
   for( Circle c : circles){
     if (c.isClicked() == true && dead.contains(c)== false) {
