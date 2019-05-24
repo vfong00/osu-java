@@ -12,7 +12,7 @@ class ApproachCircle implements Displayable {
   
   void display() {
     fill(0,0,0,0);
-    stroke(255, 255);
+    stroke(204, 44, 113, 255);
     strokeWeight(2.5);
     ellipse(x,y,r,r);
     r -= 0.75;

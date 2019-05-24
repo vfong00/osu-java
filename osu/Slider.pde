@@ -29,7 +29,6 @@ class Slider extends Circle implements Displayable{
   
   int g = 0;
   void display(){
-    
     if ( g < time){
       horizontalSlider();
       if (!isDead()) {
@@ -43,13 +42,14 @@ class Slider extends Circle implements Displayable{
         //ellipse(x,y,r - (r / 10),r - (r / 10));
         fill(255);
         text(num, x-12, y+5);
+        in++;
       }else{
         if(x< (end)) x++;
         
         fill(255);
         ellipse(x,y,r,r);
         drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-        if (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r) in++;  
+        if ((mousePressed && dist(mouseX, mouseY, this.x, this.y) < r)) in++;  
     }
     }
     
@@ -58,7 +58,7 @@ class Slider extends Circle implements Displayable{
   }
   
   float accuracy(){
-    return in/(float)time;
+    return (in)/(float)time;
   }
   
   void horizontalSlider(){
@@ -78,7 +78,7 @@ class Slider extends Circle implements Displayable{
   
   boolean isDead() {
     if (!dead){
-      clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
+      clicked = dist(mouseX, mouseY, this.x, this.y) < r*(3/2) && mousePressed;
       dead = clicked;
     }
     return dead;
