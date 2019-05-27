@@ -96,11 +96,10 @@ void draw() {
   a.display();
   if (timer > 50) b.display();
   if (timer > 100) c.display();
-  
   if (timer > 150) d.display();
   p.display();
   for( Circle c : circles){
-    if (c.isClicked() == true && dead.contains(c)== false) {
+    if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
       int sMult = streak;
       if (sMult > 0) sMult--;
       int cScore = c.getScore();
@@ -112,7 +111,7 @@ void draw() {
     }
   }
   for( Slider s : sliders){
-    if (s.isClicked() == true && dead.contains(s)== false) {
+    if ((s.isDead() || s.isClicked()) && !dead.contains(s)) {
       int sMult = streak;
       if (sMult > 0) sMult--;
       int sScore = s.getScore();

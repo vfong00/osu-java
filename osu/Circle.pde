@@ -16,7 +16,7 @@ class Circle implements Displayable {
     this.num =  "" + num;
     dead = false;
     clicked = false;
-    score = 0;
+    score = 2.5;
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   

@@ -20,7 +20,7 @@ class Slider extends Circle implements Displayable{
     this.num =  "" + num;
     dead = false;
     clicked = false;
-    score = 0;
+    score = 2.5;
     this.len = len;
     this.time = time;
     end = x + len;
