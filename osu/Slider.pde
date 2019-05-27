@@ -1,18 +1,12 @@
 class Slider extends Circle implements Displayable{
-  float x,y,r;
+  float x,y,r,in,score,start,end,len,startTime;
   String num;
-  boolean dead;
-  boolean clicked;
-  float in;
-  float score;
-  float start;
-  float end;
+  boolean dead,clicked;
   ApproachCircle c;
-  float len;
-  int time;
+  int elapseTime;
   
-  public Slider(float x, float y, float r, int num, float len, int time){
-    super(x,y,r,num);
+  public Slider(float x, float y, float r, float startTime, int num, float len, int elapseTime){
+    super(x,y,r,startTime,num);
     this.x = x;
     this.y = y;
     this.r = r;
@@ -22,14 +16,14 @@ class Slider extends Circle implements Displayable{
     clicked = false;
     score = 2.5;
     this.len = len;
-    this.time = time;
+    this.elapseTime = elapseTime;
     end = x + len;
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   
   int g = 0;
   void display(){
-    if ( g < time){
+    if ( g < elapseTime){
       horizontalSlider();
       if (!isDead()) {
         if (c.getRadius() >= r) c.display();
@@ -58,8 +52,8 @@ class Slider extends Circle implements Displayable{
   }
 
   
-  float accuracy(){
-    return (in)/(float)time;
+  float accuracy() {
+    return (in) / (float) elapseTime;
   }
   
   void horizontalSlider(){

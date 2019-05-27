@@ -23,16 +23,16 @@ void setup() {
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
   dead = new ArrayList<Object>();
-  a = new Circle(100, 400, 80, 1);
+  a = new Circle(100, 400, 80, 0, 1);
   clickies.add(a);
   circles.add(a);
-  b = new Circle(250, 480, 80, 2);
+  b = new Circle(250, 480, 80, 50, 2);
   clickies.add(b);
   circles.add(b);
-  c = new Circle(400, 600, 80, 3);
+  c = new Circle(400, 600, 80, 100, 3);
   clickies.add(c);
   circles.add(c);
-  d = new Slider(550, 600, 80, 4, 150, 300);
+  d = new Slider(550, 600, 80, 150, 4, 150, 300);
   clickies.add(d);
   sliders.add(d);
   photo = loadImage("cursor@2x.png");
@@ -54,14 +54,10 @@ void circles(){
 void draw() { 
   background(20);
   noCursor();
- 
   timer++;
-  a.display();
-  if (timer > 50) b.display();
-  if (timer > 100) c.display();
-  if (timer > 150) d.display();
-  p.display();
+  
   for( Circle c : circles){
+    if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
       int cScore = c.getScore();
       if (cScore == 0) streak = 0;
@@ -74,6 +70,7 @@ void draw() {
     }
   }
   for( Slider s : sliders){
+    if (timer > s.getStartTime()) s.display();
     if (s.isClicked() && !dead.contains(s)) {
       int sScore = s.getScore();
       if (sScore == 0) streak = 0;
@@ -85,6 +82,8 @@ void draw() {
       dead.add(s);
     }
   }
+  p.display();
+  
   accuracy = (float) rawScore / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
   textSize(32);
