@@ -107,7 +107,10 @@ void draw() {
   accuracy = (float) score / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
   for( Slider s : sliders){
-    if (s.isClicked() == true && dead.contains(s)== false) dead.add(s);
+    if (s.isClicked() == true && dead.contains(s)== false) {
+      score += s.getScore();
+      dead.add(s);
+    }
   }
   textSize(32);
   fill(255);
