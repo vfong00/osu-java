@@ -1,42 +1,5 @@
 import processing.opengl.*;
 
-
-interface Displayable {
-  void display();
-}
-
-class Thing{
-  float x, y;
-
-  Thing(float x, float y) {
-    this.x = x;
-    this.y = y;
-  }
-  
-} 
-
-class Cursor extends Thing implements Displayable{
-  float x, y;
-  PImage photo;
-  public Cursor(float x, float y, PImage photo) {
-      super(x,y);
-      this.photo = photo;
-  }
-  void display() {
-    imageMode(CENTER);
-    image(photo, mouseX, mouseY);
-    fill(255);
-    text(mouseX+"", 50, 70);
-    text(mouseY+"", 50, 100);
-    text(mousePressed+"", 130,100);
-  }
-    
-}
-
-
-
-
-
 Circle a; 
 Circle b; 
 Circle c; 
@@ -100,23 +63,23 @@ void draw() {
   p.display();
   for( Circle c : circles){
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
-      int sMult = streak;
-      if (sMult > 0) sMult--;
       int cScore = c.getScore();
       if (cScore == 0) streak = 0;
       else streak++;
+      int sMult = streak;
+      if (sMult > 0) sMult--;
       score += cScore + (cScore * sMult);
       rawScore += cScore;
       dead.add(c);
     }
   }
   for( Slider s : sliders){
-    if ((s.isDead() || s.isClicked()) && !dead.contains(s)) {
-      int sMult = streak;
-      if (sMult > 0) sMult--;
+    if (s.isClicked() && !dead.contains(s)) {
       int sScore = s.getScore();
       if (sScore == 0) streak = 0;
       else streak++;
+      int sMult = streak;
+      if (sMult > 0) sMult--;
       score += sScore + (sScore * sMult);
       rawScore += sScore;
       dead.add(s);

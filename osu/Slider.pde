@@ -4,7 +4,7 @@ class Slider extends Circle implements Displayable{
   boolean dead;
   boolean clicked;
   float in;
-  int score;
+  float score;
   float start;
   float end;
   ApproachCircle c;
@@ -80,6 +80,9 @@ class Slider extends Circle implements Displayable{
   boolean isDead() {
     if (!dead){
       clicked = dist(mouseX, mouseY, this.x, this.y) < r*(3/2) && mousePressed;
+      if (clicked) {
+        score = c.getRadius() / r;
+      }
       dead = clicked;
     }
     return dead;
