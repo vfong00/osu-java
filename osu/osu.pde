@@ -46,6 +46,7 @@ int timer = 0;
 PImage photo;
 int streak = 0;
 int score = 0;
+int rawScore = 0;
 float accuracy = 0;
 
 ArrayList<Object> clickies;
@@ -100,21 +101,33 @@ void draw() {
   p.display();
   for( Circle c : circles){
     if (c.isClicked() == true && dead.contains(c)== false) {
-      score += c.getScore();
+      int sMult = streak;
+      if (sMult > 0) sMult--;
+      int cScore = c.getScore();
+      if (cScore == 0) streak = 0;
+      else streak++;
+      score += cScore + (cScore * sMult);
+      rawScore += cScore;
       dead.add(c);
     }
   }
-  accuracy = (float) score / (3 * dead.size());
-  if (dead.size() == 0) accuracy = 0;
   for( Slider s : sliders){
     if (s.isClicked() == true && dead.contains(s)== false) {
-      score += s.getScore();
+      int sMult = streak;
+      if (sMult > 0) sMult--;
+      int sScore = s.getScore();
+      if (sScore == 0) streak = 0;
+      else streak++;
+      score += sScore + (sScore * sMult);
+      rawScore += sScore;
       dead.add(s);
     }
   }
+  accuracy = (float) rawScore / (3 * dead.size());
+  if (dead.size() == 0) accuracy = 0;
   textSize(32);
   fill(255);
-  text("Streak: " + dead.size() + "x", 15, 790);
+  text("Streak: " + streak + "x", 15, 790);
   text("Score: " + score, 820, 35); 
   text("Accuracy: " + accuracy + "%", 725, 65);
 }
