@@ -87,8 +87,8 @@ void draw() {
   timer++;
  
   displayCircles();
-  p.display();
   t.display();
+  p.display();
   
   accuracy = (float) rawScore / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
