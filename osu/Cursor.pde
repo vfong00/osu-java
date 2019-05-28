@@ -9,6 +9,7 @@ class Cursor extends Thing implements Displayable {
   
   void display() {
     imageMode(CENTER);
+    tint(255, 255);
     image(photo, mouseX, mouseY);
     fill(255);
     text(mouseX+"", 50, 70);

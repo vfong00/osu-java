@@ -10,8 +10,8 @@ class Slider extends Circle implements Displayable{
     this.x = x;
     this.y = y;
     this.r = r;
-    start = x;
     this.num =  "" + num;
+    start = x;
     dead = false;
     clicked = false;
     score = 2.5;
@@ -80,6 +80,16 @@ class Slider extends Circle implements Displayable{
       dead = clicked;
     }
     return dead;
+  }
+  int getScore() {
+    //if (score < 1.25) return 300;
+    //else if (score < 1.6) return 100;
+    //else if (score < 1.95) return 50;
+    //return 0;
+    if (accuracy() > (7 / 10.0)) return 300;
+    else if (accuracy() > (2 / 5.0)) return 100;
+    else if (accuracy() > (1 / 5.0)) return 50;
+    else return 0;
   }
   
 }
