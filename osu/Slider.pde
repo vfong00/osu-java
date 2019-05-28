@@ -47,7 +47,7 @@ class Slider extends Circle implements Displayable{
         if ((mousePressed && dist(mouseX, mouseY, this.x, this.y) < r)) in++;  
       }
     }
-    
+    // text(accuracy() + "", 50, 160);
     g++;
   }
 
@@ -86,6 +86,8 @@ class Slider extends Circle implements Displayable{
     //else if (score < 1.6) return 100;
     //else if (score < 1.95) return 50;
     //return 0;
+    float acc = accuracy();
+    text(acc + "", 50, 160);
     if (accuracy() > (7 / 10.0)) return 300;
     else if (accuracy() > (2 / 5.0)) return 100;
     else if (accuracy() > (1 / 5.0)) return 50;

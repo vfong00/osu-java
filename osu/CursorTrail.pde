@@ -11,8 +11,8 @@ class CursorTrail extends Thing implements Displayable {
   void display() {
     imageMode(CENTER);
     tint(255, transparency);
-    image(photo,x,y);
-    transparency -= 1.25;
+    image(photo, mouseX, mouseY);
+    transparency -= 2.5;
     text(transparency + "", 50, 130);
     if (transparency < 0) transparency = 0;
   }

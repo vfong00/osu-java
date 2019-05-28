@@ -1,4 +1,5 @@
 import processing.opengl.*;
+import java.util.*;
 
 Circle a; 
 Circle b; 
@@ -44,11 +45,11 @@ void setup() {
   
   cursorPhoto = loadImage("cursor@2x.png");
   cursorPhoto.resize(40,40);
-  p = new Cursor(width / 2, height / 2, cursorPhoto);
-  
   cursorTrailPhoto = loadImage("cursortrail@2x.png");
   cursorTrailPhoto.resize(100,100);
-  t = new CursorTrail(200, 200, cursorTrailPhoto);
+  p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
+
+  // t = new CursorTrail(200, 200, cursorTrailPhoto);
 }
 
 void displayCircles(){
@@ -87,8 +88,8 @@ void draw() {
   timer++;
  
   displayCircles();
-  t.display();
   p.display();
+  // t.display();
   
   accuracy = (float) rawScore / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
