@@ -10,8 +10,10 @@ class Slider extends Circle implements Displayable{
   ApproachCircle c;
   float len;
   int time;
+  boolean complete;
+  boolean reverse;
   
-  public Slider(float x, float y, float r, int num, float len, int time){
+  public Slider(float x, float y, float r, int num, float len, int time, boolean reverse){
     super(x,y,r,num);
     this.x = x;
     this.y = y;
@@ -23,6 +25,7 @@ class Slider extends Circle implements Displayable{
     score = 0;
     this.len = len;
     this.time = time;
+    this.reverse = reverse;
     end = x + len;
     c = new ApproachCircle(x, y, 2.5 * r);
   }
@@ -46,12 +49,24 @@ class Slider extends Circle implements Displayable{
         in++;
       }else{
         if(x< (end)) x++;
+        else complete = true;
         noStroke();
         fill(255);
         ellipse(x,y,r,r);
         drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
         if ((mousePressed && dist(mouseX, mouseY, this.x, this.y) < r)) in++;  
+        System.out.println(complete);
+        if(complete && reverse){
+        
+        x--;
+        System.out.println(x);
+        noStroke();
+        fill(255);
+        ellipse(x,y,r,r);
+        drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
       }
+      }
+      
     }
     
     g++;
