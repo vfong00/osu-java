@@ -1,7 +1,7 @@
 class Slider extends Circle implements Displayable{
   float x,y,r,in,score,start,end,len,startTime;
   String num;
-  boolean dead,clicked;
+  boolean dead,clicked,initialAcc;
   ApproachCircle c;
   int elapseTime;
   
@@ -14,6 +14,7 @@ class Slider extends Circle implements Displayable{
     start = x;
     dead = false;
     clicked = false;
+    initialAcc = false;
     score = 2.5;
     this.len = len;
     this.elapseTime = elapseTime;
@@ -47,7 +48,7 @@ class Slider extends Circle implements Displayable{
         if ((mousePressed && dist(mouseX, mouseY, this.x, this.y) < r)) in++;  
       }
     }
-    // text(accuracy() + "", 50, 160);
+    text(accuracy() + "", 50, 160);
     g++;
   }
 
@@ -75,23 +76,14 @@ class Slider extends Circle implements Displayable{
     if (!dead){
       clicked = dist(mouseX, mouseY, this.x, this.y) < r*(3/2) && mousePressed;
       if (clicked) {
-        score = c.getRadius() / r;
+        initialAcc = (c.getRadius() / r) < 1.95;
       }
       dead = clicked;
     }
     return dead;
   }
-  int getScore() {
-    //if (score < 1.25) return 300;
-    //else if (score < 1.6) return 100;
-    //else if (score < 1.95) return 50;
-    //return 0;
-    float acc = accuracy();
-    text(acc + "", 50, 160);
-    if (accuracy() > (7 / 10.0)) return 300;
-    else if (accuracy() > (2 / 5.0)) return 100;
-    else if (accuracy() > (1 / 5.0)) return 50;
-    else return 0;
+  boolean initialAcc() {
+    return initialAcc;
   }
   
 }
