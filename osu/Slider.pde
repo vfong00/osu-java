@@ -46,23 +46,17 @@ class Slider extends Circle implements Displayable{
     for (int i = 0; i < ticks.length; i++) {
       ticks[i].display();
     }
-    if (ticks[firstNotTicked].isTicked() || !ticks[firstNotTicked].isAlive()) firstNotTicked++;
   }
   
   void checkTicked() {
-    //text(dist(x, y, ticks[firstNotTicked].getX(), ticks[firstNotTicked].getY()) + "", 50, 160);
-    //text(ticks[firstNotTicked].getX() + "", 50, 190);
-    //text(ticks[firstNotTicked].getY() + "", 50, 220);
-    //text(x + "", 150, 190);
-    //text(y + "", 150, 220);
-    if (dist(x, y, ticks[firstNotTicked].getX(), ticks[firstNotTicked].getY()) < r) {
-      inRangeOfTick = true;
-      if (mousePressed) ticks[firstNotTicked].setTicked(true);
-    } else {
-      if (inRangeOfTick) {
-        inRangeOfTick = false;
+    text(firstNotTicked, 50, 160);
+    if (x == ticks[firstNotTicked].getX() && y == ticks[firstNotTicked].getY()) {
+      if (mousePressed) {
+        ticks[firstNotTicked].setTicked(true);
+      } else {
         ticks[firstNotTicked].setAlive(false);
       }
+      firstNotTicked++;
     }
   }
   
@@ -86,7 +80,6 @@ class Slider extends Circle implements Displayable{
         }
       }
     }
-    // text(firstNotTicked + "", 50, 160);
   }
   
   void horizontalSlider(){
