@@ -13,7 +13,9 @@ class Cursor extends Thing implements Displayable {
   void display() {
     imageMode(CENTER);
     tint(255, 255);
-    image(cursorPhoto, mouseX, mouseY);
+    x = mouseX;
+    y = mouseY;
+    image(cursorPhoto, x, y);
     fill(255);
     
     if (trailImgs.size() >= 100) {
@@ -22,8 +24,13 @@ class Cursor extends Thing implements Displayable {
     CursorTrail t = new CursorTrail(x, y, cursorTrailPhoto);
     trailImgs.add(t);
     
-    text(mouseX+"", 50, 70);
-    text(mouseY+"", 50, 100);
+    Iterator<CursorTrail> iter = trailImgs.descendingIterator();
+    while (iter.hasNext()) {
+      iter.next().display();
+    }
+    
+    text(x+"", 50, 70);
+    text(y+"", 50, 100);
     text(mousePressed+"", 130,100);
   }
 }

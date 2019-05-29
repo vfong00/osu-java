@@ -38,7 +38,6 @@ class Slider extends Circle implements Displayable{
       horizontalSlider();
       if (c.getRadius() < r) {
         fill(255);
-        text("hello", 50, 160);
         if (x < end) x++;
         else dead = true;
         displayClicky(false);
@@ -52,32 +51,6 @@ class Slider extends Circle implements Displayable{
         }
       }
     }
-    
-    //if (g < elapseTime) {
-    //  horizontalSlider();
-    //  if (!isDead()) {
-    //    if (c.getRadius() >= r) c.display();
-    //    else dead = true;
-    //    noStroke();
-    //    fill(255);
-    //    ellipse(x,y,r,r);
-        
-    //    drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-    //    fill(255);
-    //    text(num, x-12, y+5);
-    //    in++;
-    //  } else {
-    //    // if (c.getRadius() < r) {  
-    //      if(x < end) x++;
-    //      noStroke();
-    //      fill(255);
-    //      ellipse(x,y,r,r);
-    //      drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-    //      if (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r) in++;  
-    //    // }
-    //  }
-    //}
-    // text(accuracy() + "", 50, 160);
   }
   
   void horizontalSlider(){
@@ -96,13 +69,6 @@ class Slider extends Circle implements Displayable{
   }
   
   boolean isDead() {
-    //if (!dead){
-    //  clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
-    //  if (clicked) {
-    //    initialAcc();
-    //  }
-    //  // dead = clicked;
-    //}
     return dead;
   }
   boolean initialAcc() {

@@ -48,8 +48,6 @@ void setup() {
   cursorTrailPhoto = loadImage("cursortrail@2x.png");
   cursorTrailPhoto.resize(100,100);
   p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
-
-  // t = new CursorTrail(200, 200, cursorTrailPhoto);
 }
 
 void displayCircles(){
@@ -68,7 +66,7 @@ void displayCircles(){
   }
   for( Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
-    if ((s.isDead() || s.isClicked()) && !dead.contains(s)) {
+    if (s.isDead() && !dead.contains(s)) {
       int sScore = s.getScore();
       text(sScore + "", 50, 130);
       if (sScore == 0) streak = 0;
@@ -89,7 +87,6 @@ void draw() {
  
   displayCircles();
   p.display();
-  // t.display();
   
   accuracy = (float) rawScore / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
