@@ -32,5 +32,6 @@ class Cursor extends Thing implements Displayable {
     text(x+"", 50, 70);
     text(y+"", 50, 100);
     text(mousePressed+"", 130,100);
+    // text(trailImgs.size() + "", 50, 160);
   }
 }
