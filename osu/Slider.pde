@@ -44,6 +44,7 @@ class Slider extends Circle implements Displayable{
         displayClicky(false);
       } else {
         if (isClicked() || wasClicked) {
+          c.updateRadius();
           wasClicked = true;
         } else {
           c.display();

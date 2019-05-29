@@ -10,11 +10,15 @@ class ApproachCircle implements Displayable {
     return r;
   }
   
+  void updateRadius() {
+    r -= 0.75;
+  }
+  
   void display() {
     fill(0,0,0,0);
     stroke(204, 44, 113, 255);
     strokeWeight(2.5);
     ellipse(x,y,r,r);
-    r -= 0.75;
+    updateRadius();
   }
 }
