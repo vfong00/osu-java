@@ -31,4 +31,12 @@ class SliderTick extends Thing implements Displayable {
   float getY() {
     return x;
   }
+  
+  void setTicked(boolean t) {
+    ticked = t;
+  }
+  
+  void setAlive(boolean a) {
+    alive = a;
+  }
 }

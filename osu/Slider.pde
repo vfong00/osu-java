@@ -1,7 +1,7 @@
 class Slider extends Circle implements Displayable{
   float x, y, r, in, score, start, end, len, startTime;
   String num;
-  boolean dead, wasClicked;
+  boolean dead, wasClicked, inRangeOfTick;
   int firstNotTicked;
   ApproachCircle c;
   SliderTick[] ticks;
@@ -48,6 +48,18 @@ class Slider extends Circle implements Displayable{
     if (ticks[firstNotTicked].isTicked() || !ticks[firstNotTicked].isAlive()) firstNotTicked++;
   }
   
+  void checkTicked() {
+    if (dist(x, y, ticks[firstNotTicked].getX(), ticks[firstNotTicked].getY()) < r) {
+      inRangeOfTick = true;
+      if (mousePressed) ticks[firstNotTicked].setTicked(true);
+    } else {
+      if (inRangeOfTick) {
+        inRangeOfTick = false;
+        ticks[firstNotTicked].setAlive(false);
+      }
+    }
+  }
+  
   void display() {
     if (!isDead()) {
       horizontalSlider();
@@ -56,6 +68,7 @@ class Slider extends Circle implements Displayable{
         fill(255);
         if (x < end) x++;
         else dead = true;
+        checkTicked();
         displayClicky(false);
       } else {
         if (isClicked() || wasClicked) {
@@ -67,6 +80,7 @@ class Slider extends Circle implements Displayable{
         }
       }
     }
+    text(firstNotTicked + "", 50, 160);
   }
   
   void horizontalSlider(){
