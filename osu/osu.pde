@@ -1,12 +1,6 @@
 import processing.opengl.*;
 import java.util.*;
 
-Circle a; 
-Circle b; 
-Circle c; 
-Slider d; 
-Cursor p;
-CursorTrail t;
 int timer = 0;
 int streak = 0;
 int score = 0;
@@ -14,6 +8,12 @@ int rawScore = 0;
 float accuracy = 0;
 PImage cursorPhoto;
 PImage cursorTrailPhoto;
+
+Circle a; 
+Circle b; 
+Circle c; 
+Slider d; 
+Cursor p;
 
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
@@ -39,7 +39,7 @@ void setup() {
   clickies.add(c);
   circles.add(c);
   
-  d = new Slider(550, 600, 80, 150, 4, 150);
+  d = new Slider(550, 600, 80, 150, 4, 300);
   clickies.add(d);
   sliders.add(d);
   

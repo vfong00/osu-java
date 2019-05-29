@@ -10,6 +10,7 @@ class Slider extends Circle implements Displayable{
     this.y = y;
     this.r = r;
     this.num =  "" + num;
+    
     c = new ApproachCircle(x, y, 2.5 * r);
     
     start = x;
