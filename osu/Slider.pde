@@ -3,6 +3,7 @@ class Slider extends Circle implements Displayable{
   String num;
   boolean dead, wasClicked;
   ApproachCircle c;
+  SliderTick[] ticks;
   
   public Slider(float x, float y, float r, float startTime, int num, float len) {
     super(x,y,r,startTime,num);
@@ -12,6 +13,9 @@ class Slider extends Circle implements Displayable{
     this.num =  "" + num;
     
     c = new ApproachCircle(x, y, 2.5 * r);
+    ticks = new SliderTick[2];
+    ticks[0] = new SliderTick(650, 600);
+    ticks[1] = new SliderTick(750, 600);
     
     start = x;
     end = x + len;
@@ -34,9 +38,16 @@ class Slider extends Circle implements Displayable{
     }
   }
   
+  void displayTicks() {
+    for (SliderTick tick : ticks) {
+      tick.display();
+    }
+  }
+  
   void display() {
     if (!isDead()) {
       horizontalSlider();
+      displayTicks();
       if (c.getRadius() < r) {
         fill(255);
         if (x < end) x++;
