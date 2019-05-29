@@ -37,3 +37,11 @@ Simply open osu.pde, and press the play button!
 - Put streaks in scoring
 - Implemented streak snaps
 - Tried implementing a cursor trail to no avail (that rhymes!)
+
+### 5-28-19
+- Reorganized a lot of code -- made it clean to read (no documentation yet). Especially needed on Slider since there were a lot of test variables.
+- Based on discussion, rewrote slider based on ticks as opposed to timing completion:
+- Ticks visually done except disappearing. No scoring work done.
+- Finished cursor trail in concept but not working as intended.
+
+### 5-29-19
