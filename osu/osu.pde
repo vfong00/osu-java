@@ -1,53 +1,19 @@
 import processing.opengl.*;
+import java.util.*;
 
-
-interface Displayable {
-  void display();
-}
-
-class Thing{
-  float x, y;
-
-  Thing(float x, float y) {
-    this.x = x;
-    this.y = y;
-  }
-  
-} 
-
-class Cursor extends Thing implements Displayable{
-  float x, y;
-  PImage photo;
-  public Cursor(float x, float y, PImage photo) {
-      super(x,y);
-      this.photo = photo;
-  }
-  void display() {
-    imageMode(CENTER);
-    image(photo, mouseX, mouseY);
-    fill(255);
-    text(mouseX+"", 50, 70);
-    text(mouseY+"", 50, 100);
-    text(mousePressed+"", 130,100);
-  }
-    
-}
-
-
-
-
+int timer = 0;
+int streak = 0;
+int score = 0;
+int rawScore = 0;
+float accuracy = 0;
+PImage cursorPhoto;
+PImage cursorTrailPhoto;
 
 Circle a; 
 Circle b; 
 Circle c; 
 Slider d; 
 Cursor p;
-int timer = 0;
-PImage photo;
-int streak = 0;
-int score = 0;
-int rawScore = 0;
-float accuracy = 0;
 
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
@@ -60,74 +26,74 @@ void setup() {
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
   dead = new ArrayList<Object>();
-  a = new Circle(100, 400, 80, 1);
+  
+  a = new Circle(100, 400, 80, 0, 1);
   clickies.add(a);
   circles.add(a);
-  b = new Circle(250, 480, 80, 2);
+  
+  b = new Circle(250, 480, 80, 50, 2);
   clickies.add(b);
   circles.add(b);
-  c = new Circle(400, 600, 80, 3);
+  
+  c = new Circle(400, 600, 80, 100, 3);
   clickies.add(c);
   circles.add(c);
-  d = new Slider(550, 600, 80, 4, 150, 400, true);
+  d = new Slider(550, 600, 80, 4, 150, 300, true);
   clickies.add(d);
   sliders.add(d);
-  photo = loadImage("cursor@2x.png");
-  photo.resize(40,40);
-  p = new Cursor(width / 2, height / 2, photo);
+  
+  cursorPhoto = loadImage("cursor@2x.png");
+  cursorPhoto.resize(40,40);
+  cursorTrailPhoto = loadImage("cursortrail@2x.png");
+  cursorTrailPhoto.resize(100,100);
+  p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
 }
 
-void circles(){
-  a.display();
-  
-  /*delay(10);
-  b.display();
-  delay(40);
-  c.display();
-  delay(10);
-  d.display();*/
-}
-
-void draw() { 
-  background(20);
-  noCursor();
- 
-  timer++;
-  a.display();
-  if (timer > 50) b.display();
-  if (timer > 100) c.display();
-  
-  if (timer > 150) d.display();
-  p.display();
+void displayCircles(){
   for( Circle c : circles){
-    if (c.isClicked() == true && dead.contains(c)== false) {
-      int sMult = streak;
-      if (sMult > 0) sMult--;
+    if (timer > c.getStartTime()) c.display();
+    if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
       int cScore = c.getScore();
       if (cScore == 0) streak = 0;
       else streak++;
+      int sMult = streak;
+      if (sMult > 0) sMult--;
       score += cScore + (cScore * sMult);
       rawScore += cScore;
       dead.add(c);
     }
   }
   for( Slider s : sliders){
-    if (s.isClicked() == true && dead.contains(s)== false) {
-      int sMult = streak;
-      if (sMult > 0) sMult--;
+    if (timer > s.getStartTime()) s.display();
+    if (s.isDead() && !dead.contains(s)) {
       int sScore = s.getScore();
+      text(sScore + "", 50, 130);
       if (sScore == 0) streak = 0;
       else streak++;
+      int sMult = streak;
+      if (sMult > 0) sMult--;
       score += sScore + (sScore * sMult);
       rawScore += sScore;
       dead.add(s);
     }
   }
+}
+
+void draw() { 
+  background(20);
+  noCursor();
+  timer++;
+ 
+  displayCircles();
+  p.display();
+  
   accuracy = (float) rawScore / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
   textSize(32);
   fill(255);
   text("Streak: " + streak + "x", 15, 790);
+
   text("Score: " + score, 820, 35); 
   text("Accuracy: " + accuracy + "%", 725, 65);
+
 }

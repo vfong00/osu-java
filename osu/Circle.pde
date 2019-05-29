@@ -2,21 +2,21 @@ import processing.opengl.*;
 
 
 class Circle implements Displayable {
-  float x,y,r;
+  float x,y,r,score,startTime;
   String num;
   boolean dead;
   boolean clicked;
-  float score;
   ApproachCircle c;
   
-  public Circle(float x, float y, float r, int num) {
+  public Circle(float x, float y, float r, float startTime, int num) {
     this.x = x;
     this.y = y;
     this.r = r;
     this.num =  "" + num;
+    this.startTime = startTime;
     dead = false;
     clicked = false;
-    score = 0;
+    score = 2.5;
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   
@@ -38,7 +38,7 @@ class Circle implements Displayable {
   
    float h = random(0, 360);
 
-void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int fromC, int toC){ 
+  void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int fromC, int toC){ 
     noStroke(); 
     beginShape(TRIANGLE_STRIP);
     int halfC = lerpColor(fromC,toC,0.5);
@@ -53,11 +53,16 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
       vertex(x+radiusX*cos(theta),y+radiusY*sin(theta));
     } 
     endShape(); 
-}
-
+  }
+  
+  float getStartTime(){
+    return startTime;
+  }
+  
   boolean isClicked(){
     return clicked;
   }
+  
   boolean isDead() {
     if (!dead){
       clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
