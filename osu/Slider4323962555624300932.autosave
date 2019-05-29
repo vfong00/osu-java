@@ -25,7 +25,6 @@ class Slider extends Circle implements Displayable{
     
     dead = false;
     wasClicked = false;
-    inRangeOfTick = false;
 
     score = 2.5;
     this.len = len;
@@ -50,11 +49,6 @@ class Slider extends Circle implements Displayable{
   }
   
   void checkTicked() {
-    //text(dist(x, y, ticks[firstNotTicked].getX(), ticks[firstNotTicked].getY()) + "", 50, 160);
-    //text(ticks[firstNotTicked].getX() + "", 50, 190);
-    //text(ticks[firstNotTicked].getY() + "", 50, 220);
-    //text(x + "", 150, 190);
-    //text(y + "", 150, 220);
     if (dist(x, y, ticks[firstNotTicked].getX(), ticks[firstNotTicked].getY()) < r) {
       inRangeOfTick = true;
       if (mousePressed) ticks[firstNotTicked].setTicked(true);
@@ -86,7 +80,7 @@ class Slider extends Circle implements Displayable{
         }
       }
     }
-    // text(firstNotTicked + "", 50, 160);
+    text(firstNotTicked + "", 50, 160);
   }
   
   void horizontalSlider(){
