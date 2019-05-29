@@ -45,7 +45,7 @@ class Slider extends Circle implements Displayable{
     for (int i = firstNotTicked; i < ticks.length; i++) {
       ticks[i].display();
     }
-    if (ticks[firstNotTicked].isTicked()) firstNotTicked++;
+    if (ticks[firstNotTicked].isTicked() || !ticks[firstNotTicked].isAlive()) firstNotTicked++;
   }
   
   void display() {

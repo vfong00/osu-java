@@ -1,11 +1,11 @@
 class SliderTick extends Thing implements Displayable {
-  boolean end;
-  boolean ticked;
+  boolean end, ticked, alive;
   
   SliderTick(float x, float y, boolean end) {
     super(x, y);
     this.end = end;
     ticked = false;
+    alive = true;
   }
   
   void display() {
@@ -18,5 +18,9 @@ class SliderTick extends Thing implements Displayable {
   
   boolean isTicked() {
     return ticked;
+  }
+  
+  boolean isAlive() {
+    return alive;
   }
 }
