@@ -1,60 +1,82 @@
 class Slider extends Circle implements Displayable{
-  float x,y,r,in,score,start,end,len,startTime;
+  float x, y, r, in, score, start, end, len, startTime;
   String num;
-  boolean dead,clicked,initialAcc;
+  boolean dead, wasClicked;
   ApproachCircle c;
-  int elapseTime;
   
-  public Slider(float x, float y, float r, float startTime, int num, float len, int elapseTime){
+  public Slider(float x, float y, float r, float startTime, int num, float len) {
     super(x,y,r,startTime,num);
     this.x = x;
     this.y = y;
     this.r = r;
     this.num =  "" + num;
+    c = new ApproachCircle(x, y, 2.5 * r);
+    
     start = x;
+    end = x + len;
+    
     dead = false;
-    clicked = false;
-    initialAcc = false;
+    wasClicked = false;
+
     score = 2.5;
     this.len = len;
-    this.elapseTime = elapseTime;
-    end = x + len;
-    c = new ApproachCircle(x, y, 2.5 * r);
   }
   
-  int g = 0;
-  void display(){
-    if ( g < elapseTime){
+  void displayClicky(boolean gradient) {
+    noStroke();
+    fill(255);
+    ellipse(x, y, r, r);
+    if (gradient) {
+      drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
+      fill(255);
+      text(num, x-12, y+5);
+    }
+  }
+  
+  void display() {
+    if (!isDead()) {
       horizontalSlider();
-      if (!isDead()) {
-        if (c.getRadius() >= r) c.display();
+      if (c.getRadius() < r) {
+        fill(255);
+        text("hello", 50, 160);
+        if (x < end) x++;
         else dead = true;
-        noStroke();
-        fill(255);
-        ellipse(x,y,r,r);
-        
-        drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-        //fill(20);
-        //ellipse(x,y,r - (r / 10),r - (r / 10));
-        fill(255);
-        text(num, x-12, y+5);
-        in++;
-      }else{
-        if(x< (end)) x++;
-        noStroke();
-        fill(255);
-        ellipse(x,y,r,r);
-        drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-        if ((mousePressed && dist(mouseX, mouseY, this.x, this.y) < r)) in++;  
+        displayClicky(false);
+      } else {
+        if (isClicked() || wasClicked) {
+          wasClicked = true;
+        } else {
+          c.display();
+          displayClicky(true);
+        }
       }
     }
-    text(accuracy() + "", 50, 160);
-    g++;
-  }
-
-  
-  float accuracy() {
-    return (in) / (float) elapseTime;
+    
+    //if (g < elapseTime) {
+    //  horizontalSlider();
+    //  if (!isDead()) {
+    //    if (c.getRadius() >= r) c.display();
+    //    else dead = true;
+    //    noStroke();
+    //    fill(255);
+    //    ellipse(x,y,r,r);
+        
+    //    drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
+    //    fill(255);
+    //    text(num, x-12, y+5);
+    //    in++;
+    //  } else {
+    //    // if (c.getRadius() < r) {  
+    //      if(x < end) x++;
+    //      noStroke();
+    //      fill(255);
+    //      ellipse(x,y,r,r);
+    //      drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
+    //      if (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r) in++;  
+    //    // }
+    //  }
+    //}
+    // text(accuracy() + "", 50, 160);
   }
   
   void horizontalSlider(){
@@ -68,22 +90,22 @@ class Slider extends Circle implements Displayable{
     arc(end, y , r, r, 0, PI / 2);
   }
  
-  boolean isClicked(){
-    return clicked;
+  boolean isClicked() {
+    return (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r);
   }
   
   boolean isDead() {
-    if (!dead){
-      clicked = dist(mouseX, mouseY, this.x, this.y) < r*(3/2) && mousePressed;
-      if (clicked) {
-        initialAcc = (c.getRadius() / r) < 1.95;
-      }
-      dead = clicked;
-    }
+    //if (!dead){
+    //  clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
+    //  if (clicked) {
+    //    initialAcc();
+    //  }
+    //  // dead = clicked;
+    //}
     return dead;
   }
   boolean initialAcc() {
-    return initialAcc;
+    return (c.getRadius() / r) < 1.95;
   }
   
 }

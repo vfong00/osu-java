@@ -39,7 +39,7 @@ void setup() {
   clickies.add(c);
   circles.add(c);
   
-  d = new Slider(550, 600, 80, 150, 4, 150, 300);
+  d = new Slider(550, 600, 80, 150, 4, 150);
   clickies.add(d);
   sliders.add(d);
   

@@ -38,7 +38,7 @@ class Circle implements Displayable {
   
    float h = random(0, 360);
 
-void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int fromC, int toC){ 
+  void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int fromC, int toC){ 
     noStroke(); 
     beginShape(TRIANGLE_STRIP);
     int halfC = lerpColor(fromC,toC,0.5);
@@ -53,7 +53,8 @@ void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int
       vertex(x+radiusX*cos(theta),y+radiusY*sin(theta));
     } 
     endShape(); 
-}
+  }
+  
   float getStartTime(){
     return startTime;
   }
