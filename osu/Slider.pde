@@ -37,41 +37,6 @@ class Slider extends Circle implements Displayable{
     this.reverse = reverse;
   }
   
- int g = 0;
-  void display() {
-    if (!isDead()) {
-      horizontalSlider();
-      displayTicks();
-      if (c.getRadius() < r) {
-        fill(255);
-        if (x < end && !complete){
-          x++;
-        }else{
-          complete = true;
-          dead = true;
-        }
-        checkTicked();
-        displayClicky(false);
-        if(complete && reverse){
-          if (x > start) x--;
-          System.out.println(x);
-          displayClicky(true);
-        }
-      } else {
-        if (isClicked() || wasClicked) {
-          c.updateRadius();
-          wasClicked = true;
-        } else {
-          c.display();
-          displayClicky(true);
-        }
-      }
-    }
-    text(firstNotTicked + "", 50, 160);
-  }
- 
-
-  
   void displayClicky(boolean number) {
     noStroke();
     fill(255);
@@ -99,8 +64,30 @@ class Slider extends Circle implements Displayable{
         inRangeOfTick = false;
         ticks[firstNotTicked].setAlive(false);
       }
-      
     }
+  }
+  
+  void display() {
+    if (!isDead()) {
+      horizontalSlider();
+      displayTicks();
+      if (c.getRadius() < r) {
+        fill(255);
+        if (x < end) x++;
+        else dead = true;
+        checkTicked();
+        displayClicky(false);
+      } else {
+        if (isClicked() || wasClicked) {
+          c.updateRadius();
+          wasClicked = true;
+        } else {
+          c.display();
+          displayClicky(true);
+        }
+      }
+    }
+    text(firstNotTicked + "", 50, 160);
   }
   
   
