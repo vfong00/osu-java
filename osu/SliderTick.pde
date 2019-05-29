@@ -23,4 +23,12 @@ class SliderTick extends Thing implements Displayable {
   boolean isAlive() {
     return alive;
   }
+  
+  float getX() {
+    return x;
+  }
+  
+  float getY() {
+    return x;
+  }
 }
