@@ -22,12 +22,12 @@ class Slider extends Circle implements Displayable{
     this.len = len;
   }
   
-  void displayClicky(boolean gradient) {
+  void displayClicky(boolean number) {
     noStroke();
     fill(255);
     ellipse(x, y, r, r);
-    if (gradient) {
-      drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
+    drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
+    if (number) {
       fill(255);
       text(num, x-12, y+5);
     }
