@@ -54,7 +54,6 @@ class Slider extends Circle implements Displayable{
   }
   
   void checkTicked() {
-    text(firstNotTicked, 50, 160);
     SliderTick tick = ticks[firstNotTicked];
     if (x == tick.getX() && y == tick.getY()) {
       onTick = true;

@@ -18,60 +18,46 @@ Simply open osu.pde, and press the play button!
 
 ## devlog - vincent
 ### weekend (5-18/19-19)
-- Wrote a clickable circle prototype.
+[V] Wrote a clickable circle prototype.
 
 ### 5-20-19
-- Wrote an approach circle that made the clickable circle disappear when the approach circle elapsed the clickable circle.
+[V] Wrote an approach circle that made the clickable circle disappear when the approach circle elapsed the clickable circle.
+[A] Made the display of the circles a linear gradient
+[A] Adjustment of sensitivity for clickies
+[A] Added streak and counter number
 
 ### 5-21-19
-- Made basic accuracy/score calculations and printed them so it looks nice?!
+[V] Made basic accuracy/score calculations and printed them so it looks nice?!
+[A] Modified the way we count dead and scored clickies and made counters
+[A] Made a slider do the slide (took FOREVER and I didn't commit different parts because I have bad committing habits)
 
 ### 5-22/23-19
-- I died because of APs I am sorry
+[V] I died because of APs I am sorry
+[A] Modified the motion of the horizontal slider
 
 ### 5-24-19
-- Worked on integrating accuracy with Angel's stuff on sliders.
+[V] Worked on integrating accuracy with Angel's stuff on sliders.
 
 ### weekend (5-25/26/27-19)
-- Sort of successfully got accuracy working -- the problem is that the calculation works weird and I have to ask Angel about it since she wrote it.
-- Put streaks in scoring
-- Implemented streak snaps
-- Tried implementing a cursor trail to no avail (that rhymes!)
+[V] Sort of successfully got accuracy working -- the problem is that the calculation works weird and I have to ask Angel about it since she wrote it.
+[V] Put streaks in scoring
+[V] Implemented streak snaps
+[V] Tried implementing a cursor trail to no avail (that rhymes!)
+[A] I got sick and died :(
 
 ### 5-28-19
-- Reorganized a lot of code -- made it clean to read (no documentation yet). Especially needed on Slider since there were a lot of test variables.
-- Based on discussion, rewrote slider based on ticks as opposed to timing completion:
-- Ticks visually done except disappearing. No scoring work done.
-- Finished cursor trail in concept but not working as intended.
+[V] Reorganized a lot of code -- made it clean to read (no documentation yet). Especially needed on Slider since there were a lot of test variables.
+[V] Based on discussion, rewrote slider based on ticks as opposed to timing completion:
+[V] Ticks visually done except disappearing. No scoring work done.
+[V] Finished cursor trail in concept but not working as intended.
+[A] Continued to work on reverse slider (diff branch)
+[A] I keep falling asleep and not pushing and having technical issues (my computer is like, barely functional)
 
 ### 5-29-19
+[V] Made ticks disappear upon the circle passing it.
+[V] Did some preemptive work for scoring (counting held ticks), nothing apparent
+[A] Merged the code from Vincent's score calculation developments and ticks and began implementing old code but it got very confusing and complicated so there weren't enough commits
 
-
-
-## devlog - angel
-
-### 5-20-19
-- Made the display of the circles a linear gradient
-- Adjustment of sensitivity for clickies 
-- Added streak and counter number
-
-### 5-21-19
-- Modified the way we count dead and scored clickies and made counters
-- Made a slider do the slide (took FOREVER and I didn't commit different parts because I have bad committing habits)
-
-### 5-22/23-19
-- Modified the motion of the horizontal slider
-- Began  and finished accuracy calculation
-
-### 5-24-19
-- Began working on slider reverse 
-
-### weekend (5-25/26/27-19)
-- I got sick and died :(
-
-### 5-28-19
-- Continued to work on reverse slider (diff branch)
-- I keep falling alseep and not pushing and having technical issues (my computer is like, barely functional)
-
-### 5-29-19
-- Merged the code from Vincent's score calculation developments and ticks and began implementing old code but it got very confusing and complicated so there weren't enough commits 
+### 5-30-19
+[V] Added ticks to the score officially
+[V] Made scoring for slider object as a whole
