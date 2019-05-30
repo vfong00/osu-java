@@ -7,6 +7,7 @@ class Slider extends Circle implements Displayable{
   float time;
   int tickScore;
   SliderTick[] ticks;
+  SliderTick[] reverseTicks;
   
   public Slider(float x, float y, float r, float startTime, int num, float len, boolean reverse) {
     super(x,y,r,startTime,num);
@@ -25,6 +26,12 @@ class Slider extends Circle implements Displayable{
     ticks[0] = new SliderTick(650, 600, false);
     ticks[1] = new SliderTick(750, 600, false);
     ticks[2] = new SliderTick(850, 600, true);
+    
+    reverseTicks = new SliderTick[3];
+    reverseTicks[0] = new SliderTick(650, 600, false);
+    reverseTicks[1] = new SliderTick(750, 600, false);
+    reverseTicks[2] = new SliderTick(850, 600, true);   
+  
     
     start = x;
     end = x + len;
@@ -56,14 +63,14 @@ class Slider extends Circle implements Displayable{
     }
   }
   
-  void displayTicks() {
-    for (int i = 0; i < ticks.length; i++) {
-      ticks[i].display();
+  void displayTicks(SliderTick[] g) {
+    for (int i = 0; i < g.length; i++) {
+      g[i].display();
     }
   }
   
-  void checkTicked() {
-    SliderTick tick = ticks[firstNotTicked];
+  void checkTicked(SliderTick[] g) {
+    SliderTick tick = g[firstNotTicked];
     if (x == tick.getX() && y == tick.getY()) {
       onTick = true;
       if (isClicked()) {
@@ -84,7 +91,7 @@ class Slider extends Circle implements Displayable{
   void display() {
     if (!isDead()) {
       horizontalSlider();
-      displayTicks();
+      displayTicks(ticks);
       if (c.getRadius() < r) {
         moving = true;
         fill(255);
@@ -94,19 +101,17 @@ class Slider extends Circle implements Displayable{
            if (!reverse){
              dead = true;
            }else{
-             displayTicks();
+             displayTicks(reverseTicks);
+             if (!lastTicked) checkTicked(reverseTicks);
+             else onTick = false;
              complete = true;
              if (x > start) x--; 
            }
         }
-        if (!lastTicked) checkTicked();
+        if (!lastTicked) checkTicked(ticks);
         else onTick = false;
         
         displayClicky(false);
-        if (complete && reverse){
-          if (x > start) x--;
-          else dead = true;
-        }
       } else {
         if (wasClicked || isClicked()) {
           if (!wasClicked) initScore = c.getRadius() / r;
@@ -158,6 +163,12 @@ class Slider extends Circle implements Displayable{
   
   boolean moving() {
     return moving;
+  }
+  
+  void resetTicks(){
+    for( SliderTick a: ticks){
+      a.setAlive(true);
+    }
   }
   
   void setNotChecked(boolean b) {
