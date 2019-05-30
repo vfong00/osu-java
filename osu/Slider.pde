@@ -2,7 +2,7 @@ class Slider extends Circle implements Displayable{
   float x, y, r, in, score, start, end, len, startTime;
   String num;
   boolean dead, wasClicked, lastTicked;
-  int firstNotTicked;
+  int firstNotTicked, numTicked;
   ApproachCircle c;
   SliderTick[] ticks;
   
@@ -13,6 +13,7 @@ class Slider extends Circle implements Displayable{
     this.r = r;
     this.num =  "" + num;
     firstNotTicked = 0;
+    numTicked = 0;
     
     c = new ApproachCircle(x, y, 2.5 * r);
     ticks = new SliderTick[3];
@@ -52,6 +53,7 @@ class Slider extends Circle implements Displayable{
     text(firstNotTicked, 50, 160);
     SliderTick tick = ticks[firstNotTicked];
     if (x == tick.getX() && y == tick.getY()) {
+      updateTickScore();
       if (mousePressed) {
         tick.setTicked(true);
       } else {
@@ -73,7 +75,8 @@ class Slider extends Circle implements Displayable{
         if (!lastTicked) checkTicked();
         displayClicky(false);
       } else {
-        if (isClicked() || wasClicked) {
+        if (wasClicked || isClicked()) {
+          if (!wasClicked && isClicked()) score = c.getRadius() / r;
           c.updateRadius();
           wasClicked = true;
         } else {
@@ -90,9 +93,9 @@ class Slider extends Circle implements Displayable{
     strokeWeight(4);
     line(start, y-r/2, end, y-r/2);
     line(start, y+r/2, end, y+r/2);
-    arc(start, y , r, r, PI / 2, 3 * PI / 2);
-    arc(end,  y ,r, r, 3 * PI / 2, 2*PI);
-    arc(end, y , r, r, 0, PI / 2);
+    arc(start, y, r, r, PI / 2, 3 * PI / 2);
+    arc(end, y, r, r, 3 * PI / 2, 2*PI);
+    arc(end, y, r, r, 0, PI / 2);
   }
  
   boolean isClicked() {
@@ -103,11 +106,26 @@ class Slider extends Circle implements Displayable{
     return dead;
   }
   
-  boolean initialAcc() {
-    return (c.getRadius() / r) < 1.95;
+  int getScore() {
+    // initial hit score; -1 and 0 are used for later tiering
+    if (score > 1.6) score = -1;
+    else score = 0;
+    
+    // final calculation of ticks ticked to total number of ticks
+    if (((float) numTicked / ticks.length) == 1.0) score += 3;
+    else if (((float) numTicked / ticks.length) >= 0.5) score += 2;
+    else if (((float) numTicked / ticks.length) > 0) score++;
+    
+    // conversion to 300/100/50/X system
+    if (score == 3) score = 300;
+    else if (score == 2) score = 100;
+    else if (score == 1) score = 50;
+    else score = 0;
+    
+    return (int) score;
   }
   
-  int numTicks() {
-    return ticks.length;
+  void updateTickScore() {
+    
   }
 }

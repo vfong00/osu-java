@@ -73,6 +73,7 @@ class Circle implements Displayable {
     }
     return dead;
   }
+  
   int getScore() {
     if (score < 1.25) return 300;
     else if (score < 1.6) return 100;
