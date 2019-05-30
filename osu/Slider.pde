@@ -2,7 +2,7 @@ class Slider extends Circle implements Displayable{
   float x, y, r, in, score, start, end, len, startTime, initScore;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving;
-  int firstNotTicked, numTicked;
+  int firstNotTicked, numTicked, tickScore;
   ApproachCircle c;
   SliderTick[] ticks;
   
@@ -59,9 +59,11 @@ class Slider extends Circle implements Displayable{
     if (x == tick.getX() && y == tick.getY()) {
       onTick = true;
       if (mousePressed) {
+        tickScore = 10;
         numTicked++;
         tick.setTicked(true);
       } else {
+        tickScore = 0;
         tick.setAlive(false);
       }
       firstNotTicked++;
@@ -166,10 +168,6 @@ class Slider extends Circle implements Displayable{
   }
   
   int tickScore() {
-    if (mousePressed) {
-      return 10;
-    } else {
-      return 0;
-    }
+    return tickScore;
   }
 }
