@@ -1,7 +1,7 @@
 class Slider extends Circle implements Displayable{
   float x, y, r, in, score, start, end, len, startTime, initScore;
   String num;
-  boolean dead, wasClicked, lastTicked, onTick;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked;
   int firstNotTicked, numTicked;
   ApproachCircle c;
   SliderTick[] ticks;
@@ -29,6 +29,7 @@ class Slider extends Circle implements Displayable{
     wasClicked = false;
     lastTicked = false;
     onTick = false;
+    notChecked = true;
 
     score = 2.5;
     this.len = len;
@@ -125,6 +126,14 @@ class Slider extends Circle implements Displayable{
   
   boolean onTick() {
     return onTick;
+  }
+  
+  boolean notChecked() {
+    return notChecked;
+  }
+  
+  void setNotChecked(boolean b) {
+    notChecked = b;
   }
   
   float initScore() {
