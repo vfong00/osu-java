@@ -52,7 +52,6 @@ class Slider extends Circle implements Displayable{
     text(firstNotTicked, 50, 160);
     SliderTick tick = ticks[firstNotTicked];
     if (x == tick.getX() && y == tick.getY()) {
-    // if (Math.abs(x - tick.getX()) < 1 && Math.abs(y - tick.getY()) < 1) {
       if (mousePressed) {
         tick.setTicked(true);
       } else {

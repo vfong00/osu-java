@@ -50,31 +50,39 @@ void setup() {
   p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
 }
 
+void scoreCircle(Circle circle) {
+  int cScore = circle.getScore();
+  if (cScore == 0) streak = 0;
+  else streak++;
+  int sMult = streak;
+  if (sMult > 0) sMult--;
+  score += cScore + (cScore * sMult);
+  rawScore += cScore;
+}
+
+void scoreSlider(Slider slider) {
+  int sScore = slider.getScore();
+  if (sScore == 0) streak = 0;
+  else streak++;
+  int sMult = streak;
+  if (sMult > 0) sMult--;
+  score += sScore + (sScore * sMult);
+  rawScore += sScore;
+}
+
+
 void displayCircles(){
   for( Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
-      int cScore = c.getScore();
-      if (cScore == 0) streak = 0;
-      else streak++;
-      int sMult = streak;
-      if (sMult > 0) sMult--;
-      score += cScore + (cScore * sMult);
-      rawScore += cScore;
+      scoreCircle(c);
       dead.add(c);
     }
   }
   for( Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
     if (s.isDead() && !dead.contains(s)) {
-      int sScore = s.getScore();
-      text(sScore + "", 50, 130);
-      if (sScore == 0) streak = 0;
-      else streak++;
-      int sMult = streak;
-      if (sMult > 0) sMult--;
-      score += sScore + (sScore * sMult);
-      rawScore += sScore;
+      scoreSlider(s);
       dead.add(s);
     }
   }
