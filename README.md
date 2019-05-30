@@ -45,3 +45,33 @@ Simply open osu.pde, and press the play button!
 - Finished cursor trail in concept but not working as intended.
 
 ### 5-29-19
+
+
+
+## devlog - angel
+
+### 5-20-19
+- Made the display of the circles a linear gradient
+- Adjustment of sensitivity for clickies 
+- Added streak and counter number
+
+### 5-21-19
+- Modified the way we count dead and scored clickies and made counters
+- Made a slider do the slide (took FOREVER and I didn't commit different parts because I have bad committing habits)
+
+### 5-22/23-19
+- Modified the motion of the horizontal slider
+- Began  and finished accuracy calculation
+
+### 5-24-19
+- Began working on slider reverse 
+
+### weekend (5-25/26/27-19)
+- I got sick and died :(
+
+### 5-28-19
+- Continued to work on reverse slider (diff branch)
+- I keep falling alseep and not pushing and having technical issues (my computer is like, barely functional)
+
+### 5-29-19
+- Merged the code from Vincent's score calculation developments and ticks and began implementing old code but it got very confusing and complicated so there weren't enough commits 
