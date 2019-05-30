@@ -58,7 +58,7 @@ class Slider extends Circle implements Displayable{
     SliderTick tick = ticks[firstNotTicked];
     if (x == tick.getX() && y == tick.getY()) {
       onTick = true;
-      if (mousePressed) {
+      if (isClicked()) {
         tickScore = 10;
         numTicked++;
         tick.setTicked(true);
