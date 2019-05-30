@@ -82,12 +82,13 @@ class Slider extends Circle implements Displayable{
         moving = true;
         fill(255);
         
-        if (x < end && !complete){
+        if (!complete && x < end ){
           x++;
         }else{
            if (!reverse){
              dead = true;
            }else{
+             complete = true;
              if (x > start) x--; 
            }
         }
