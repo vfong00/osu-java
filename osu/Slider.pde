@@ -88,6 +88,7 @@ class Slider extends Circle implements Displayable{
            if (!reverse){
              dead = true;
            }else{
+             displayTicks();
              complete = true;
              if (x > start) x--; 
            }
