@@ -63,12 +63,14 @@ void scoreCircle(Circle circle) {
 }
 
 void scoreSlider(Slider slider) {
+  boolean first = true;
+  if (first && slider.wasClicked()) {
+    first = false;
+    if (slider.initScore() > 1.6) streak = 0;
+  }
   if (!slider.isDead() && slider.onTick()) {
-    if (slider.tickScore() == 0) {
-      if (!slider.lastTicked()) streak = 0;
-    } else {
-      streak++;
-    }
+    if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
+    else streak++;
   }
   
 }

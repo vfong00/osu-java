@@ -1,5 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, r, in, score, start, end, len, startTime;
+  float x, y, r, in, score, start, end, len, startTime, initScore;
   String num;
   boolean dead, wasClicked, lastTicked, onTick;
   int firstNotTicked, numTicked;
@@ -14,6 +14,7 @@ class Slider extends Circle implements Displayable{
     this.num =  "" + num;
     firstNotTicked = 0;
     numTicked = 0;
+    initScore = 0;
     
     c = new ApproachCircle(x, y, 2.5 * r);
     ticks = new SliderTick[3];
@@ -74,13 +75,17 @@ class Slider extends Circle implements Displayable{
       displayTicks();
       if (c.getRadius() < r) {
         fill(255);
+        
         if (x < end) x++;
         else dead = true;
+        
         if (!lastTicked) checkTicked();
+        else onTick = false;
+        
         displayClicky(false);
       } else {
         if (wasClicked || isClicked()) {
-          if (!wasClicked && isClicked()) score = c.getRadius() / r;
+          if (!wasClicked) initScore = c.getRadius() / r;
           c.updateRadius();
           wasClicked = true;
         } else {
@@ -106,6 +111,10 @@ class Slider extends Circle implements Displayable{
     return (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r);
   }
   
+  boolean wasClicked() {
+    return wasClicked;
+  }
+  
   boolean isDead() {
     return dead;
   }
@@ -118,9 +127,13 @@ class Slider extends Circle implements Displayable{
     return onTick;
   }
   
+  float initScore() {
+    return initScore;
+  }
+  
   int getScore() {
     // initial hit score; -1 and 0 are used for later tiering
-    if (score > 1.6) score = -1;
+    if (initScore() > 1.6) score = -1;
     else score = 0;
     
     // final calculation of ticks ticked to total number of ticks

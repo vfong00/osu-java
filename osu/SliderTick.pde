@@ -9,7 +9,7 @@ class SliderTick extends Thing implements Displayable {
   }
   
   void display() {
-    if (!ticked && alive && !end) {   
+    if (!ticked && alive) {   
       noStroke();
       fill(255);
       ellipse(x, y, 10, 10);
