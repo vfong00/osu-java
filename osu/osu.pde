@@ -5,6 +5,7 @@ int timer = 0;
 int streak = 0;
 int score = 0;
 int rawScore = 0;
+int rawMaxScore = 0;
 float accuracy = 0;
 PImage cursorPhoto;
 PImage cursorTrailPhoto;
@@ -58,6 +59,7 @@ void scoreCircle(Circle circle) {
   if (sMult > 0) sMult--;
   score += cScore + (cScore * sMult);
   rawScore += cScore;
+  rawMaxScore += 300;
 }
 
 void scoreSlider(Slider slider) {
@@ -96,7 +98,7 @@ void draw() {
   displayCircles();
   p.display();
   
-  accuracy = (float) rawScore / (3 * dead.size());
+  accuracy = (float) rawScore * 100 / rawMaxScore;
   if (dead.size() == 0) accuracy = 0;
   textSize(32);
   fill(255);

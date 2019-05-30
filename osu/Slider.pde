@@ -102,8 +102,12 @@ class Slider extends Circle implements Displayable{
   boolean isDead() {
     return dead;
   }
+  
   boolean initialAcc() {
     return (c.getRadius() / r) < 1.95;
   }
   
+  int numTicks() {
+    return ticks.length;
+  }
 }
