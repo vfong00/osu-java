@@ -27,11 +27,12 @@ class Slider extends Circle implements Displayable{
     ticks[1] = new SliderTick(750, 600, false);
     ticks[2] = new SliderTick(850, 600, true);
     
-    reverseTicks = new SliderTick[3];
-    reverseTicks[0] = new SliderTick(650, 600, false);
-    reverseTicks[1] = new SliderTick(750, 600, false);
-    reverseTicks[2] = new SliderTick(850, 600, true);   
-  
+    if(reverse){
+      reverseTicks = new SliderTick[3];
+      reverseTicks[0] = new SliderTick(625, 600, false);
+      reverseTicks[1] = new SliderTick(725, 600, false);
+      reverseTicks[2] = new SliderTick(825, 600, true);   
+    }
     
     start = x;
     end = x + len;
@@ -47,9 +48,11 @@ class Slider extends Circle implements Displayable{
     moving = false;
 
     score = 2.5;
-    this.len = len;
-    this.time = startTime;
     this.reverse = reverse;
+    this.len = len;
+    if (reverse) this.time = 950;
+    else this.time = 515;
+    
   }
   
   void displayClicky(boolean number) {
@@ -88,10 +91,13 @@ class Slider extends Circle implements Displayable{
     }
   }
   
+  int t = 0;
   void display() {
+    if (t > time) dead = true;
     if (!isDead()) {
       horizontalSlider();
       displayTicks(ticks);
+      
       if (c.getRadius() < r) {
         moving = true;
         fill(255);
@@ -101,16 +107,18 @@ class Slider extends Circle implements Displayable{
            if (!reverse){
              dead = true;
            }else{
-             displayTicks(reverseTicks);
-             if (!lastTicked) checkTicked(reverseTicks);
-             else onTick = false;
+             
              complete = true;
              if (x > start) x--; 
            }
         }
         if (!lastTicked) checkTicked(ticks);
         else onTick = false;
-        
+        if(complete && reverse){
+          displayTicks(reverseTicks);
+          if (!lastTicked) checkTicked(reverseTicks);
+          else onTick = false;
+        }
         displayClicky(false);
       } else {
         if (wasClicked || isClicked()) {
@@ -123,6 +131,7 @@ class Slider extends Circle implements Displayable{
         }
       }
       text(firstNotTicked + "", 50, 160);
+      t++;
     }
   }
   
