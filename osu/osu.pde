@@ -75,8 +75,8 @@ void scoreSlider(Slider slider) {
     } 
   }
   if (!slider.isDead() && slider.onTick()) {
-    if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
-    else streak++;
+    if (slider.tickScore() == 10) streak++;
+    else if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
   }
   
 }
