@@ -81,8 +81,6 @@ void scoreSlider(Slider slider) {
   }
   if (slider.isDead() && !dead.contains(slider)) {
     int sScore = slider.getScore();
-    if (sScore == 0) streak = 0;
-    else streak++;
     int sMult = streak;
     if (sMult > 0) sMult--;
     score += sScore + (sScore * sMult);
