@@ -75,10 +75,20 @@ void scoreSlider(Slider slider) {
     } 
   }
   if (!slider.isDead() && slider.onTick()) {
+    score += 10;
     if (slider.tickScore() == 10) streak++;
     else if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
   }
-  
+  if (slider.isDead() && !dead.contains(slider)) {
+    int sScore = slider.getScore();
+    if (sScore == 0) streak = 0;
+    else streak++;
+    int sMult = streak;
+    if (sMult > 0) sMult--;
+    score += sScore + (sScore * sMult);
+    rawScore += sScore;
+    rawMaxScore += 300;
+  }
 }
 
 
