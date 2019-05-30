@@ -1,22 +1,24 @@
 class Slider extends Circle implements Displayable{
-  float x, y, r, in, score, start, end, len, startTime;
+  float x, y, r, in, score, start, end, len, startTime, initScore;
   String num;
-  boolean dead, wasClicked, inRangeOfTick;
-  int firstNotTicked;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
+  int firstNotTicked, numTicked;
   ApproachCircle c;
-  int time;
-  boolean complete;
-  boolean reverse;
+  float time;
+  int tickScore;
   SliderTick[] ticks;
   
-  public Slider(float x, float y, float r, int num, float len, int startTime, boolean reverse){
+  public Slider(float x, float y, float r, float startTime, int num, float len, boolean reverse) {
     super(x,y,r,startTime,num);
     
     this.x = x;
     this.y = y;
     this.r = r;
+    this.reverse = reverse;
     this.num =  "" + num;
     firstNotTicked = 0;
+    numTicked = 0;
+    initScore = 2.5;
     
     c = new ApproachCircle(x, y, 2.5 * r);
     ticks = new SliderTick[3];
@@ -27,9 +29,15 @@ class Slider extends Circle implements Displayable{
     start = x;
     end = x + len;
     
+    
     dead = false;
     wasClicked = false;
+
+    lastTicked = false;
+    onTick = false;
+    notChecked = true;
     complete = false;
+    moving = false;
 
     score = 2.5;
     this.len = len;
@@ -49,21 +57,27 @@ class Slider extends Circle implements Displayable{
   }
   
   void displayTicks() {
-    for (int i = firstNotTicked; i < ticks.length; i++) {
+    for (int i = 0; i < ticks.length; i++) {
       ticks[i].display();
     }
-    if (ticks[firstNotTicked].isTicked() || !ticks[firstNotTicked].isAlive()) firstNotTicked++;
   }
   
   void checkTicked() {
-    if (dist(x, y, ticks[firstNotTicked].getX(), ticks[firstNotTicked].getY()) < r) {
-      inRangeOfTick = true;
-      if (mousePressed) ticks[firstNotTicked].setTicked(true);
-    } else {
-      if (inRangeOfTick) {
-        inRangeOfTick = false;
-        ticks[firstNotTicked].setAlive(false);
+    SliderTick tick = ticks[firstNotTicked];
+    if (x == tick.getX() && y == tick.getY()) {
+      onTick = true;
+      if (isClicked()) {
+        tickScore = 10;
+        numTicked++;
+        tick.setTicked(true);
+      } else {
+        tickScore = 0;
+        tick.setAlive(false);
       }
+      firstNotTicked++;
+      lastTicked = tick.isEnd();
+    } else {
+      onTick = false;
     }
   }
   
@@ -72,23 +86,30 @@ class Slider extends Circle implements Displayable{
       horizontalSlider();
       displayTicks();
       if (c.getRadius() < r) {
+        moving = true;
         fill(255);
-
-        if (x < end && !complete){
+        if (!complete && x < end ){
           x++;
         }else{
-          complete = true;
-          if (!reverse)  dead = true;
+           if (!reverse){
+             dead = true;
+           }else{
+             displayTicks();
+             complete = true;
+             if (x > start) x--; 
+           }
         }
-      }
-        checkTicked();
+        if (!lastTicked) checkTicked();
+        else onTick = false;
+        
         displayClicky(false);
         if (complete && reverse){
           if (x > start) x--;
           else dead = true;
         }
       } else {
-        if (isClicked() || wasClicked) {
+        if (wasClicked || isClicked()) {
+          if (!wasClicked) initScore = c.getRadius() / r;
           c.updateRadius();
           wasClicked = true;
         } else {
@@ -98,8 +119,7 @@ class Slider extends Circle implements Displayable{
       }
       text(firstNotTicked + "", 50, 160);
     }
-
-  
+  }
   
   void horizontalSlider(){
     fill(0,0,0,0);
@@ -107,20 +127,67 @@ class Slider extends Circle implements Displayable{
     strokeWeight(4);
     line(start, y-r/2, end, y-r/2);
     line(start, y+r/2, end, y+r/2);
-    arc(start, y , r, r, PI / 2, 3 * PI / 2);
-    arc(end,  y ,r, r, 3 * PI / 2, 2*PI);
-    arc(end, y , r, r, 0, PI / 2);
+    arc(start, y, r, r, PI / 2, 3 * PI / 2);
+    arc(end, y, r, r, 3 * PI / 2, 2*PI);
+    arc(end, y, r, r, 0, PI / 2);
   }
  
   boolean isClicked() {
     return (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r);
   }
   
+  boolean wasClicked() {
+    return wasClicked;
+  }
+  
   boolean isDead() {
     return dead;
   }
-  boolean initialAcc() {
-    return (c.getRadius() / r) < 1.95;
+  
+  boolean lastTicked() {
+    return lastTicked;
   }
   
+  boolean onTick() {
+    return onTick;
+  }
+  
+  boolean notChecked() {
+    return notChecked;
+  }
+  
+  boolean moving() {
+    return moving;
+  }
+  
+  void setNotChecked(boolean b) {
+    notChecked = b;
+  }
+  
+  float initScore() {
+    return initScore;
+  }
+  
+  int getScore() {
+    // initial hit score; -1 and 0 are used for later tiering
+    if (initScore() > 1.6) score = -1;
+    else score = 0;
+    
+    // final calculation of ticks ticked to total number of ticks
+    if (((float) numTicked / ticks.length) == 1.0) score += 3;
+    else if (((float) numTicked / ticks.length) >= 0.5) score += 2;
+    else if (((float) numTicked / ticks.length) > 0) score++;
+    
+    // conversion to 300/100/50/X system
+    if (score == 3) score = 300;
+    else if (score == 2) score = 100;
+    else if (score == 1) score = 50;
+    else score = 0;
+    
+    return (int) score;
+  }
+  
+  int tickScore() {
+    return tickScore;
+  }
 }

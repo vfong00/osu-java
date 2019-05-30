@@ -9,11 +9,13 @@ class SliderTick extends Thing implements Displayable {
   }
   
   void display() {
-    noStroke();
-    fill(255);
-    ellipse(x, y, 10, 10);
-    fill(0);
-    ellipse(x, y, 5, 5);
+    if (!ticked && alive) {   
+      noStroke();
+      fill(255);
+      ellipse(x, y, 10, 10);
+      fill(0);
+      ellipse(x, y, 5, 5);
+    }
   }
   
   boolean isTicked() {
@@ -24,12 +26,16 @@ class SliderTick extends Thing implements Displayable {
     return alive;
   }
   
+  boolean isEnd() {
+    return end;
+  }
+  
   float getX() {
     return x;
   }
   
   float getY() {
-    return x;
+    return y;
   }
   
   void setTicked(boolean t) {

@@ -5,7 +5,6 @@ int timer = 0;
 int streak = 0;
 int score = 0;
 int rawScore = 0;
-int rawMaxScore = 0;
 float accuracy = 0;
 PImage cursorPhoto;
 PImage cursorTrailPhoto;
@@ -39,7 +38,8 @@ void setup() {
   c = new Circle(400, 600, 80, 100, 3);
   clickies.add(c);
   circles.add(c);
-  d = new Slider(550, 600, 80, 150, 4, 350, true);
+  //d = new Slider(550, 600, 80, 4, 150, 500, true);
+  d = new Slider(550, 600, 80, 4, 300, 300, true);
   clickies.add(d);
   sliders.add(d);
   
@@ -50,57 +50,31 @@ void setup() {
   p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
 }
 
-void scoreCircle(Circle circle) {
-  int cScore = circle.getScore();
-  if (cScore == 0) streak = 0;
-  else streak++;
-  int sMult = streak;
-  if (sMult > 0) sMult--;
-  score += cScore + (cScore * sMult);
-  rawScore += cScore;
-  rawMaxScore += 300;
-}
-
-void scoreSlider(Slider slider) {
-  // you only need this checked once
-  if (slider.notChecked()) {
-    if (slider.moving()) {
-      slider.setNotChecked(false);
-      streak = 0;
-    } else if (slider.wasClicked()) {
-      slider.setNotChecked(false);
-      if (slider.initScore() > 1.6) streak = 0;
-      else streak++;
-    } 
-  }
-  if (!slider.isDead() && slider.onTick()) {
-    score += 10;
-    if (slider.tickScore() == 10) streak++;
-    else if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
-  }
-  if (slider.isDead() && !dead.contains(slider)) {
-    int sScore = slider.getScore();
-    int sMult = streak;
-    if (sMult > 0) sMult--;
-    score += sScore + (sScore * sMult);
-    rawScore += sScore;
-    rawMaxScore += 300;
-  }
-}
-
-
 void displayCircles(){
   for( Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
-      scoreCircle(c);
+      int cScore = c.getScore();
+      if (cScore == 0) streak = 0;
+      else streak++;
+      int sMult = streak;
+      if (sMult > 0) sMult--;
+      score += cScore + (cScore * sMult);
+      rawScore += cScore;
       dead.add(c);
     }
   }
   for( Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
-    scoreSlider(s);
     if (s.isDead() && !dead.contains(s)) {
+      int sScore = s.getScore();
+      text(sScore + "", 50, 130);
+      if (sScore == 0) streak = 0;
+      else streak++;
+      int sMult = streak;
+      if (sMult > 0) sMult--;
+      score += sScore + (sScore * sMult);
+      rawScore += sScore;
       dead.add(s);
     }
   }
@@ -114,12 +88,13 @@ void draw() {
   displayCircles();
   p.display();
   
-  accuracy = (float) rawScore * 100 / rawMaxScore;
+  accuracy = (float) rawScore / (3 * dead.size());
   if (dead.size() == 0) accuracy = 0;
   textSize(32);
   fill(255);
   text("Streak: " + streak + "x", 15, 790);
 
-  text("Score: " + score, 800, 35); 
-  text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
+  text("Score: " + score, 820, 35); 
+  text("Accuracy: " + accuracy + "%", 725, 65);
+
 }
