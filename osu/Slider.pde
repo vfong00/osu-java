@@ -1,16 +1,17 @@
 class Slider extends Circle implements Displayable{
   float x, y, r, in, score, start, end, len, startTime, initScore;
   String num;
-  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
   int firstNotTicked, numTicked;
   ApproachCircle c;
   SliderTick[] ticks;
   
-  public Slider(float x, float y, float r, float startTime, int num, float len) {
+  public Slider(float x, float y, float r, float startTime, int num, float len, boolean reverse) {
     super(x,y,r,startTime,num);
     this.x = x;
     this.y = y;
     this.r = r;
+    this.reverse = reverse;
     this.num =  "" + num;
     firstNotTicked = 0;
     numTicked = 0;
@@ -25,11 +26,13 @@ class Slider extends Circle implements Displayable{
     start = x;
     end = x + len;
     
+    
     dead = false;
     wasClicked = false;
     lastTicked = false;
     onTick = false;
     notChecked = true;
+    complete = false;
     moving = false;
 
     score = 2.5;
@@ -79,9 +82,15 @@ class Slider extends Circle implements Displayable{
         moving = true;
         fill(255);
         
-        if (x < end) x++;
-        else dead = true;
-        
+        if (x < end && !complete){
+          x++;
+        }else{
+           if (!reverse){
+             dead = true;
+           }else{
+             if (x > start) x--; 
+           }
+        }
         if (!lastTicked) checkTicked();
         else onTick = false;
         
