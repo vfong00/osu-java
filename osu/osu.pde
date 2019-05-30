@@ -40,7 +40,7 @@ void setup() {
   clickies.add(c);
   circles.add(c);
   
-  d = new Slider(550, 600, 80, 150, 4, 301);
+  d = new Slider(550, 600, 80, 150, 4, 350);
   clickies.add(d);
   sliders.add(d);
   
@@ -63,13 +63,14 @@ void scoreCircle(Circle circle) {
 }
 
 void scoreSlider(Slider slider) {
-  int sScore = slider.getScore();
-  if (sScore == 0) streak = 0;
-  else streak++;
-  int sMult = streak;
-  if (sMult > 0) sMult--;
-  score += sScore + (sScore * sMult);
-  rawScore += sScore;
+  if (!slider.isDead() && slider.onTick()) {
+    if (slider.tickScore() == 0) {
+      if (!slider.lastTicked()) streak = 0;
+    } else {
+      streak++;
+    }
+  }
+  
 }
 
 
@@ -83,8 +84,8 @@ void displayCircles(){
   }
   for( Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
+    scoreSlider(s);
     if (s.isDead() && !dead.contains(s)) {
-      scoreSlider(s);
       dead.add(s);
     }
   }
