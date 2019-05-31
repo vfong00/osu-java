@@ -59,9 +59,12 @@ class Slider extends Circle implements Displayable{
       ticks[5] = new SliderTick(625, 600, true);
     }else{
       ticks = new SliderTick[3];
-      for(int i = 1; i < ticks.length; i++){
+      /*for(int i = 1; i < ticks.length; i++){
         ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
-      }
+      }*/
+      ticks[0] = new SliderTick(625, 600, false);
+      ticks[1] = new SliderTick(725, 600, false);
+      ticks[2] = new SliderTick(825, 600, true);
     }
     
     dead = false;
@@ -91,15 +94,32 @@ class Slider extends Circle implements Displayable{
   }
   
   void displayTicks(SliderTick[] g) {
-    if (complete){
-      for (int i = 0; i < g.length; i++) {
-        g[i].display();
-      }
-    }else{
-      for (int i = 0; i < g.length/2; i++) {
-        g[i].display();
-      }
-    }
+      /*if (complete){
+        for (int i = g.length/2; i < g.length; i++) {
+          g[i].display();
+        }
+      }else if (reverse){
+        for (int i = 0; i < g.length/2; i++) {
+          g[i].display();
+        }
+      }*/
+      
+     if (reverse){
+       if(!complete){
+         for (int i = 0; i < g.length/2; i++) {
+          g[i].display();
+         }
+       }else{
+         for (int i = g.length/2; i < g.length; i++) {
+          g[i].display();
+        }
+       }
+     }else{
+       for(SliderTick i: ticks){
+         i.display();
+       }   
+     }
+    
   }
   
   void checkTicked(SliderTick[] g) {
@@ -132,7 +152,8 @@ class Slider extends Circle implements Displayable{
         moving = true;
         fill(255);
         if (!complete && x < end[0] ){
-          x += dir.normalize().x ;;
+          x += dir.normalize().x ;
+          y += dir.normalize().y ;
         }else{
            if (!reverse){
              dead = true;
@@ -175,17 +196,7 @@ class Slider extends Circle implements Displayable{
     arc(end[0], end[1], r, r, 3 * PI / 2, 2*PI);
     arc(end[0], end[1], r, r, 0, PI / 2);
   }
-  
-  void verticalSlider(){
-    fill(0,0,0,0);
-    stroke(255, 255);
-    strokeWeight(4);
-    line(start[0], y-r/2, end[0], y-r/2);
-    line(start[0], y+r/2, end[0], y+r/2);
-    arc(start[0], y, r, r, PI / 2, 3 * PI / 2);
-    arc(end[0], y, r, r, 3 * PI / 2, 2*PI);
-    arc(end[0], y, r, r, 0, PI / 2);
-  }
+
   
   boolean isClicked() {
     return (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r);

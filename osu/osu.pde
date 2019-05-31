@@ -16,6 +16,7 @@ Circle c;
 Slider d; 
 Cursor p;
 test k;
+Slider j;
 
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
@@ -46,6 +47,11 @@ void setup() {
   sliders.add(d);
 
   k = new test(500,300,450,400,80);
+  
+  
+  j = new Slider(550, 250, 80, 150, 4, 900, 250, false);
+  clickies.add(j);
+  sliders.add(j);
   
   cursorPhoto = loadImage("cursor@2x.png");
   cursorPhoto.resize(40,40);
