@@ -27,6 +27,8 @@ class Slider extends Circle implements Displayable{
     end[0] = x1;
     end[1] = y1; 
     
+    dir = new PVector(x1- x,y1-y);
+    
     this.r = r;
     this.reverse = reverse;
     this.num =  "" + num;
@@ -39,8 +41,8 @@ class Slider extends Circle implements Displayable{
     print(len);
     
  
-    print(start);
-    print(end);
+    print(start[0]);
+    print(end[0]);
     if(reverse){
       ticks = new SliderTick[6];
       ticks[0] = new SliderTick(625, 600, false);
@@ -130,14 +132,14 @@ class Slider extends Circle implements Displayable{
         moving = true;
         fill(255);
         if (!complete && x < end[0] ){
-          x++;
+          x += dir.normalize().x ;;
         }else{
            if (!reverse){
              dead = true;
            }else{
              
              complete = true;
-             if (x > start[0]) x--; 
+             if (x > start[0]) x -= dir.normalize().x ;; 
            }
         }
         if (!lastTicked) checkTicked(ticks);
@@ -167,11 +169,11 @@ class Slider extends Circle implements Displayable{
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start[0], y-r/2, end[0], y-r/2);
-    line(start[0], y+r/2, end[0], y+r/2);
-    arc(start[0], y, r, r, PI / 2, 3 * PI / 2);
-    arc(end[0], y, r, r, 3 * PI / 2, 2*PI);
-    arc(end[0], y, r, r, 0, PI / 2);
+    line(start[0], start[1]-r/2, end[0], end[1]-r/2);
+    line(start[0], start[1]+r/2, end[0], end[1]+r/2);
+    arc(start[0], start[1], r, r, PI / 2, 3 * PI / 2);
+    arc(end[0], end[1], r, r, 3 * PI / 2, 2*PI);
+    arc(end[0], end[1], r, r, 0, PI / 2);
   }
   
   void verticalSlider(){

@@ -41,7 +41,7 @@ void setup() {
   clickies.add(c);
   circles.add(c);
   
-  d = new Slider(550, 600, 80, 150, 4, 550, 900, true);
+  d = new Slider(550, 600, 80, 150, 4, 900, 600, true);
   clickies.add(d);
   sliders.add(d);
 
