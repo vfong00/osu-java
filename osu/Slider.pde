@@ -2,7 +2,7 @@ class Slider extends Circle implements Displayable{
   float x, y, r, in, score, start, end, len, startTime, initScore;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
-  int firstNotTicked, numTicked;
+  int firstNotTicked, numTicked, tickScore;
   ApproachCircle c;
   SliderTick[] ticks;
   
