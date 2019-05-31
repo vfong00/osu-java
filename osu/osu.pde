@@ -47,7 +47,7 @@ void setup() {
   cursorPhoto = loadImage("cursor@2x.png");
   cursorPhoto.resize(40,40);
   cursorTrailPhoto = loadImage("cursortrail@2x.png");
-  cursorTrailPhoto.resize(100,100);
+  cursorTrailPhoto.resize(40,40);
   p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
 }
 

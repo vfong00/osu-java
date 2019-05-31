@@ -7,7 +7,7 @@ class Cursor extends Thing implements Displayable {
       super(x,y);
       this.cursorPhoto = cursorPhoto;
       this.cursorTrailPhoto = cursorTrailPhoto;
-      trailImgs = new ArrayDeque<CursorTrail>(100);
+      trailImgs = new ArrayDeque<CursorTrail>(40);
   }
   
   void display() {

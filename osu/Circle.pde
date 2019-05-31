@@ -21,6 +21,27 @@ class Circle implements Displayable {
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   
+  void displayScore() {
+    String dispText = "";
+    if (getScore() == 300) {
+      fill(0, 255, 255, timeDispScore);
+      dispText= "300";
+    } else if (getScore() == 100) {
+      fill(127, 255, 0, timeDispScore);
+      dispText = "100";
+    } else if (getScore() == 50) {
+      fill(160, 32, 240, timeDispScore);
+      dispText = "50";
+    } else { 
+      fill(255, 0, 0, timeDispScore);
+      dispText = "X";
+    }
+    textSize(25);
+    text(dispText, x + 10, y + 10);
+    timeDispScore -= 2;
+    textSize(32);
+  }
+  
   void display() {
     if (!isDead()) {
       if (c.getRadius() >= r) c.display();
@@ -36,24 +57,7 @@ class Circle implements Displayable {
       text(num, x-10, y+10);
     } else {
       if (timeDispScore > 0) {
-        String dispText = "";
-        if (getScore() == 300) {
-          fill(0, 255, 255, timeDispScore);
-          dispText= "300";
-        } else if (getScore() == 100) {
-          fill(127, 255, 0, timeDispScore);
-          dispText = "100";
-        } else if (getScore() == 50) {
-          fill(160, 32, 240, timeDispScore);
-          dispText = "50";
-        } else { 
-          fill(255, 0, 0, timeDispScore);
-          dispText = "X";
-        }
-        textSize(25);
-        text(dispText, x + 10, y + 10);
-        timeDispScore -= 2;
-        textSize(32);
+        displayScore();
       }
     }
   }
