@@ -22,16 +22,16 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     
     c = new ApproachCircle(x, y, 2.5 * r);
-    ticks = new SliderTick[3];
-    ticks[0] = new SliderTick(650, 600, false);
-    ticks[1] = new SliderTick(750, 600, false);
-    ticks[2] = new SliderTick(850, 600, true);
+    
     
     if(reverse){
-      reverseTicks = new SliderTick[3];
-      reverseTicks[0] = new SliderTick(625, 600, false);
-      reverseTicks[1] = new SliderTick(725, 600, false);
-      reverseTicks[2] = new SliderTick(825, 600, true);   
+      ticks = new SliderTick[6];
+      ticks[0] = new SliderTick(650, 600, false);
+      ticks[1] = new SliderTick(750, 600, false);
+      ticks[2] = new SliderTick(850, 600, true);
+      ticks[3] = new SliderTick(850, 600, false);
+      ticks[4] = new SliderTick(750, 600, false);
+      ticks[5] = new SliderTick(650, 600, true);
     }
     
     start = x;
