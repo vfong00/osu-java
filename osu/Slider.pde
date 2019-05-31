@@ -26,12 +26,12 @@ class Slider extends Circle implements Displayable{
     
     if(reverse){
       ticks = new SliderTick[6];
-      ticks[0] = new SliderTick(650, 600, false);
-      ticks[1] = new SliderTick(750, 600, false);
-      ticks[2] = new SliderTick(850, 600, true);
-      ticks[3] = new SliderTick(850, 600, false);
-      ticks[4] = new SliderTick(750, 600, false);
-      ticks[5] = new SliderTick(650, 600, true);
+      ticks[0] = new SliderTick(625, 600, false);
+      ticks[1] = new SliderTick(725, 600, false);
+      ticks[2] = new SliderTick(825, 600, false);
+      ticks[3] = new SliderTick(825, 600, false);
+      ticks[4] = new SliderTick(725, 600, false);
+      ticks[5] = new SliderTick(625, 600, true);
     }
     
     start = x;
@@ -67,8 +67,14 @@ class Slider extends Circle implements Displayable{
   }
   
   void displayTicks(SliderTick[] g) {
-    for (int i = 0; i < g.length; i++) {
-      g[i].display();
+    if (complete){
+      for (int i = 0; i < g.length; i++) {
+        g[i].display();
+      }
+    }else{
+      for (int i = 0; i < g.length/2; i++) {
+        g[i].display();
+      }
     }
   }
   
@@ -114,11 +120,11 @@ class Slider extends Circle implements Displayable{
         }
         if (!lastTicked) checkTicked(ticks);
         else onTick = false;
-        if(complete && reverse){
+        /*if(complete && reverse){
           displayTicks(reverseTicks);
           if (!lastTicked) checkTicked(reverseTicks);
           else onTick = false;
-        }
+        }*/
         displayClicky(false);
       } else {
         if (wasClicked || isClicked()) {
