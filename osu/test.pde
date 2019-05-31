@@ -26,7 +26,7 @@ class test{
     fill(255);
     ellipse(x,y,r,r);
     drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-    if(y1 != y){
+    if(abs(y1-y) > 1){
       x += g.normalize().x ;
       y += g.normalize().y ;
     }

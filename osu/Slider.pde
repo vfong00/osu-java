@@ -1,6 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, r, in, score, end, len, startTime, initScore, x1, y1;
-  float[] start;
+  float x, y, r, in, score, len, startTime, initScore, x1, y1;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
   int firstNotTicked, numTicked;
@@ -10,15 +9,25 @@ class Slider extends Circle implements Displayable{
   SliderTick[] ticks;
   SliderTick[] reverseTicks;
   int shape;
+  float[] start = new float[2];
+  float[] end = new float[2];
+  PVector dir;
+  
   
   public Slider(float x, float y, float r, float startTime, int num, float x1, float y1, boolean reverse) {
     super(x,y,r,startTime,num);
     
     this.x = x;
     this.y = y;
-    this.r = r;
+    start[0] = x;
+    start[1] = y;
+    
     this.x1 = x1;
     this.y1 = y1;
+    end[0] = x1;
+    end[1] = y1; 
+    
+    this.r = r;
     this.reverse = reverse;
     this.num =  "" + num;
     firstNotTicked = 0;
@@ -26,29 +35,25 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     
     c = new ApproachCircle(x, y, 2.5 * r);
-    start = new float[2];
-    start[0]= x;
-    start[1]= y;
     this.len = dist(start[0],start[1],x1,y1);
     print(len);
     
-    end = x + this.len;
  
     print(start);
     print(end);
     if(reverse){
       ticks = new SliderTick[6];
       ticks[0] = new SliderTick(625, 600, false);
-      for(int i = 1; i < ticks.length/2; i++){
+      /*for(int i = 1; i < ticks.length/2; i++){
         ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
       }
       for(int i = ticks.length/2; i < ticks.length -1; i++){
         ticks[i] = new SliderTick((end-75)-(i-3)*100, 600, false);
-      }
-      /*ticks[1] = new SliderTick(725, 600, false);
+      }*/
+      ticks[1] = new SliderTick(725, 600, false);
       ticks[2] = new SliderTick(825, 600, false);
       ticks[3] = new SliderTick(825, 600, false);
-      ticks[4] = new SliderTick(725, 600, false);*/
+      ticks[4] = new SliderTick(725, 600, false);
       ticks[5] = new SliderTick(625, 600, true);
     }else{
       ticks = new SliderTick[3];
@@ -124,7 +129,7 @@ class Slider extends Circle implements Displayable{
       if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && x < end ){
+        if (!complete && x < end[0] ){
           x++;
         }else{
            if (!reverse){
@@ -162,22 +167,22 @@ class Slider extends Circle implements Displayable{
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start[0], y-r/2, end, y-r/2);
-    line(start[0], y+r/2, end, y+r/2);
+    line(start[0], y-r/2, end[0], y-r/2);
+    line(start[0], y+r/2, end[0], y+r/2);
     arc(start[0], y, r, r, PI / 2, 3 * PI / 2);
-    arc(end, y, r, r, 3 * PI / 2, 2*PI);
-    arc(end, y, r, r, 0, PI / 2);
+    arc(end[0], y, r, r, 3 * PI / 2, 2*PI);
+    arc(end[0], y, r, r, 0, PI / 2);
   }
   
   void verticalSlider(){
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start[0], y-r/2, end, y-r/2);
-    line(start[0], y+r/2, end, y+r/2);
+    line(start[0], y-r/2, end[0], y-r/2);
+    line(start[0], y+r/2, end[0], y+r/2);
     arc(start[0], y, r, r, PI / 2, 3 * PI / 2);
-    arc(end, y, r, r, 3 * PI / 2, 2*PI);
-    arc(end, y, r, r, 0, PI / 2);
+    arc(end[0], y, r, r, 3 * PI / 2, 2*PI);
+    arc(end[0], y, r, r, 0, PI / 2);
   }
   
   boolean isClicked() {
