@@ -1,5 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, r, in, score, start, end, len, startTime, initScore;
+  float x, y, r, in, score, start, end, len, startTime, initScore, x1, y1;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
   int firstNotTicked, numTicked;
@@ -8,13 +8,16 @@ class Slider extends Circle implements Displayable{
   int tickScore;
   SliderTick[] ticks;
   SliderTick[] reverseTicks;
+  int shape;
   
-  public Slider(float x, float y, float r, float startTime, int num, float len, boolean reverse) {
+  public Slider(float x, float y, float r, float startTime, int num, float x1, float y1, boolean reverse) {
     super(x,y,r,startTime,num);
     
     this.x = x;
     this.y = y;
     this.r = r;
+    this.x1 = x1;
+    this.y1 = y1;
     this.reverse = reverse;
     this.num =  "" + num;
     firstNotTicked = 0;
@@ -22,9 +25,10 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     
     c = new ApproachCircle(x, y, 2.5 * r);
-    
+    this.len = dist(x,y,x1,y1);
     start = x;
-    end = x + len;
+    end = x + this.len;
+ 
     print(start);
     print(end);
     if(reverse){
@@ -43,13 +47,10 @@ class Slider extends Circle implements Displayable{
       ticks[5] = new SliderTick(625, 600, true);
     }else{
       ticks = new SliderTick[3];
-      ticks[0] = new SliderTick(625, 600, false);
-      ticks[1] = new SliderTick(725, 600, false);
-      ticks[2] = new SliderTick(825, 600, true);
+      for(int i = 1; i < ticks.length; i++){
+        ticks[i] = new SliderTick(start + 75 + i*100, 600, false);
+      }
     }
-    
-    
-    
     
     dead = false;
     wasClicked = false;
@@ -65,7 +66,6 @@ class Slider extends Circle implements Displayable{
     this.len = len;
     if (reverse) this.time = 950;
     else this.time = 515;
-    
   }
   
   void displayClicky(boolean number) {
@@ -73,7 +73,7 @@ class Slider extends Circle implements Displayable{
     fill(255);
     ellipse(x, y, r, r);
     drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
-    if (number) {
+    if (number){
       fill(255);
       text(num, x-12, y+5);
     }
@@ -164,7 +164,18 @@ class Slider extends Circle implements Displayable{
     arc(end, y, r, r, 3 * PI / 2, 2*PI);
     arc(end, y, r, r, 0, PI / 2);
   }
- 
+  
+  void verticalSlider(){
+    fill(0,0,0,0);
+    stroke(255, 255);
+    strokeWeight(4);
+    line(start, y-r/2, end, y-r/2);
+    line(start, y+r/2, end, y+r/2);
+    arc(start, y, r, r, PI / 2, 3 * PI / 2);
+    arc(end, y, r, r, 3 * PI / 2, 2*PI);
+    arc(end, y, r, r, 0, PI / 2);
+  }
+  
   boolean isClicked() {
     return (mousePressed && dist(mouseX, mouseY, this.x, this.y) < r);
   }

@@ -39,9 +39,11 @@ void setup() {
   c = new Circle(400, 600, 80, 100, 3);
   clickies.add(c);
   circles.add(c);
-  d = new Slider(550, 600, 80, 150, 4, 350, true);
+  
+  d = new Slider(550, 600, 80, 150, 4, 550, 900, true);
   clickies.add(d);
   sliders.add(d);
+
   
   cursorPhoto = loadImage("cursor@2x.png");
   cursorPhoto.resize(40,40);
