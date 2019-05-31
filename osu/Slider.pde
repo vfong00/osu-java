@@ -23,14 +23,23 @@ class Slider extends Circle implements Displayable{
     
     c = new ApproachCircle(x, y, 2.5 * r);
     
-    
+    start = x;
+    end = x + len;
+    print(start);
+    print(end);
     if(reverse){
       ticks = new SliderTick[6];
       ticks[0] = new SliderTick(625, 600, false);
-      ticks[1] = new SliderTick(725, 600, false);
+      for(int i = 1; i < ticks.length/2; i++){
+        ticks[i] = new SliderTick(start + 75 + i*100, 600, false);
+      }
+      for(int i = ticks.length/2; i < ticks.length -1; i++){
+        ticks[i] = new SliderTick(end -75-  (i-3)*100, 600, false);
+      }
+      /*ticks[1] = new SliderTick(725, 600, false);
       ticks[2] = new SliderTick(825, 600, false);
       ticks[3] = new SliderTick(825, 600, false);
-      ticks[4] = new SliderTick(725, 600, false);
+      ticks[4] = new SliderTick(725, 600, false);*/
       ticks[5] = new SliderTick(625, 600, true);
     }else{
       ticks = new SliderTick[3];
@@ -39,8 +48,7 @@ class Slider extends Circle implements Displayable{
       ticks[2] = new SliderTick(825, 600, true);
     }
     
-    start = x;
-    end = x + len;
+    
     
     
     dead = false;
