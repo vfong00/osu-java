@@ -103,7 +103,17 @@ class Slider extends Circle implements Displayable{
           g[i].display();
         }
       }*/
-      
+      if (complete){
+        for (int i = 0; i < g.length; i++) {
+          g[i].display();
+        }
+      }else{
+        for (int i = 0; i < g.length/2; i++) {
+          g[i].display();
+        }
+      }
+
+    /*
      if (reverse){
        if(!complete){
          for (int i = 0; i < g.length/2; i++) {
@@ -118,7 +128,7 @@ class Slider extends Circle implements Displayable{
        for(SliderTick i: ticks){
          i.display();
        }   
-     }
+     }*/
     
   }
   
@@ -151,7 +161,7 @@ class Slider extends Circle implements Displayable{
       if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && x < end[0] ){
+        if (!complete && (end[0] - x > 1 || end[1] - y > 1 )){
           x += dir.normalize().x ;
           y += dir.normalize().y ;
         }else{
@@ -191,7 +201,7 @@ class Slider extends Circle implements Displayable{
     stroke(255, 255);
     strokeWeight(4);
     line(start[0], start[1]-r/2, end[0], end[1]-r/2);
-    line(start[0], start[1]+r/2, end[0], end[1]+r/2);
+    line(start[0] , start[1]+r/2, end[0], end[1]+r/2);
     arc(start[0], start[1], r, r, PI / 2, 3 * PI / 2);
     arc(end[0], end[1], r, r, 3 * PI / 2, 2*PI);
     arc(end[0], end[1], r, r, 0, PI / 2);
