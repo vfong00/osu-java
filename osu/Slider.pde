@@ -32,6 +32,11 @@ class Slider extends Circle implements Displayable{
       ticks[3] = new SliderTick(825, 600, false);
       ticks[4] = new SliderTick(725, 600, false);
       ticks[5] = new SliderTick(625, 600, true);
+    }else{
+      ticks = new SliderTick[3];
+      ticks[0] = new SliderTick(625, 600, false);
+      ticks[1] = new SliderTick(725, 600, false);
+      ticks[2] = new SliderTick(825, 600, true);
     }
     
     start = x;
