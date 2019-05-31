@@ -1,5 +1,6 @@
 class Slider extends Circle implements Displayable{
-  float x, y, r, in, score, start, end, len, startTime, initScore, x1, y1;
+  float x, y, r, in, score, end, len, startTime, initScore, x1, y1;
+  float[] start;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
   int firstNotTicked, numTicked;
@@ -25,8 +26,12 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     
     c = new ApproachCircle(x, y, 2.5 * r);
-    this.len = dist(x,y,x1,y1);
-    start = x;
+    start = new float[2];
+    start[0]= x;
+    start[1]= y;
+    this.len = dist(start[0],start[1],x1,y1);
+    print(len);
+    
     end = x + this.len;
  
     print(start);
@@ -35,10 +40,10 @@ class Slider extends Circle implements Displayable{
       ticks = new SliderTick[6];
       ticks[0] = new SliderTick(625, 600, false);
       for(int i = 1; i < ticks.length/2; i++){
-        ticks[i] = new SliderTick(start + 75 + i*100, 600, false);
+        ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
       }
       for(int i = ticks.length/2; i < ticks.length -1; i++){
-        ticks[i] = new SliderTick(end -75-  (i-3)*100, 600, false);
+        ticks[i] = new SliderTick((end-75)-(i-3)*100, 600, false);
       }
       /*ticks[1] = new SliderTick(725, 600, false);
       ticks[2] = new SliderTick(825, 600, false);
@@ -48,7 +53,7 @@ class Slider extends Circle implements Displayable{
     }else{
       ticks = new SliderTick[3];
       for(int i = 1; i < ticks.length; i++){
-        ticks[i] = new SliderTick(start + 75 + i*100, 600, false);
+        ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
       }
     }
     
@@ -63,7 +68,6 @@ class Slider extends Circle implements Displayable{
 
     score = 2.5;
     this.reverse = reverse;
-    this.len = len;
     if (reverse) this.time = 950;
     else this.time = 515;
   }
@@ -128,7 +132,7 @@ class Slider extends Circle implements Displayable{
            }else{
              
              complete = true;
-             if (x > start) x--; 
+             if (x > start[0]) x--; 
            }
         }
         if (!lastTicked) checkTicked(ticks);
@@ -158,9 +162,9 @@ class Slider extends Circle implements Displayable{
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start, y-r/2, end, y-r/2);
-    line(start, y+r/2, end, y+r/2);
-    arc(start, y, r, r, PI / 2, 3 * PI / 2);
+    line(start[0], y-r/2, end, y-r/2);
+    line(start[0], y+r/2, end, y+r/2);
+    arc(start[0], y, r, r, PI / 2, 3 * PI / 2);
     arc(end, y, r, r, 3 * PI / 2, 2*PI);
     arc(end, y, r, r, 0, PI / 2);
   }
@@ -169,9 +173,9 @@ class Slider extends Circle implements Displayable{
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start, y-r/2, end, y-r/2);
-    line(start, y+r/2, end, y+r/2);
-    arc(start, y, r, r, PI / 2, 3 * PI / 2);
+    line(start[0], y-r/2, end, y-r/2);
+    line(start[0], y+r/2, end, y+r/2);
+    arc(start[0], y, r, r, PI / 2, 3 * PI / 2);
     arc(end, y, r, r, 3 * PI / 2, 2*PI);
     arc(end, y, r, r, 0, PI / 2);
   }
