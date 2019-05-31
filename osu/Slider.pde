@@ -27,6 +27,8 @@ class Slider extends Circle implements Displayable{
     end[0] = x1;
     end[1] = y1; 
     
+    len = dist(start[0],start[1], end[0], end[1]);
+    
     dir = new PVector(x1- x,y1-y);
     
     this.r = r;
@@ -59,12 +61,16 @@ class Slider extends Circle implements Displayable{
       ticks[5] = new SliderTick(625, 600, true);
     }else{
       ticks = new SliderTick[3];
-      /*for(int i = 1; i < ticks.length; i++){
-        ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
+      
+       /*
+      for(int i = 1; i < ticks.length; i++){
+        if (i != ticks.length -1) ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
+        else ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], true);
       }*/
-      ticks[0] = new SliderTick(625, 600, false);
-      ticks[1] = new SliderTick(725, 600, false);
-      ticks[2] = new SliderTick(825, 600, true);
+      
+      ticks[0] = new SliderTick(start[0] + 75 , 240, false);
+      ticks[1] = new SliderTick(start[0] + 75 + 100, 225, false);
+      ticks[2] = new SliderTick(start[0] + 75 + 200, 210, false);
     }
     
     dead = false;
@@ -94,6 +100,21 @@ class Slider extends Circle implements Displayable{
   }
   
   void displayTicks(SliderTick[] g) {
+      if (!reverse){
+        for (int i = 0; i < g.length; i++) {
+          g[i].display();
+        }
+      }else{
+        if (complete){
+          for (int i = 0; i < g.length; i++) {
+            g[i].display();
+          }
+        }else{
+          for (int i = 0; i < g.length/2; i++) {
+            g[i].display();
+          }
+        }
+      }
       /*if (complete){
         for (int i = g.length/2; i < g.length; i++) {
           g[i].display();
@@ -102,17 +123,9 @@ class Slider extends Circle implements Displayable{
         for (int i = 0; i < g.length/2; i++) {
           g[i].display();
         }
-      }*/
-      if (complete){
-        for (int i = 0; i < g.length; i++) {
-          g[i].display();
-        }
-      }else{
-        for (int i = 0; i < g.length/2; i++) {
-          g[i].display();
-        }
       }
-
+      
+*/
     /*
      if (reverse){
        if(!complete){
@@ -168,18 +181,13 @@ class Slider extends Circle implements Displayable{
            if (!reverse){
              dead = true;
            }else{
-             
              complete = true;
              if (x > start[0]) x -= dir.normalize().x ;; 
            }
         }
         if (!lastTicked) checkTicked(ticks);
         else onTick = false;
-        /*if(complete && reverse){
-          displayTicks(reverseTicks);
-          if (!lastTicked) checkTicked(reverseTicks);
-          else onTick = false;
-        }*/
+
         displayClicky(false);
       } else {
         if (wasClicked || isClicked()) {
@@ -236,12 +244,7 @@ class Slider extends Circle implements Displayable{
     return moving;
   }
   
-  void resetTicks(){
-    for( SliderTick a: ticks){
-      a.setAlive(true);
-    }
-  }
-  
+
   void setNotChecked(boolean b) {
     notChecked = b;
   }
