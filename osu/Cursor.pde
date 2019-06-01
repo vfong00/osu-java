@@ -26,6 +26,9 @@ class Cursor extends Thing implements Displayable {
       iter.next().display();
     }
     
+    if (mousePressed) cursorPhoto.resize(60,60);
+    else cursorPhoto.resize(40,40);
+    
     tint(255, 255);
     image(cursorPhoto, x, y);
     fill(255);
