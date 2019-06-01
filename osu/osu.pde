@@ -43,7 +43,6 @@ void setup() {
   d = new Slider(550, 600, 80, 150, 4, 350, false);
   clickies.add(d);
   sliders.add(d);
-  
   cursorPhoto = loadImage("cursor@2x.png");
   cursorPhoto.resize(40,40);
   cursorTrailPhoto = loadImage("cursortrail@2x.png");
@@ -119,6 +118,7 @@ void draw() {
   if (dead.size() == 0) accuracy = 0;
   textSize(32);
   fill(255);
+  text(timer + "", 50, 160);
   text("Streak: " + streak + "x", 15, 790);
   text("Score: " + score, 800, 35); 
   text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
