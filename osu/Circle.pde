@@ -2,7 +2,7 @@ import processing.opengl.*;
 
 
 class Circle implements Displayable {
-  float x,y,r,score,startTime,timeDispScore;
+  float x, y, r, score, startTime, timeDispScore;
   String num;
   boolean dead;
   boolean clicked;
@@ -14,6 +14,7 @@ class Circle implements Displayable {
     this.r = r;
     this.num =  "" + num;
     this.startTime = startTime;
+    
     dead = false;
     clicked = false;
     score = 2.5;
@@ -21,7 +22,7 @@ class Circle implements Displayable {
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   
-  void displayScore() {
+  void displayScore(float xcor, float ycor) {
     String dispText = "";
     if (getScore() == 300) {
       fill(0, 255, 255, timeDispScore);
@@ -37,7 +38,7 @@ class Circle implements Displayable {
       dispText = "X";
     }
     textSize(25);
-    text(dispText, x + 10, y + 10);
+    text(dispText, xcor + 10, ycor + 10);
     timeDispScore -= 2;
     textSize(32);
   }
@@ -57,7 +58,7 @@ class Circle implements Displayable {
       text(num, x-10, y+10);
     } else {
       if (timeDispScore > 0) {
-        displayScore();
+        displayScore(x, y);
       }
     }
   }

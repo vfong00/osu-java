@@ -1,5 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, r, in, score, start, end, len, startTime, initScore;
+  float x, y, r, in, score, start, end, len, startTime, initScore, timeDispScore;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
   int firstNotTicked, numTicked, tickScore;
@@ -16,6 +16,7 @@ class Slider extends Circle implements Displayable{
     firstNotTicked = 0;
     numTicked = 0;
     initScore = 2.5;
+    timeDispScore = 255;
     
     c = new ApproachCircle(x, y, 2.5 * r);
     ticks = new SliderTick[3];
@@ -85,10 +86,10 @@ class Slider extends Circle implements Displayable{
         
         if (!complete && x < end ){
           x++;
-        }else{
+        } else{
            if (!reverse){
              dead = true;
-           }else{
+           } else{
              displayTicks();
              complete = true;
              if (x > start) x--; 
@@ -107,6 +108,10 @@ class Slider extends Circle implements Displayable{
           c.display();
           displayClicky(true);
         }
+      }
+    } else {
+      if (timeDispScore > 0) {
+        displayScore(end + 10, y);
       }
     }
   }
