@@ -17,7 +17,7 @@ This game currently features:
 You'll need Processing!
 Simply open osu.pde, and press the play button!
 
-## devlog - vincent
+## devlog
 ### weekend (5-18/19-19)
 [V] Wrote a clickable circle prototype. <br/>
 
