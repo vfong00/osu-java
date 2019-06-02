@@ -7,13 +7,12 @@ int score = 0;
 int rawScore = 0;
 int rawMaxScore = 0;
 float accuracy = 0;
-PImage cursorPhoto;
-PImage cursorTrailPhoto;
 
 Circle a; 
 Circle b; 
 Circle c; 
-Slider d; 
+Slider d;
+Spinner s;
 Cursor p;
 
 ArrayList<Object> clickies;
@@ -43,11 +42,10 @@ void setup() {
   d = new Slider(550, 600, 80, 150, 4, 350, false);
   clickies.add(d);
   sliders.add(d);
-  cursorPhoto = loadImage("cursor@2x.png");
-  cursorPhoto.resize(40,40);
-  cursorTrailPhoto = loadImage("cursortrail@2x.png");
-  cursorTrailPhoto.resize(40,40);
-  p = new Cursor(width / 2, height / 2, cursorPhoto, cursorTrailPhoto);
+  
+  // s = new Spinner(
+  
+  p = new Cursor(width / 2, height / 2);
 }
 
 void scoreCircle(Circle circle) {
