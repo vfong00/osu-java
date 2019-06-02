@@ -57,16 +57,9 @@ class Slider extends Circle implements Displayable{
       ticks[5] = new SliderTick(625, 600, true);
     }else{
       ticks = new SliderTick[3];
-      
-       /*
-      for(int i = 1; i < ticks.length; i++){
-        if (i != ticks.length -1) ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, false);
-        else ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, true);
-      }*/
-      
-      ticks[0] = new SliderTick(start.x + 75 , 240, false);
-      ticks[1] = new SliderTick(start.x + 75 + 100, 225, false);
-      ticks[2] = new SliderTick(start.x + 75 + 200, 210, true);
+       ticks[0] = new SliderTick(start.x + 80, y + dir.normalize().y*90, false);
+       ticks[1] = new SliderTick(start.x + 80 +100, y+ dir.normalize().y* 190, false);
+       ticks[2] = new SliderTick(start.x + 80 + 200, y + dir.normalize().y*290, true);
     }
     
     dead = false;
@@ -143,7 +136,8 @@ class Slider extends Circle implements Displayable{
   
   void checkTicked(SliderTick[] g) {
     SliderTick tick = g[firstNotTicked];
-    if (dist(x,y, tick.getX(), tick.getY()) < 1) {
+    println(dist(x,y, tick.getX(), tick.getY()) + "   " + num);
+    if (dist(x,y, tick.getX(), tick.getY()) < r/4) {
       onTick = true;
       if (isClicked()) {
         tickScore = 10;
@@ -203,7 +197,7 @@ class Slider extends Circle implements Displayable{
   void horizontalSlider(){
     PVector n = new PVector(10, 0);
     float angle = PVector.angleBetween(n,dir);
-    println(angle + "   " + num);
+    //println(angle + "   " + num);
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
