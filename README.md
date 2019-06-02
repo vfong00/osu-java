@@ -62,7 +62,15 @@ Simply open osu.pde, and press the play button!
 ### 5-30-19
 [V] Added ticks to the score officially <br/>
 [V] Made scoring for slider object as a whole <br/>
+[A] Converting code to be modular per usage and havea good functioning display <br/>
+[A] Fixed errors with ticks on horizontal sliders<br/>
 
 ### 5-31-19
 [V] Wrote general code to display score for each object (and it fades!!! pretty!!!) <br/>
 [V] Finally got cursor trail to work (and it also fades!!! pretty!!!) <br/>
+[A] Worked on integrating the sliders to operate on vectors rather than set coordinates<br/>
+
+
+### 6-1-19
+[A] Less commits this time because spent a long time doing math to figure out the right angle coordinates to make the sldier display correctly at an angle given the start and end coordinates
+[A] Fixed a different bug with the ticks, made it a fomula rather than set coordinates
