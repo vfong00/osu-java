@@ -201,18 +201,18 @@ class Slider extends Circle implements Displayable{
   }
   
   void horizontalSlider(){
-    float angle = PVector.angleBetween(start,end);
-    
+    PVector n = new PVector(end.x, 0);
+    float angle = PVector.angleBetween(n,dir);
+    println(angle + "   " + num);
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    PVector v1 = new PVector(start.x - (r/2)*sin(angle), start.y-r/2);
-    print(PVector.angleBetween(start, v1));
-    line(start.x - (r/2)*sin(angle), start.y-r/2, end.x, end.y-r/2);
-    line(start.x , start.y+r/2, end.x, end.y+r/2);
-    arc(start.x, start.y, r, r,  PI/ 2, 3 * PI / 2);
-    arc(end.x, end.y, r, r, 3 * PI / 2, 5*PI/2);
-    arc(end.x, end.y, r, r, 0, PI / 2);
+    
+    line(start.x + (r/2)*cos(PI-angle), start.y+(r/2)*sin(PI-angle), end.x+ (r/2)*cos(PI-angle), end.y+(r/2)*(PI-angle));
+    line(start.x + (r/2)*cos(-1*angle), start.y+r/2*sin(-1*angle), end.x + (r/2)*cos(-1*angle), end.y+(r/2)*sin(-1*angle));
+    //arc(start.x, start.y, r, r,  PI/ 2  + angle, 3 * PI / 2);
+    //arc(end.x, end.y, r, r, 3 * PI / 2, 5*PI/2);
+    //arc(end.x, end.y, r, r, 0, PI / 2);
     noStroke();
     fill(20);
   }
