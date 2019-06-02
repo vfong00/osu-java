@@ -15,7 +15,7 @@ Circle b;
 Circle c; 
 Slider d; 
 Cursor p;
-test k;
+
 Slider j;
 
 ArrayList<Object> clickies;

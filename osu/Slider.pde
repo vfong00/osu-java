@@ -5,7 +5,6 @@ class Slider extends Circle implements Displayable{
   int firstNotTicked, numTicked, tickScore;
   ApproachCircle c;
   float time;
-  int tickScore;
   SliderTick[] ticks;
   SliderTick[] reverseTicks;
   int shape;
