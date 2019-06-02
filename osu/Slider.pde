@@ -9,8 +9,8 @@ class Slider extends Circle implements Displayable{
   SliderTick[] ticks;
   SliderTick[] reverseTicks;
   int shape;
-  float[] start = new float[2];
-  float[] end = new float[2];
+  PVector start;
+  PVector end;
   PVector dir;
   
   
@@ -19,15 +19,13 @@ class Slider extends Circle implements Displayable{
     
     this.x = x;
     this.y = y;
-    start[0] = x;
-    start[1] = y;
+    start = new PVector (x,y);
     
     this.x1 = x1;
     this.y1 = y1;
-    end[0] = x1;
-    end[1] = y1; 
+    end = new PVector(x1,y1);
     
-    len = dist(start[0],start[1], end[0], end[1]);
+    len = dist(start.x,start.y, end.x, end.y);
     
     dir = new PVector(x1- x,y1-y);
     
@@ -39,17 +37,15 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     
     c = new ApproachCircle(x, y, 2.5 * r);
-    this.len = dist(start[0],start[1],x1,y1);
+    this.len = dist(start.x,start.y,x1,y1);
     print(len);
     
- 
-    print(start[0]);
-    print(end[0]);
+
     if(reverse){
       ticks = new SliderTick[6];
       ticks[0] = new SliderTick(625, 600, false);
       /*for(int i = 1; i < ticks.length/2; i++){
-        ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
+        ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, false);
       }
       for(int i = ticks.length/2; i < ticks.length -1; i++){
         ticks[i] = new SliderTick((end-75)-(i-3)*100, 600, false);
@@ -64,13 +60,13 @@ class Slider extends Circle implements Displayable{
       
        /*
       for(int i = 1; i < ticks.length; i++){
-        if (i != ticks.length -1) ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], false);
-        else ticks[i] = new SliderTick(start[0] + 75 + i*100, start[1], true);
+        if (i != ticks.length -1) ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, false);
+        else ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, true);
       }*/
       
-      ticks[0] = new SliderTick(start[0] + 75 , 240, false);
-      ticks[1] = new SliderTick(start[0] + 75 + 100, 225, false);
-      ticks[2] = new SliderTick(start[0] + 75 + 200, 210, false);
+      ticks[0] = new SliderTick(start.x + 75 , 240, false);
+      ticks[1] = new SliderTick(start.x + 75 + 100, 225, false);
+      ticks[2] = new SliderTick(start.x + 75 + 200, 210, true);
     }
     
     dead = false;
@@ -88,7 +84,7 @@ class Slider extends Circle implements Displayable{
     else this.time = 515;
   }
   
-  void displayClicky(boolean number) {
+  void displayClicky(boolean number){
     noStroke();
     fill(255);
     ellipse(x, y, r, r);
@@ -99,7 +95,7 @@ class Slider extends Circle implements Displayable{
     }
   }
   
-  void displayTicks(SliderTick[] g) {
+  void displayTicks(SliderTick[] g){
       if (!reverse){
         for (int i = 0; i < g.length; i++) {
           g[i].display();
@@ -147,7 +143,7 @@ class Slider extends Circle implements Displayable{
   
   void checkTicked(SliderTick[] g) {
     SliderTick tick = g[firstNotTicked];
-    if (x == tick.getX() && y == tick.getY()) {
+    if (dist(x,y, tick.getX(), tick.getY()) < 1) {
       onTick = true;
       if (isClicked()) {
         tickScore = 10;
@@ -174,7 +170,7 @@ class Slider extends Circle implements Displayable{
       if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && (end[0] - x > 1 || end[1] - y > 1 )){
+        if (!complete && (end.x - x > 1 || end.y - y > 1 )){
           x += dir.normalize().x ;
           y += dir.normalize().y ;
         }else{
@@ -182,7 +178,7 @@ class Slider extends Circle implements Displayable{
              dead = true;
            }else{
              complete = true;
-             if (x > start[0]) x -= dir.normalize().x ;; 
+             if (x > start.x) x -= dir.normalize().x ;; 
            }
         }
         if (!lastTicked) checkTicked(ticks);
@@ -205,14 +201,20 @@ class Slider extends Circle implements Displayable{
   }
   
   void horizontalSlider(){
+    float angle = PVector.angleBetween(start,end);
+    
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start[0], start[1]-r/2, end[0], end[1]-r/2);
-    line(start[0] , start[1]+r/2, end[0], end[1]+r/2);
-    arc(start[0], start[1], r, r, PI / 2, 3 * PI / 2);
-    arc(end[0], end[1], r, r, 3 * PI / 2, 2*PI);
-    arc(end[0], end[1], r, r, 0, PI / 2);
+    PVector v1 = new PVector(start.x - (r/2)*sin(angle), start.y-r/2);
+    print(PVector.angleBetween(start, v1));
+    line(start.x - (r/2)*sin(angle), start.y-r/2, end.x, end.y-r/2);
+    line(start.x , start.y+r/2, end.x, end.y+r/2);
+    arc(start.x, start.y, r, r,  PI/ 2, 3 * PI / 2);
+    arc(end.x, end.y, r, r, 3 * PI / 2, 5*PI/2);
+    arc(end.x, end.y, r, r, 0, PI / 2);
+    noStroke();
+    fill(20);
   }
 
   
