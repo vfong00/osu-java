@@ -7,16 +7,13 @@ class Cursor extends Thing implements Displayable {
       super(x,y);
       this.cursorPhoto = cursorPhoto;
       this.cursorTrailPhoto = cursorTrailPhoto;
-      trailImgs = new ArrayDeque<CursorTrail>(100);
+      trailImgs = new ArrayDeque<CursorTrail>(40);
   }
   
   void display() {
     imageMode(CENTER);
-    tint(255, 255);
     x = mouseX;
     y = mouseY;
-    image(cursorPhoto, x, y);
-    fill(255);
     
     if (trailImgs.size() >= 100) {
       trailImgs.removeFirst();
@@ -28,6 +25,10 @@ class Cursor extends Thing implements Displayable {
     while (iter.hasNext()) {
       iter.next().display();
     }
+    
+    tint(255, 255);
+    image(cursorPhoto, x, y);
+    fill(255);
     
     text(x+"", 50, 70);
     text(y+"", 50, 100);

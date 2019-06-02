@@ -1,5 +1,5 @@
 class CursorTrail extends Thing implements Displayable {
-  float x, y, transparency;
+  float transparency;
   PImage photo;
   
   public CursorTrail(float x, float y, PImage photo) {
@@ -12,7 +12,7 @@ class CursorTrail extends Thing implements Displayable {
     imageMode(CENTER);
     tint(255, transparency);
     image(photo, x, y);
-    transparency -= 2.5;
+    transparency -= (255 / 40.0);
     if (transparency < 0) transparency = 0;
   }
   
