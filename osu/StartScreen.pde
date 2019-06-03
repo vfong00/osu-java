@@ -7,8 +7,16 @@ class StartScreen{
   
   void display(){
     drawCircle(x,y);
-    if(dist(mouseX, mouseY, x, y) <=  240)  x = 325;
-   
+    if(dist(mouseX, mouseY, x, y) <=  240){
+      x = 325;
+    }
+  }
+  
+  void drawOptions(){
+   quad(400, 200, 216, 18, 216, 360, 144, 360);
+   quad(189, 18, 216, 18, 216, 360, 144, 360);
+   quad(189, 18, 216, 18, 216, 360, 144, 360);
+   quad(189, 18, 216, 18, 216, 360, 144, 360);
   }
   
   void drawCircle(float x, float y){
