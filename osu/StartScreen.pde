@@ -37,6 +37,7 @@ class StartScreen{
   }
   
   void drawIcons(){
+    //play
     fill(255);
     ellipse(815,300,35,35);
     ellipse(850,275,40,40);
@@ -50,6 +51,13 @@ class StartScreen{
     textSize(21);
     text("1",808,308);
     text("2",844,283);
+    
+    // exit
+    fill(255);
+    rect(805,460,40,55);
+    strokeWeight(1.5);
+    rect(810,465,30,48);
+    ellipse(835,493,5,5);
   }
   
   void drawCircle(float x, float y){
