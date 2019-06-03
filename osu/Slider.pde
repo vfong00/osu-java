@@ -5,7 +5,6 @@ class Slider extends Circle implements Displayable{
   int firstNotTicked, numTicked, tickScore;
   ApproachCircle c;
   float time;
-  int tickScore;
   SliderTick[] ticks;
   SliderTick[] reverseTicks;
   int shape;
@@ -194,8 +193,9 @@ class Slider extends Circle implements Displayable{
       t++;
     } else {
       if (timeDispScore > 0) {
-        displayScore(end + 10, y);
+        displayScore(x1 + 5, y1 + 5);
       }
+    }
   }
 
   void horizontalSlider(){

@@ -5,7 +5,7 @@ public class Spinner extends Thing {
   Spinner(float startTime) {
     super(width / 2, height / 2);
     this.startTime = startTime;
-    
+    this.spinnerPhoto = loadImage("Images/spinner-circle@2x.png");
     theta = 0;
   }
   

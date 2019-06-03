@@ -14,7 +14,6 @@ Circle c;
 Slider d;
 Spinner s;
 Cursor p;
-test k;
 Slider j;
 
 ArrayList<Object> clickies;
@@ -44,9 +43,6 @@ void setup() {
   d = new Slider(550, 600, 80, 150, 4, 900, 600, true);
   clickies.add(d);
   sliders.add(d);
-
- // k = new test(500,300,450,400,80);
-
 
   j = new Slider(550, 250, 80, 150, 5, 900, 170, false);
   clickies.add(j);
@@ -120,7 +116,7 @@ void draw() {
 
   displayCircles();
   p.display();
-  s.display();
+  // s.display();
 
   accuracy = (float) rawScore * 100 / rawMaxScore;
   if (dead.size() == 0) accuracy = 0;

@@ -5,9 +5,9 @@ class Cursor extends Thing implements Displayable {
   
   public Cursor(float x, float y) {
       super(x,y);
-      cursorPhoto = loadImage("cursor@2x.png");
+      cursorPhoto = loadImage("Images/cursor@2x.png");
       cursorPhoto.resize(40,40);
-      cursorTrailPhoto = loadImage("cursortrail@2x.png");
+      cursorTrailPhoto = loadImage("Images/cursortrail@2x.png");
       cursorTrailPhoto.resize(40,40);
       trailImgs = new ArrayDeque<CursorTrail>(40);
   }
