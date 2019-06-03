@@ -116,6 +116,8 @@ void displayCircles(){
   }
 }
 
+  
+
 void draw() { 
   background(20);
   noCursor();

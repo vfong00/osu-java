@@ -10,7 +10,7 @@ class StartScreen{
     //text(mouseX+"", 900, 70);
     //text(mouseY+"", 900, 100);
     drawCircle(x,y);
-    if(dist(mouseX, mouseY, 500, 400) <=  240){
+    if(dist(mouseX, mouseY, 500, 400) <=  350){
       x = 325;
       drawOptions();
       drawCircle(x,y);
