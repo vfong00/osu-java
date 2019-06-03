@@ -33,6 +33,23 @@ class StartScreen{
    text("Play", 650, 310);
    text("Options", 630, 410);
    text("Exit", 650, 510);
+   drawIcons();
+  }
+  
+  void drawIcons(){
+    fill(255);
+    ellipse(815,300,35,35);
+    ellipse(850,275,40,40);
+    strokeWeight(2);
+    stroke(190, 50, 120);
+    ellipse(815,300,28,28);
+    strokeWeight(5);
+    
+    ellipse(849.9999699,275,30,30);
+    fill(190, 50, 120);
+    textSize(21);
+    text("1",808,308);
+    text("2",844,283);
   }
   
   void drawCircle(float x, float y){
