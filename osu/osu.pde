@@ -12,7 +12,7 @@ Circle a;
 Circle b;
 Circle c;
 Slider d;
-Spinner s;
+Spinner sp;
 Cursor p;
 Slider j;
 
@@ -48,7 +48,7 @@ void setup() {
   //clickies.add(j);
   //sliders.add(j);
 
-  s = new Spinner(500);
+  sp = new Spinner(500, 800);
 
   p = new Cursor(width / 2, height / 2);
 }
@@ -99,7 +99,7 @@ void scoreSlider(Slider slider) {
 
 void displayClickies() {
   // display all circles. When dead, score them.
-  for( Circle c : circles){
+  for(Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
       scoreCircle(c);
@@ -107,13 +107,14 @@ void displayClickies() {
     }
   }
   // display all sliders. Score them (for each tick) until they die)
-  for( Slider s : sliders){
+  for(Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
     scoreSlider(s);
     if (s.isDead() && !dead.contains(s)) {
       dead.add(s);
     }
   }
+  if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
 }
 
 void draw() {
@@ -123,7 +124,6 @@ void draw() {
 
   displayClickies();
   p.display();
-  s.display();
 
   accuracy = (float) rawScore * 100 / rawMaxScore;
   if (dead.size() == 0) accuracy = 0;

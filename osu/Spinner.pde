@@ -1,10 +1,11 @@
 public class Spinner extends Thing {
-  float startTime, angle, oldAngle;
+  float startTime, endTime, angle, oldAngle;
   PImage spinnerPhoto;
   
-  Spinner(float startTime) {
+  Spinner(float startTime, float endTime) {
     super(width / 2, height / 2);
     this.startTime = startTime;
+    this.endTime = endTime;
     this.spinnerPhoto = loadImage("Images/spinner-circle@2x.png");
     
     angle = processAngle(mouseX, mouseY);
@@ -23,5 +24,13 @@ public class Spinner extends Thing {
     PVector axis = new PVector(10, 0);
     angle = PVector.angleBetween(axis,dir);
     return angle;
+  }
+  
+  float getStartTime() {
+    return startTime;
+  }
+  
+  float getEndTime() {
+    return endTime;
   }
 }
