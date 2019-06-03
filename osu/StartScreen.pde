@@ -6,21 +6,28 @@ class StartScreen{
   }
   
   void display(){
+    textSize(20);
+    //text(mouseX+"", 900, 70);
+    //text(mouseY+"", 900, 100);
     drawCircle(x,y);
-    if(dist(mouseX, mouseY, x, y) <=  240){
+    if(dist(mouseX, mouseY, 500, 400) <=  240){
       x = 325;
+      drawOptions();
+      drawCircle(x,y);
     }
+    else x = 500;
+   
   }
   
-   void drawOptions(){
+ void drawOptions(){
    fill(190, 50, 120);
    ellipse(325,400,1150,1150);
    fill(20);
-   rect(0,0,1000,250);
-   rect(0,550,1000,250);
+   rect(0,0,900,250);
+   rect(0,540,900,260);
    rect(0,0,200,600);
-   rect(0,320,1000,20);
-   rect(0,0,1000,250);
+   rect(0,330,1000,20);
+   rect(0,430,1000,20);
   }
   
   void drawCircle(float x, float y){
