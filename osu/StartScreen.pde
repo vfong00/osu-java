@@ -1,24 +1,29 @@
 class StartScreen{
   float x,y,r;
+  int mode;
+  
   public StartScreen(float len, float w){
     x = len/2;
     y = w/2;
   }
-  
-  void display(){
-    textSize(20);
-    //text(mouseX+"", 900, 70);
-    //text(mouseY+"", 900, 100);
-    drawCircle(x,y);
-    if(dist(mouseX, mouseY, 500, 400) <=  350){
-      x = 325;
-      drawOptions();
-      drawCircle(x,y);
-    }
-    else x = 500;
    
+  void display(){
+      drawCircle(x,y);
+      if(dist(mouseX, mouseY, 500, 400) <=  350){
+        x = 325;
+        drawOptions();
+        drawCircle(x,y);
+        if (mousePressed && (570 < mouseX && x < 820) && (250 < mouseY && mouseY < 330)) mode = 1;
+        if (mousePressed && (585 < mouseX && x < 820) && (350 < mouseY && mouseY < 430)) mode = 2;
+        if (mousePressed && (570 < mouseX && x < 820) && (450 < mouseY && mouseY < 530)) mode = 3;
+      }
+      else x = 500;
   }
   
+ int getMode(){
+     return mode;
+ }
+ 
  void drawOptions(){
    fill(190, 50, 120);
    ellipse(325,400,1150,1150);
