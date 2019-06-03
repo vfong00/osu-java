@@ -3,10 +3,12 @@ class Cursor extends Thing implements Displayable {
   PImage cursorPhoto, cursorTrailPhoto;
   ArrayDeque<CursorTrail> trailImgs;
   
-  public Cursor(float x, float y, PImage cursorPhoto, PImage cursorTrailPhoto) {
+  public Cursor(float x, float y) {
       super(x,y);
-      this.cursorPhoto = cursorPhoto;
-      this.cursorTrailPhoto = cursorTrailPhoto;
+      cursorPhoto = loadImage("cursor@2x.png");
+      cursorPhoto.resize(40,40);
+      cursorTrailPhoto = loadImage("cursortrail@2x.png");
+      cursorTrailPhoto.resize(40,40);
       trailImgs = new ArrayDeque<CursorTrail>(40);
   }
   
@@ -25,6 +27,9 @@ class Cursor extends Thing implements Displayable {
     while (iter.hasNext()) {
       iter.next().display();
     }
+    
+    if (mousePressed) cursorPhoto.resize(60,60);
+    else cursorPhoto.resize(40,40);
     
     tint(255, 255);
     image(cursorPhoto, x, y);

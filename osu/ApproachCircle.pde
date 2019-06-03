@@ -11,7 +11,7 @@ class ApproachCircle implements Displayable {
   }
   
   void updateRadius() {
-    r -= 0.75;
+    r -= 1.5;
   }
   
   void display() {
