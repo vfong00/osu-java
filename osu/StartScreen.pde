@@ -28,6 +28,11 @@ class StartScreen{
    rect(0,0,200,600);
    rect(0,330,1000,20);
    rect(0,430,1000,20);
+   textSize(60);
+   fill(255);
+   text("Play", 650, 310);
+   text("Options", 630, 410);
+   text("Exit", 650, 510);
   }
   
   void drawCircle(float x, float y){
