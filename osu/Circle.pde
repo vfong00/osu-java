@@ -1,11 +1,9 @@
 import processing.opengl.*;
 
-
 class Circle implements Displayable {
-  float x,y,r,score,startTime,timeDispScore;
+  float x, y, r, score, startTime, timeDispScore;
   String num;
-  boolean dead;
-  boolean clicked;
+  boolean dead, clicked;
   ApproachCircle c;
   
   public Circle(float x, float y, float r, float startTime, int num) {
@@ -14,6 +12,7 @@ class Circle implements Displayable {
     this.r = r;
     this.num =  "" + num;
     this.startTime = startTime;
+    
     dead = false;
     clicked = false;
     score = 2.5;
@@ -21,7 +20,8 @@ class Circle implements Displayable {
     c = new ApproachCircle(x, y, 2.5 * r);
   }
   
-  void displayScore() {
+  // creates a pop-up number next to the ending of a circle (or a slider end)
+  void displayScore(float xcor, float ycor) {
     String dispText = "";
     if (getScore() == 300) {
       fill(0, 255, 255, timeDispScore);
@@ -37,7 +37,7 @@ class Circle implements Displayable {
       dispText = "X";
     }
     textSize(25);
-    text(dispText, x + 10, y + 10);
+    text(dispText, xcor + 10, ycor + 10);
     timeDispScore -= 2;
     textSize(32);
   }
@@ -49,15 +49,14 @@ class Circle implements Displayable {
       stroke(255);
       strokeWeight(4);
       fill(20);
-      ellipse(x,y,r-7,r-7);
+      ellipse(x,y,r-5,r-5);
+      
       drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
-      //fill(20);
-      //ellipse(x,y,r - (r / 10),r - (r / 10));
       fill(255);
       text(num, x-10, y+10);
     } else {
       if (timeDispScore > 0) {
-        displayScore();
+        displayScore(x, y);
       }
     }
   }
@@ -72,11 +71,9 @@ class Circle implements Displayable {
     for(float theta=0; theta<TWO_PI; theta+=TWO_PI/72){ 
       fill(halfC);  
       vertex(x,y);
-      if ( theta <= PI )
-      fill(lerpColor(fromC, toC, (theta%PI)/PI ));
-      else
-      fill(lerpColor(toC, fromC, (theta%PI)/PI ));
-      vertex(x+radiusX*cos(theta),y+radiusY*sin(theta));
+      if (theta <= PI) fill(lerpColor(fromC, toC, (theta%PI)/PI ));
+      else fill(lerpColor(toC, fromC, (theta%PI)/PI ));
+      vertex(x + radiusX * cos(theta), y + radiusY * sin(theta));
     } 
     endShape(); 
   }
