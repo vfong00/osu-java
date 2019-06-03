@@ -43,7 +43,7 @@ void setup() {
   clickies.add(d);
   sliders.add(d);
   
-  // s = new Spinner(
+  s = new Spinner(500);
   
   p = new Cursor(width / 2, height / 2);
 }
@@ -111,12 +111,13 @@ void draw() {
  
   displayCircles();
   p.display();
+  s.display();
   
   accuracy = (float) rawScore * 100 / rawMaxScore;
   if (dead.size() == 0) accuracy = 0;
   textSize(32);
   fill(255);
-  text(timer + "", 50, 160);
+  // text(timer + "", 50, 160);
   text("Streak: " + streak + "x", 15, 790);
   text("Score: " + score, 800, 35); 
   text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
