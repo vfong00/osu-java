@@ -65,22 +65,27 @@ void scoreCircle(Circle circle) {
 }
 
 void scoreSlider(Slider slider) {
-  // you only need this checked once
+  // if slider hasn't been clicked or if the approach circle hasn't elapsed it yet
   if (slider.notChecked()) {
+    // check for when elapsed
     if (slider.moving()) {
       slider.setNotChecked(false);
       streak = 0;
-    } else if (slider.wasClicked()) {
+    } 
+    // check for when clicked first time. Update scores
+    else if (slider.wasClicked()) {
       slider.setNotChecked(false);
       if (slider.initScore() > 1.6) streak = 0;
       else streak++;
     }
   }
+  // check if on tick, and score appropiately
   if (!slider.isDead() && slider.onTick()) {
     score += 10;
     if (slider.tickScore() == 10) streak++;
     else if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
   }
+  // when slider ends, calculate the end score based on the amount of ticks ticked and add it.
   if (slider.isDead() && !dead.contains(slider)) {
     int sScore = slider.getScore();
     int sMult = streak;
@@ -92,7 +97,8 @@ void scoreSlider(Slider slider) {
 }
 
 
-void displayCircles(){
+void displayClickies() {
+  // display all circles. When dead, score them.
   for( Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
@@ -100,6 +106,7 @@ void displayCircles(){
       dead.add(c);
     }
   }
+  // display all sliders. Score them (for each tick) until they die)
   for( Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
     scoreSlider(s);
@@ -114,7 +121,7 @@ void draw() {
   noCursor();
   timer++;
 
-  displayCircles();
+  displayClickies();
   p.display();
   // s.display();
 
@@ -124,7 +131,6 @@ void draw() {
   fill(255);
   // text(timer + "", 50, 160);
   text("Streak: " + streak + "x", 15, 790);
-
   text("Score: " + score, 800, 35);
   text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
 }

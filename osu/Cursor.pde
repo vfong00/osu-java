@@ -9,7 +9,8 @@ class Cursor extends Thing implements Displayable {
       cursorPhoto.resize(40,40);
       cursorTrailPhoto = loadImage("Images/cursortrail@2x.png");
       cursorTrailPhoto.resize(40,40);
-      trailImgs = new ArrayDeque<CursorTrail>(40);
+      // queue of cursor trails, which gradually become transparent as they go towards the end of the queue.
+      trailImgs = new ArrayDeque<CursorTrail>(41);
   }
   
   void display() {
@@ -17,17 +18,22 @@ class Cursor extends Thing implements Displayable {
     x = mouseX;
     y = mouseY;
     
-    if (trailImgs.size() >= 100) {
-      trailImgs.removeFirst();
-    }
+    // add a new trail at the current mouse spot
     CursorTrail t = new CursorTrail(x, y, cursorTrailPhoto);
     trailImgs.add(t);
     
+    // iterate to display each trail image
     Iterator<CursorTrail> iter = trailImgs.descendingIterator();
     while (iter.hasNext()) {
       iter.next().display();
     }
     
+    // keeping 40 trail images constantly
+    if (trailImgs.size() >= 40) {
+      trailImgs.removeFirst();
+    }
+    
+    // dilation of cursor
     if (mousePressed) cursorPhoto.resize(60,60);
     else cursorPhoto.resize(40,40);
     
@@ -38,6 +44,5 @@ class Cursor extends Thing implements Displayable {
     text(x+"", 50, 70);
     text(y+"", 50, 100);
     text(mousePressed+"", 50, 130);
-    // text(trailImgs.size() + "", 50, 160);
   }
 }
