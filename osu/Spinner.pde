@@ -10,9 +10,9 @@ public class Spinner extends Thing {
   }
   
   void display() {
-    if (mouseX == width / 2 && mouseY == height / 2) theta = 0;
-    else theta = atan((mouseY - (height / 2)) / (mouseX - (width / 2))) * 360;
-    // pushMatrix();
-    text(theta + "", 50, 160);
+    PVector dir = new PVector(mouseX - (width / 2), mouseY - (height / 2));
+    PVector axis = new PVector(10, 0);
+    float angle = PVector.angleBetween(axis,dir);
+    text(angle + "", 50, 160);
   }
 }

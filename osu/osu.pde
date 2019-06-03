@@ -40,13 +40,13 @@ void setup() {
   clickies.add(c);
   circles.add(c);
 
-  d = new Slider(550, 600, 80, 150, 4, 900, 600, true);
-  clickies.add(d);
-  sliders.add(d);
+  //d = new Slider(550, 600, 900, 600, 80, 150, 4, true);
+  //clickies.add(d);
+  //sliders.add(d);
 
-  j = new Slider(550, 250, 80, 150, 5, 900, 170, false);
-  clickies.add(j);
-  sliders.add(j);
+  //j = new Slider(550, 250, 900, 170, 80, 150, 5, false);
+  //clickies.add(j);
+  //sliders.add(j);
 
   s = new Spinner(500);
 
@@ -123,7 +123,7 @@ void draw() {
 
   displayClickies();
   p.display();
-  // s.display();
+  s.display();
 
   accuracy = (float) rawScore * 100 / rawMaxScore;
   if (dead.size() == 0) accuracy = 0;
