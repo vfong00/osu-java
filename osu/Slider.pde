@@ -117,12 +117,24 @@ class Slider extends Circle implements Displayable{
     }
   }
 
-  void display() {
-    if (!isDead()) {
-      horizontalSlider();
-      displayTicks(ticks);
+  void drawSlider(){
+    PVector n = new PVector(10, 0);
+    float angle = PVector.angleBetween(n,dir);
+    fill(0,0,0,0);
+    stroke(255, 255);
+    strokeWeight(4);
 
-      if (c.getRadius() < r) {
+    line(start.x - (r/2)*cos(PI/2-angle), start.y-(r/2)*sin(PI/2-angle), end.x- (r/2)*cos(PI/2-angle), end.y-(r/2)*sin(PI/2-angle)); //top
+    line(start.x - (r/2)*cos(PI/2+angle), start.y+(r/2)*sin(PI/2+angle), end.x - (r/2)*cos(PI/2+angle), end.y+(r/2)*sin(PI/2+angle)); //bottom
+    arc(start.x, start.y, r, r,  PI/2-angle, 3 * PI / 2 - angle);
+    arc(end.x, end.y, r, r, 3 * (PI / 2 )- angle , 2*PI);
+    arc(end.x, end.y, r, r, 0, PI/2-angle);
+    noStroke();
+    fill(20);
+  }
+  
+  void funcSlider() {
+    if (c.getRadius() < r) {
         moving = true;
         fill(255);
         if (!complete && (end.x - x > 1 || end.y - y > 1 )){
@@ -149,28 +161,6 @@ class Slider extends Circle implements Displayable{
           displayClicky(true);
         }
       }
-    } else {
-      if (timeDispScore > 0) {
-        if (reverse) displayScore(x + 5, y + 5);
-        else displayScore(x1 + 5, y1 + 5);
-      }
-    }
-  }
-
-  void horizontalSlider(){
-    PVector n = new PVector(10, 0);
-    float angle = PVector.angleBetween(n,dir);
-    fill(0,0,0,0);
-    stroke(255, 255);
-    strokeWeight(4);
-
-    line(start.x - (r/2)*cos(PI/2-angle), start.y-(r/2)*sin(PI/2-angle), end.x- (r/2)*cos(PI/2-angle), end.y-(r/2)*sin(PI/2-angle)); //top
-    line(start.x - (r/2)*cos(PI/2+angle), start.y+(r/2)*sin(PI/2+angle), end.x - (r/2)*cos(PI/2+angle), end.y+(r/2)*sin(PI/2+angle)); //bottom
-    arc(start.x, start.y, r, r,  PI/2-angle, 3 * PI / 2 - angle);
-    arc(end.x, end.y, r, r, 3 * (PI / 2 )- angle , 2*PI);
-    arc(end.x, end.y, r, r, 0, PI/2-angle);
-    noStroke();
-    fill(20);
   }
 
   boolean isClicked() {
@@ -230,5 +220,18 @@ class Slider extends Circle implements Displayable{
 
   int tickScore() {
     return tickScore;
+  }
+  
+  void display() {
+    if (!isDead()) {
+      drawSlider();
+      displayTicks(ticks);
+      funcSlider();
+    } else {
+      if (timeDispScore > 0) {
+        if (reverse) displayScore(x + 5, y + 5);
+        else displayScore(x1 + 5, y1 + 5);
+      }
+    }
   }
 }
