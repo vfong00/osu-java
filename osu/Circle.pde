@@ -46,10 +46,10 @@ class Circle implements Displayable {
     if (!isDead()) {
       if (c.getRadius() >= r) c.display();
       else dead = true;
-      noStroke();
-      fill(255);
-      ellipse(x,y,r,r);
-      
+      stroke(255);
+      strokeWeight(4);
+      fill(20);
+      ellipse(x,y,r-7,r-7);
       drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
       //fill(20);
       //ellipse(x,y,r - (r / 10),r - (r / 10));
@@ -65,11 +65,11 @@ class Circle implements Displayable {
    float h = random(0, 360);
 
   void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int fromC, int toC){ 
-    noStroke(); 
+    noStroke();
     beginShape(TRIANGLE_STRIP);
     int halfC = lerpColor(fromC,toC,0.5);
     
-    for(float theta=0; theta<TWO_PI; theta+=TWO_PI/36){ 
+    for(float theta=0; theta<TWO_PI; theta+=TWO_PI/72){ 
       fill(halfC);  
       vertex(x,y);
       if ( theta <= PI )

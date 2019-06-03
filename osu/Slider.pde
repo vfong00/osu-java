@@ -77,9 +77,10 @@ class Slider extends Circle implements Displayable{
   }
   
   void displayClicky(boolean number){
-    noStroke();
-    fill(255);
-    ellipse(x, y, r, r);
+    stroke(255);
+    strokeWeight(4);
+    fill(20);
+    ellipse(x,y,r-7,r-7);
     drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
     if (number){
       fill(255);
@@ -102,35 +103,7 @@ class Slider extends Circle implements Displayable{
             g[i].display();
           }
         }
-      }
-      /*if (complete){
-        for (int i = g.length/2; i < g.length; i++) {
-          g[i].display();
-        }
-      }else if (reverse){
-        for (int i = 0; i < g.length/2; i++) {
-          g[i].display();
-        }
-      }
-      
-*/
-    /*
-     if (reverse){
-       if(!complete){
-         for (int i = 0; i < g.length/2; i++) {
-          g[i].display();
-         }
-       }else{
-         for (int i = g.length/2; i < g.length; i++) {
-          g[i].display();
-        }
-       }
-     }else{
-       for(SliderTick i: ticks){
-         i.display();
-       }   
-     }*/
-    
+      }   
   }
   
   void checkTicked(SliderTick[] g) {
