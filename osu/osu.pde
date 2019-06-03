@@ -135,7 +135,7 @@ void draw() {
     screen.display();
      p.display();
   }else if(screen.getMode() == 1){
-      p.display();
+    p.display();
     displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;

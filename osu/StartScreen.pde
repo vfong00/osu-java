@@ -9,7 +9,7 @@ class StartScreen{
    
   void display(){
       drawCircle(x,y);
-      if(dist(mouseX, mouseY, 500, 400) <=  350){
+      if(dist(mouseX, mouseY, 500, 400) <=  330){
         x = 325;
         drawOptions();
         drawCircle(x,y);
@@ -36,7 +36,7 @@ class StartScreen{
    textSize(60);
    fill(255);
    text("Play", 650, 310);
-   text("Options", 630, 410);
+   text("Help", 650, 410);
    text("Exit", 650, 510);
    drawIcons();
   }
