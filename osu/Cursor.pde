@@ -45,4 +45,12 @@ class Cursor extends Thing implements Displayable {
     text(y+"", 50, 100);
     text(mousePressed+"", 50, 130);
   }
+  
+  float getX() {
+    return x;
+  }
+  
+  float getY() {
+    return y;
+  }
 }

@@ -14,7 +14,7 @@ Circle a;
 Circle b;
 Circle c;
 Slider d;
-Spinner s;
+Spinner sp;
 Cursor p;
 Slider j;
 
@@ -44,15 +44,15 @@ void setup() {
   clickies.add(c);
   circles.add(c);
 
-  d = new Slider(550, 600, 80, 150, 4, 900, 600, true);
-  clickies.add(d);
-  sliders.add(d);
+  //d = new Slider(550, 600, 900, 600, 80, 150, 4, true);
+  //clickies.add(d);
+  //sliders.add(d);
 
-  j = new Slider(550, 250, 80, 150, 5, 900, 170, false);
-  clickies.add(j);
-  sliders.add(j);
+  //j = new Slider(550, 250, 900, 170, 80, 150, 5, false);
+  //clickies.add(j);
+  //sliders.add(j);
 
-  s = new Spinner(500);
+  sp = new Spinner(500, 800);
 
   p = new Cursor(width / 2, height / 2);
 }
@@ -103,7 +103,7 @@ void scoreSlider(Slider slider) {
 
 void displayClickies() {
   // display all circles. When dead, score them.
-  for( Circle c : circles){
+  for(Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
       scoreCircle(c);
@@ -111,13 +111,14 @@ void displayClickies() {
     }
   }
   // display all sliders. Score them (for each tick) until they die)
-  for( Slider s : sliders){
+  for(Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
     scoreSlider(s);
     if (s.isDead() && !dead.contains(s)) {
       dead.add(s);
     }
   }
+  if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
 }
 
 
@@ -146,4 +147,5 @@ void draw() {
     text("Score: " + score, 800, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
+
 }
