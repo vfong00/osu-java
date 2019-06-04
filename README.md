@@ -8,10 +8,12 @@ TL;DR Clicker rhythm game. <br/>
 This game currently features:
 - Clickable circles that disappear upon being clicked OR when the approach circle is on the circle.
 - Sliders that slide. They do so when being clicked (regardless of timing) or when the approach circle hits the object.
+- Spinners that you need to spin rapidly to clear
 - Streak counting
 - Accuracy and score counters
 - Score integrated for all objects
 - Cool textures
+- An actual main menu???
 
 ## But like, how do you even start the game?
 You'll need Processing!
@@ -63,14 +65,26 @@ Simply open osu.pde, and press the play button!
 [V] Added ticks to the score officially <br/>
 [V] Made scoring for slider object as a whole <br/>
 [A] Converting code to be modular per usage and havea good functioning display <br/>
-[A] Fixed errors with ticks on horizontal sliders<br/>
+[A] Fixed errors with ticks on horizontal sliders <br/>
 
 ### 5-31-19
 [V] Wrote general code to display score for each object (and it fades!!! pretty!!!) <br/>
 [V] Finally got cursor trail to work (and it also fades!!! pretty!!!) <br/>
 [A] Worked on integrating the sliders to operate on vectors rather than set coordinates<br/>
 
-
 ### 6-1-19
-[A] Less commits this time because spent a long time doing math to figure out the right angle coordinates to make the sldier display correctly at an angle given the start and end coordinates
-[A] Fixed a different bug with the ticks, made it a fomula rather than set coordinates
+[V] Made game speed modular(ish) <br/>
+[V] Messed with cursor to give visual cues to being clicked <br/>
+[A] Less commits this time because spent a long time doing math to figure out the right angle coordinates to make the sldier display correctly at an angle given the start and end coordinates <br/>
+[A] Fixed a different bug with the ticks, made it a formula rather than set coordinates <br/>
+
+### 6-2-19
+[V] so like food (that I technically helped make so my fault ig) made me real sick and I didn't commit anything. But I did the math on a piece of paper for a spinner. Yay psuedocode! <br/>
+
+### 6-3-19
+[V] Wrote spinner that spins with the cursor based on its angle change (and has a little decay/acceleration like in game) <br/>
+[V] Visually represented that spinning <br/>
+
+### 6-4-19
+[V] Integrated score with spinners </br>
+[V] Made them spin better visually </br>

@@ -28,17 +28,14 @@ ArrayList<Object> dead;
 void setup() {
   size(1000, 800);
   screen = new StartScreen(1000,800);
-  
   play();
-  
-
-  p = new Cursor(width / 2, height / 2);
 }
 
 void play(){
   pause = false;
   timer =0;
   pointer = loadImage("Images/pointer.png");
+
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
@@ -64,11 +61,13 @@ void play(){
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(500, 800);
+  sp = new Spinner(250, 650, 10);
+
+  p = new Cursor(width / 2, height / 2);
 }
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
-  if (cScore == 0) streak = 0;
+  if (cScore < 100) streak = 0;
   else streak++;
   int sMult = streak;
   if (sMult > 0) sMult--;
@@ -84,7 +83,7 @@ void scoreSlider(Slider slider) {
     if (slider.moving()) {
       slider.setNotChecked(false);
       streak = 0;
-    } 
+    }
     // check for when clicked first time. Update scores
     else if (slider.wasClicked()) {
       slider.setNotChecked(false);
@@ -109,9 +108,27 @@ void scoreSlider(Slider slider) {
   }
 }
 
+void scoreSpinner(Spinner spinner) {
+  if (!spinner.isDead()) {
+    score += spinner.getScore();
+  } else if (!spinner.checked()) {
+    spinner.updateScore();
+    int sScore = spinner.getScore();
+    if (sScore == 0) streak = 0;
+    else streak++;
+    int sMult = streak;
+    if (sMult > 0) sMult--;
+    score += sScore + (sScore * sMult);
+    rawScore += sScore;
+    rawMaxScore += 300;
+    spinner.setChecked();
+  } 
+}
+
 
 void displayClickies() {
   // display all circles. When dead, score them.
+  textSize(32);
   for(Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
@@ -123,12 +140,18 @@ void displayClickies() {
   for(Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
     scoreSlider(s);
-    if (s.isDead() && !dead.contains(s)) {
-      dead.add(s);
-    }
+    if (s.isDead() && !dead.contains(s)) dead.add(s);
   }
-  if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
+  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
+    scoreSpinner(sp);
+    sp.display();
+  } else if (timer > sp.getEndTime()) {
+    sp.display();
+    sp.setDead();
+    if (!sp.checked()) scoreSpinner(sp);
+  }
 }
+
 
 boolean pause;
 void keyPressed() {
@@ -195,25 +218,23 @@ void draw() {
   background(10);
   noCursor();
   timer++;
-  
-  
-  
   p.display();
   if (screen.getMode() == 0){
      
     screen.display();
      p.display();
   }else if(screen.getMode() == 1 && !pause){
-    
-    p.display();
+
     displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
-    textSize(32);
     fill(255);
+    p.display();
+
     // text(timer + "", 50, 160);
+    textSize(32);
     text("Streak: " + streak + "x", 15, 790);
-    text("Score: " + score, 800, 35);
+    text("Score: " + score, 770, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
   pause();
