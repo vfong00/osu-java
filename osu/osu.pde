@@ -27,6 +27,13 @@ void setup() {
   size(1000, 800);
   screen = new StartScreen(1000,800);
   
+  play();
+  
+
+  p = new Cursor(width / 2, height / 2);
+}
+
+void play(){
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
@@ -53,10 +60,7 @@ void setup() {
   //sliders.add(j);
 
   sp = new Spinner(500, 800);
-
-  p = new Cursor(width / 2, height / 2);
 }
-
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
   if (cScore == 0) streak = 0;
