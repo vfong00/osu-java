@@ -35,7 +35,7 @@ void setup() {
 
 void play(){
   pause = false;
-  
+  timer =0;
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
@@ -173,6 +173,7 @@ void pause(){
       if (mousePressed && 300 < mouseX && mouseX < 700 && 500 < mouseY && mouseY < 600){
         pause = false;
         screen.setMode(0);
+        play();
       }
     }
 }
