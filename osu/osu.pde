@@ -203,5 +203,19 @@ void draw() {
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
   pause();
+  if (screen.getMode() == 2){
+    screen.drawOptions();
+    screen.drawCircle(325,400);
+    fill(10,10,10,200);
+    rect(0,0,1000,800);
+    fill(255);
+    rect(240,190,520,420,15);
+    for (int i = 200; i <= 600; i++) {
+        float inter = map(i, 200, 600, 0, 1);
+        color c = lerpColor( color(130, 28, 72),color(10), inter);
+        stroke(c);
+        line(250, i, 750, i);
+    }
+  }
   if (screen.getMode() == 3) exit();
 }
