@@ -8,10 +8,12 @@ TL;DR Clicker rhythm game. <br/>
 This game currently features:
 - Clickable circles that disappear upon being clicked OR when the approach circle is on the circle.
 - Sliders that slide. They do so when being clicked (regardless of timing) or when the approach circle hits the object.
+- Spinners that you need to spin rapidly to clear
 - Streak counting
 - Accuracy and score counters
 - Score integrated for all objects
 - Cool textures
+- An actual main menu???
 
 ## But like, how do you even start the game?
 You'll need Processing!
