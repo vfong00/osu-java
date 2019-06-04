@@ -3,7 +3,7 @@ public class Spinner extends Thing {
   int fakeRPM, timesCircled, quota;
   PImage spinnerPhoto, meterPhoto;
   
-  Spinner(float startTime, float endTime) {
+  Spinner(float startTime, float endTime, int quota) {
     super(width / 2, height / 2);
     this.startTime = startTime;
     this.endTime = endTime;
@@ -15,6 +15,8 @@ public class Spinner extends Thing {
     angle = processAngle(mouseX, mouseY);
     oldAngle = 0;
     fakeRPM = 0;
+    timesCircled = 0;
+    this.quota = quota;
   }
   
   void display() {
@@ -24,27 +26,37 @@ public class Spinner extends Thing {
     // calculating the rpm that changes the spinner speed
     int rpm = (int) abs((oldAngle - angle) * 500);
     fakeRPM = ((46 * fakeRPM) / 50) + (rpm / 10);
+    textSize(32);
+    fill(255);
     text("RPM: " + fakeRPM, width / 2, 790);
     
     // angle that the spinner is at
     float newAngle = (fakeRPM / 500.0) * (2 * PI);
-    text(newAngle + "", 50, 160);
+    text(timesCircled + "", 50, 160);
     
     // displays the spinner
     pushMatrix();
     translate(width / 2, height / 2 + 20);
     tint(255, 255);
-    rotate(newAngle);
+    if (mousePressed) rotate((oldAngle + angle) / 2);
+    else rotate(newAngle);
     image(spinnerPhoto, 0, 0);
-    fill(255);
     popMatrix();
     
     // displays the spinner meter
+  }
+  
+  void displayMeter() {
     pushMatrix();
     translate(width / 2, height / 2);
     tint(255, 50);
     image(meterPhoto, 0, 0);
     popMatrix();
+    for (int x = 0; x < width; x++) {
+      for (int y = 0; y < height; y++) {
+        int loc = x + (y * width);
+      }
+    }
   }
   
   float processAngle(float curX, float curY) {
