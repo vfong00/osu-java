@@ -8,6 +8,8 @@ int rawScore = 0;
 int rawMaxScore = 0;
 float accuracy = 0;
 
+StartScreen screen;
+
 Circle a;
 Circle b;
 Circle c;
@@ -23,6 +25,8 @@ ArrayList<Object> dead;
 
 void setup() {
   size(1000, 800);
+  screen = new StartScreen(1000,800);
+  
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
@@ -117,20 +121,31 @@ void displayClickies() {
   if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
 }
 
-void draw() {
+
+  
+
+void draw() { 
   background(20);
   noCursor();
   timer++;
 
-  displayClickies();
+  
   p.display();
+  if (screen.getMode() == 0){
+     
+    screen.display();
+     p.display();
+  }else if(screen.getMode() == 1){
+    p.display();
+    displayClickies();
+    accuracy = (float) rawScore * 100 / rawMaxScore;
+    if (dead.size() == 0) accuracy = 0;
+    textSize(32);
+    fill(255);
+    // text(timer + "", 50, 160);
+    text("Streak: " + streak + "x", 15, 790);
+    text("Score: " + score, 800, 35);
+    text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
+  }
 
-  accuracy = (float) rawScore * 100 / rawMaxScore;
-  if (dead.size() == 0) accuracy = 0;
-  textSize(32);
-  fill(255);
-  // text(timer + "", 50, 160);
-  text("Streak: " + streak + "x", 15, 790);
-  text("Score: " + score, 800, 35);
-  text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
 }
