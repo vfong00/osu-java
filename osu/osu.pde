@@ -52,7 +52,7 @@ void setup() {
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(250, 650, 25);
+  sp = new Spinner(250, 650, 10);
 
   p = new Cursor(width / 2, height / 2);
 }
@@ -101,7 +101,20 @@ void scoreSlider(Slider slider) {
 }
 
 void scoreSpinner(Spinner spinner) {
-  score += spinner.getScore();
+  if (!spinner.isDead()) {
+    score += spinner.getScore();
+  } else if (!spinner.checked()) {
+    spinner.updateScore();
+    int sScore = spinner.getScore();
+    if (sScore == 0) streak = 0;
+    else streak++;
+    int sMult = streak;
+    if (sMult > 0) sMult--;
+    score += sScore + (sScore * sMult);
+    rawScore += sScore;
+    rawMaxScore += 300;
+    spinner.setChecked();
+  } 
 }
 
 
@@ -119,9 +132,7 @@ void displayClickies() {
   for(Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
     scoreSlider(s);
-    if (s.isDead() && !dead.contains(s)) {
-      dead.add(s);
-    }
+    if (s.isDead() && !dead.contains(s)) dead.add(s);
   }
   if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
     scoreSpinner(sp);
@@ -130,8 +141,6 @@ void displayClickies() {
     sp.display();
     sp.setDead();
     if (!sp.checked()) scoreSpinner(sp);
-    sp.setChecked();
-    // need to display 300/100/50/X and integrate streaks
   }
 }
 

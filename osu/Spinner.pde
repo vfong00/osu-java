@@ -67,6 +67,7 @@ public class Spinner extends Thing {
       }
       updateScore();
     } else {
+      updateScore();
       if (timeDispScore > 0) {
         displayFinalScore(width / 2 + 5, height / 2 + 5);
       }
@@ -90,6 +91,10 @@ public class Spinner extends Thing {
   
   void setDead() {
     dead = true;
+  }
+  
+  boolean isDead() {
+    return dead;
   }
   
   boolean checked() {
@@ -124,12 +129,10 @@ public class Spinner extends Thing {
   
   void updateScore() {
     if (dead) {
-      
       if (percent == 1) score = 300;
       else if (percent > (2 / 3.0)) score = 100;
       else if (percent > (1 / 3.0)) score = 50;
       else score = 0;
-      
     } else if (oldTimesTurned != timesTurned) {
       if (complete) score = 1000;
       else score = 100;
