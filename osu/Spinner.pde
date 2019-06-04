@@ -1,6 +1,6 @@
 public class Spinner extends Thing {
   float startTime, endTime, angle, oldAngle, angleTurned;
-  int fakeRPM, oldTimesTurned, timesTurned, quota;
+  int fakeRPM, oldTimesTurned, timesTurned, quota, score;
   boolean complete;
   PImage spinnerPhoto;
   
@@ -17,6 +17,7 @@ public class Spinner extends Thing {
     angleTurned = 0;
     oldTimesTurned = 0;
     timesTurned = 0;
+    score = 0;
     this.quota = quota;
   }
   
@@ -60,7 +61,7 @@ public class Spinner extends Thing {
     } else {
       if (timesTurned > quota) text((timesTurned - quota) * 1000, width / 2 - 40, 580);
     }
-    oldTimesTurned = timesTurned;
+    updateScore();
   }
   
   float processAngle(float curX, float curY) {
@@ -78,11 +79,16 @@ public class Spinner extends Thing {
     return endTime;
   }
   
-  int getScore() {
+  void updateScore() {
     if (oldTimesTurned != timesTurned) {
-      if (complete) return 1000;
-      else return 100;
+      if (complete) score = 1000;
+      else score = 100;
+      oldTimesTurned = timesTurned;
     } 
-    else return 0;
+    else score = 0;
+  }
+  
+  int getScore() {
+    return score;
   }
 }

@@ -52,7 +52,7 @@ void setup() {
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(0, 100000, 25);
+  sp = new Spinner(250, 650, 25);
 
   p = new Cursor(width / 2, height / 2);
 }
@@ -144,7 +144,7 @@ void draw() {
     // text(timer + "", 50, 160);
     textSize(32);
     text("Streak: " + streak + "x", 15, 790);
-    text("Score: " + score, 800, 35);
+    text("Score: " + score, 770, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
 
