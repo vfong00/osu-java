@@ -121,21 +121,29 @@ void displayClickies() {
   if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
 }
 
+boolean pause;
+void keyPressed() {
+  final int k = keyCode;
 
-  
+  if (k == 'P')
+    pause = !pause;
+}
+
+
 
 void draw() { 
   background(20);
   noCursor();
   timer++;
-
+  
+  
   
   p.display();
   if (screen.getMode() == 0){
      
     screen.display();
      p.display();
-  }else if(screen.getMode() == 1){
+  }else if(screen.getMode() == 1 && !pause){
     p.display();
     displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
