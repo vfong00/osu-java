@@ -1,6 +1,7 @@
 public class Spinner extends Thing {
   float startTime, endTime, angle, oldAngle, angleTurned;
-  int fakeRPM, timesTurned, quota;
+  int fakeRPM, oldTimesTurned, timesTurned, quota;
+  boolean complete;
   PImage spinnerPhoto;
   
   Spinner(float startTime, float endTime, int quota) {
@@ -14,6 +15,7 @@ public class Spinner extends Thing {
     oldAngle = 0;
     fakeRPM = 0;
     angleTurned = 0;
+    oldTimesTurned = 0;
     timesTurned = 0;
     this.quota = quota;
   }
@@ -35,7 +37,6 @@ public class Spinner extends Thing {
     
     // determining cycles
     timesTurned = (int) (angleTurned / (2 * PI));
-    text(timesTurned, 50, 160);
     
     // displays the spinner
     pushMatrix();
@@ -46,11 +47,20 @@ public class Spinner extends Thing {
     image(spinnerPhoto, 0, 0);
     popMatrix();
     
-    float percent = angleTurned / (quota * 2 * PI);
-    if (percent > 1) percent = 1;
-    textSize(15);
-    text((int) (percent * 10000) / 100 + "%", width / 2 - 10, 560);
-    textSize(32);
+    // displays amount turned before completion
+    if (!complete) {
+      float percent = angleTurned / (quota * 2 * PI);
+      if (percent > 1) {
+        complete = true;
+        percent = 1;
+      }
+      textSize(15);
+      text((int) (percent * 10000) / 100 + "%", width / 2 - 10, 560);
+      textSize(32);
+    } else {
+      if (timesTurned > quota) text((timesTurned - quota) * 1000, width / 2 - 40, 580);
+    }
+    oldTimesTurned = timesTurned;
   }
   
   float processAngle(float curX, float curY) {
@@ -66,5 +76,13 @@ public class Spinner extends Thing {
   
   float getEndTime() {
     return endTime;
+  }
+  
+  int getScore() {
+    if (oldTimesTurned != timesTurned) {
+      if (complete) return 1000;
+      else return 100;
+    } 
+    else return 0;
   }
 }

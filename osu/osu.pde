@@ -100,6 +100,10 @@ void scoreSlider(Slider slider) {
   }
 }
 
+void scoreSpinner(Spinner spinner) {
+  score += spinner.getScore();
+}
+
 
 void displayClickies() {
   // display all circles. When dead, score them.
@@ -120,10 +124,8 @@ void displayClickies() {
     }
   }
   if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
+  scoreSpinner(sp);
 }
-
-
-
 
 void draw() {
   background(20);
