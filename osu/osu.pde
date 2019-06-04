@@ -1,4 +1,5 @@
 import processing.opengl.*;
+import processing.opengl.*;
 import java.util.*;
 
 int timer = 0;
@@ -9,6 +10,7 @@ int rawMaxScore = 0;
 float accuracy = 0;
 
 StartScreen screen;
+PImage pointer;
 
 Circle a;
 Circle b;
@@ -27,6 +29,16 @@ void setup() {
   size(1000, 800);
   screen = new StartScreen(1000,800);
   
+  play();
+  
+
+  p = new Cursor(width / 2, height / 2);
+}
+
+void play(){
+  pause = false;
+  timer =0;
+  pointer = loadImage("Images/pointer.png");
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
@@ -53,10 +65,7 @@ void setup() {
   //sliders.add(j);
 
   sp = new Spinner(500, 800);
-
-  p = new Cursor(width / 2, height / 2);
 }
-
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
   if (cScore == 0) streak = 0;
@@ -121,25 +130,83 @@ void displayClickies() {
   if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
 }
 
+boolean pause;
+void keyPressed() {
+  final int k = keyCode;
 
+  if (k == 'P' && screen.getMode() == 1)
+    pause = !pause;
   
+  if (k == 'R'){
+   play();
+   screen.setMode(1);
+  }
+  if (k == ENTER || k == RETURN) {
+    play();
+    screen.setMode(1);
+  }
+  if (k == ESC) exit();
+}
+
+
+
+void pause(){
+    if(pause){
+      fill(166, 255, 43);
+      rect(300,200,400,100);
+      fill(255, 130, 28);
+      rect(300,350,400,100);
+      fill(255, 33, 73);
+      rect(300,500,400,100);
+      
+      fill(10);
+      noStroke();
+      triangle(300,200,320,200,300,220);
+      triangle(700,300,700,280,680,300);
+      
+      triangle(300,350,320,350,300,370);
+      triangle(700,450,700,430,680,450);
+      
+      triangle(300,500,320,500,300,520);
+      triangle(700,600,700,580,680,600);
+      
+      textSize(50);
+      fill(255);
+      text("Continue",390,265);
+      text("Retry", 440,415);
+      text("Back to Menu", 340,565);
+      
+      p.display();
+      
+      if (mousePressed && 300 < mouseX && mouseX < 700 && 200 < mouseY && mouseY < 300) pause = false;
+      if (mousePressed && 300 < mouseX && mouseX < 700 && 350 < mouseY && mouseY < 450){
+        play();
+        screen.setMode(1);
+      }
+      if (mousePressed && 300 < mouseX && mouseX < 700 && 500 < mouseY && mouseY < 600){
+        pause = false;
+        screen.setMode(0);
+        play();
+      }
+    }
+}
 
 void draw() { 
-  background(20);
+  background(10);
   noCursor();
+  timer++;
   
-
+  
   
   p.display();
   if (screen.getMode() == 0){
      
     screen.display();
      p.display();
-  }else if(screen.getMode() == 1){
-
-    timer++;
-    displayClickies();
+  }else if(screen.getMode() == 1 && !pause){
+    
     p.display();
+    displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
     textSize(32);
@@ -149,5 +216,11 @@ void draw() {
     text("Score: " + score, 800, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
-
+  pause();
+  if (screen.getMode() == 2){
+    screen.helpMenu();
+    p.display();
+    if (mousePressed && 470 < mouseX && mouseX < 540 && 530 < mouseY && mouseY < 570) screen.setMode(0);
+  }
+  if (screen.getMode() == 3) exit();
 }
