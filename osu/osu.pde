@@ -103,6 +103,7 @@ void scoreSlider(Slider slider) {
 
 void displayClickies() {
   // display all circles. When dead, score them.
+  textSize(32);
   for(Circle c : circles){
     if (timer > c.getStartTime()) c.display();
     if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
@@ -127,22 +128,19 @@ void displayClickies() {
 void draw() { 
   background(20);
   noCursor();
-  timer++;
-
-  
-  p.display();
-  if (screen.getMode() == 0){
-     
+  if (screen.getMode() == 0) {
     screen.display();
-     p.display();
-  }else if(screen.getMode() == 1){
     p.display();
+  } else if(screen.getMode() == 1) {
+    timer++;
     displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
-    textSize(32);
     fill(255);
+    p.display();
+    
     // text(timer + "", 50, 160);
+    textSize(32);
     text("Streak: " + streak + "x", 15, 790);
     text("Score: " + score, 800, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
