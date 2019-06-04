@@ -100,6 +100,72 @@ class StartScreen{
     text("osu!", x-205, y+45);
   }
    
+   
+   void helpMenu(){
+     screen.drawOptions();
+    screen.drawCircle(325,400);
+    pushStyle();
+    //background darken
+    fill(10,10,10,200);
+    rect(0,0,1000,800);
+    
+    
+    //help box
+    fill(255);
+    rect(240,190,520,420,15);
+    //gradient
+    for (int i = 210; i <= 590; i++) {
+        float inter = map(i, 210, 590, 0, 1);
+        color c = lerpColor( color(130, 28, 72),color(10), inter);
+        stroke(c);
+        line(260, i, 740, i);
+    }
+    
+    //header
+    textSize(50);
+    text("Controls", 400,255);
+    stroke(255);
+    strokeWeight(7);
+    line(395,265, 610,265);
+    
+    
+    //key outlines
+    stroke(255);
+    strokeWeight(5);
+    fill(20,20,20,0);
+    rect(380,300,100,40,5); //play
+    rect(625,300,60,40,5); //exit
+    rect(400,370,40,40,5); //pause
+    rect(660,370,40,40,5); //exit
+    rect(400,430,40,40,5); // click
+    ellipse(530,450,50,50); // click
+    quad(535,545,548,483,554,470,581,661);
+    //button
+    rect(470,530,70,40,5); 
+    
+    //actions
+    textSize(35);
+    fill(255);
+    text("Play", 280,335);
+    text("Exit", 530,335);
+    text("Pause", 280, 400);
+    text("Restart", 530,400);
+    text("Click", 280,465);
+    text("OK", 480, 563); //button
+    
+    //keys
+    textSize(25);
+    text("Enter", 400,330);
+    text("Esc", 635, 330);
+    text("P", 413, 400);
+    text("R", 673, 400);
+    text("X", 413, 460);
+    text("or", 455, 460);
+    text("1", 523, 458);
+
+    popStyle(); 
+    
+   }
   
   void drawLinearGradientDisc( float x, float y, float radiusX, float radiusY, int fromC, int toC){ 
     noStroke(); 

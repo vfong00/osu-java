@@ -206,51 +206,8 @@ void draw() {
   }
   pause();
   if (screen.getMode() == 2){
-    
-    screen.drawOptions();
-    screen.drawCircle(325,400);
-    pushStyle();
-    //background darken
-    fill(10,10,10,200);
-    rect(0,0,1000,800);
-    
-    
-    //help box
-    fill(255);
-    rect(240,190,520,420,15);
-    //gradient
-    for (int i = 210; i <= 590; i++) {
-        float inter = map(i, 210, 590, 0, 1);
-        color c = lerpColor( color(130, 28, 72),color(10), inter);
-        stroke(c);
-        line(260, i, 740, i);
-    }
-    
-    //header
-    textSize(50);
-    text("Controls", 400,255);
-    stroke(255);
-    strokeWeight(7);
-    line(395,265, 610,265);
-    
-    
-    //key outlines
-    stroke(255);
-    strokeWeight(5);
-    fill(20,20,20,0);
-    rect(405,300,100,40,5);
-    
-    //actions
-    textSize(40);
-    fill(255);
-    text("Play", 280,335);
-    
-    //keys
-    textSize(30);
-    text("Enter", 418,330);
-    popStyle(); 
+    screen.helpMenu();
     p.display();
-    
   }
   if (screen.getMode() == 3) exit();
 }
