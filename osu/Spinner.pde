@@ -1,14 +1,16 @@
 public class Spinner extends Thing {
   float startTime, endTime, angle, oldAngle;
-  int fakeRPM;
-  PImage spinnerPhoto;
+  int fakeRPM, timesCircled, quota;
+  PImage spinnerPhoto, meterPhoto;
   
   Spinner(float startTime, float endTime) {
     super(width / 2, height / 2);
     this.startTime = startTime;
     this.endTime = endTime;
     this.spinnerPhoto = loadImage("Images/spinner-circle@2x.png");
-    spinnerPhoto.resize(250, 250);
+    spinnerPhoto.resize(360, 360);
+    this.meterPhoto = loadImage("Images/spinner-metre@2x.png");
+    meterPhoto.resize((int) (1.536 * height), height);
     
     angle = processAngle(mouseX, mouseY);
     oldAngle = 0;
@@ -30,14 +32,19 @@ public class Spinner extends Thing {
     
     // displays the spinner
     pushMatrix();
-    translate(width / 2, height / 2);
+    translate(width / 2, height / 2 + 20);
     tint(255, 255);
     rotate(newAngle);
     image(spinnerPhoto, 0, 0);
     fill(255);
     popMatrix();
     
-    
+    // displays the spinner meter
+    pushMatrix();
+    translate(width / 2, height / 2);
+    tint(255, 50);
+    image(meterPhoto, 0, 0);
+    popMatrix();
   }
   
   float processAngle(float curX, float curY) {

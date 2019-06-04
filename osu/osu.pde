@@ -52,7 +52,7 @@ void setup() {
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(350, 1050);
+  sp = new Spinner(0, 1050);
 
   p = new Cursor(width / 2, height / 2);
 }
