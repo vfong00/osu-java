@@ -132,7 +132,7 @@ void keyPressed() {
 
 
 void draw() { 
-  background(20);
+  background(10);
   noCursor();
   timer++;
   

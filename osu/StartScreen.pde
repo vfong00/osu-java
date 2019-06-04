@@ -27,7 +27,7 @@ class StartScreen{
  void drawOptions(){
    fill(190, 50, 120);
    ellipse(325,400,1150,1150);
-   fill(20);
+   fill(10);
    rect(0,0,900,250);
    rect(0,540,900,260);
    rect(0,0,200,600);
@@ -83,7 +83,7 @@ class StartScreen{
   void drawCircle(float x, float y){
     stroke(255);
     strokeWeight(20);
-    fill(20);
+    fill(10);
     ellipse(x,y,500,500);
     pushMatrix();
     drawLinearGradientDisc(x,y, 240, 240, color(204, 44, 113), color(20,20,20));
