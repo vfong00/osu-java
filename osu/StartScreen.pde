@@ -80,6 +80,10 @@ class StartScreen{
     ellipse(835,493,5,5);
   }
   
+  void setMode(int a){
+    mode = a;
+  }
+  
   void drawCircle(float x, float y){
     stroke(255);
     strokeWeight(20);
