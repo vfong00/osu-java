@@ -52,7 +52,7 @@ void setup() {
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(350, 550);
+  sp = new Spinner(350, 1050);
 
   p = new Cursor(width / 2, height / 2);
 }
@@ -134,7 +134,6 @@ void draw() {
   } else if(screen.getMode() == 1) {
     timer++;
     displayClickies();
-    p.display();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
     fill(255);

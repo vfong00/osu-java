@@ -1,5 +1,6 @@
 public class Spinner extends Thing {
   float startTime, endTime, angle, oldAngle;
+  int fakeRPM;
   PImage spinnerPhoto;
   
   Spinner(float startTime, float endTime) {
@@ -11,21 +12,32 @@ public class Spinner extends Thing {
     
     angle = processAngle(mouseX, mouseY);
     oldAngle = 0;
+    fakeRPM = 0;
   }
   
   void display() {
     oldAngle = angle;
-    angle = processAngle(mouseX, mouseY);
-    int rpm = (int) abs((oldAngle - angle) * 500);
-    text(rpm + "", 50, 190);
+    if (mousePressed) angle = processAngle(mouseX, mouseY);
     
+    // calculating the rpm that changes the spinner speed
+    int rpm = (int) abs((oldAngle - angle) * 500);
+    fakeRPM = ((46 * fakeRPM) / 50) + (rpm / 10);
+    text("RPM: " + fakeRPM, width / 2, 790);
+    
+    // angle that the spinner is at
+    float newAngle = (fakeRPM / 500.0) * (2 * PI);
+    text(newAngle + "", 50, 160);
+    
+    // displays the spinner
     pushMatrix();
     translate(width / 2, height / 2);
     tint(255, 255);
-    rotate(oldAngle);
+    rotate(newAngle);
     image(spinnerPhoto, 0, 0);
-    popMatrix();
     fill(255);
+    popMatrix();
+    
+    
   }
   
   float processAngle(float curX, float curY) {
