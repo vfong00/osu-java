@@ -139,7 +139,7 @@ class StartScreen{
     rect(660,370,40,40,5); //exit
     rect(400,430,40,40,5); // click
     ellipse(530,450,50,50); // click
-    quad(535,545,548,483,554,470,581,661);
+  
     //button
     rect(470,530,70,40,5); 
     
