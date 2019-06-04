@@ -162,6 +162,8 @@ void pause(){
       text("Back to Menu", 340,565);
       
       p.display();
+      
+      if (mousePressed && 300 < mouseX && mouseX < 700 && 200< mouseY && mouseY < 300) pause = false;
     }
 }
 
