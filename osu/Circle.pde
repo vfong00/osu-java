@@ -53,7 +53,8 @@ class Circle implements Displayable {
       
       drawLinearGradientDisc(x,y, r/2 - 5, r/2 - 5, color(204, 44, 113), color(20,20,20));
       fill(255);
-      text(num, x-10, y+10);
+      textSize(25);
+      text(num, x-7, y+7);
     } else {
       if (timeDispScore > 0) {
         displayScore(x, y);

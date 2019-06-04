@@ -26,7 +26,7 @@ ArrayList<Object> dead;
 void setup() {
   size(1000, 800);
   screen = new StartScreen(1000,800);
-  
+
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
@@ -75,7 +75,7 @@ void scoreSlider(Slider slider) {
     if (slider.moving()) {
       slider.setNotChecked(false);
       streak = 0;
-    } 
+    }
     // check for when clicked first time. Update scores
     else if (slider.wasClicked()) {
       slider.setNotChecked(false);
@@ -123,9 +123,9 @@ void displayClickies() {
 }
 
 
-  
 
-void draw() { 
+
+void draw() {
   background(20);
   noCursor();
   if (screen.getMode() == 0) {
@@ -134,11 +134,12 @@ void draw() {
   } else if(screen.getMode() == 1) {
     timer++;
     displayClickies();
+    p.display();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
     fill(255);
     p.display();
-    
+
     // text(timer + "", 50, 160);
     textSize(32);
     text("Streak: " + streak + "x", 15, 790);
