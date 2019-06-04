@@ -1,5 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore;;
+  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
   int firstNotTicked, numTicked, tickScore, shape;
@@ -35,7 +35,7 @@ class Slider extends Circle implements Displayable{
     print(len);
 
 
-    if(reverse) {
+    if (reverse) {
       ticks = new SliderTick[6];
       /*for(int i = 1; i < ticks.length/2; i++){
         ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, false);
@@ -238,3 +238,5 @@ class Slider extends Circle implements Displayable{
     }
   }
 }
+
+// make sure this works right

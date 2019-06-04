@@ -59,7 +59,7 @@ void setup() {
 
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
-  if (cScore == 0) streak = 0;
+  if (cScore < 100) streak = 0;
   else streak++;
   int sMult = streak;
   if (sMult > 0) sMult--;
@@ -123,8 +123,16 @@ void displayClickies() {
       dead.add(s);
     }
   }
-  if (timer > sp.getStartTime() && timer < sp.getEndTime()) sp.display();
-  scoreSpinner(sp);
+  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
+    scoreSpinner(sp);
+    sp.display();
+  } else if (timer > sp.getEndTime()) {
+    sp.display();
+    sp.setDead();
+    if (!sp.checked()) scoreSpinner(sp);
+    sp.setChecked();
+    // need to display 300/100/50/X and integrate streaks
+  }
 }
 
 void draw() {
