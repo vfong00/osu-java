@@ -208,6 +208,7 @@ void draw() {
   if (screen.getMode() == 2){
     screen.helpMenu();
     p.display();
+    if (mousePressed && 470 < mouseX && mouseX < 540 && 530 < mouseY && mouseY < 570) screen.setMode(0);
   }
   if (screen.getMode() == 3) exit();
 }
