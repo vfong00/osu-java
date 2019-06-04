@@ -202,7 +202,6 @@ void draw() {
     text("Score: " + score, 800, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
-  
   pause();
-
+  if (screen.getMode() == 3) exit();
 }
