@@ -129,11 +129,41 @@ boolean pause;
 void keyPressed() {
   final int k = keyCode;
 
-  if (k == 'P')
+  if (k == 'P' && screen.getMode() == 1)
     pause = !pause;
 }
 
 
+
+void pause(){
+    if(pause){
+      fill(166, 255, 43);
+      rect(300,200,400,100);
+      fill(255, 130, 28);
+      rect(300,350,400,100);
+      fill(255, 33, 73);
+      rect(300,500,400,100);
+      
+      fill(10);
+      noStroke();
+      triangle(300,200,320,200,300,220);
+      triangle(700,300,700,280,680,300);
+      
+      triangle(300,350,320,350,300,370);
+      triangle(700,450,700,430,680,450);
+      
+      triangle(300,500,320,500,300,520);
+      triangle(700,600,700,580,680,600);
+      
+      textSize(50);
+      fill(255);
+      text("Continue",390,265);
+      text("Retry", 440,415);
+      text("Back to Menu", 340,565);
+      
+      p.display();
+    }
+}
 
 void draw() { 
   background(10);
@@ -159,5 +189,7 @@ void draw() {
     text("Score: " + score, 800, 35);
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
+  
+  pause();
 
 }
