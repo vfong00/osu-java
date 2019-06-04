@@ -9,6 +9,7 @@ int rawMaxScore = 0;
 float accuracy = 0;
 
 StartScreen screen;
+PImage pointer;
 
 Circle a;
 Circle b;
@@ -36,6 +37,7 @@ void setup() {
 void play(){
   pause = false;
   timer =0;
+  pointer = loadImage("Images/pointer.png");
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
