@@ -208,14 +208,17 @@ void draw() {
     screen.drawCircle(325,400);
     fill(10,10,10,200);
     rect(0,0,1000,800);
+    
     fill(255);
     rect(240,190,520,420,15);
-    for (int i = 200; i <= 600; i++) {
-        float inter = map(i, 200, 600, 0, 1);
+    
+    for (int i = 210; i <= 590; i++) {
+        float inter = map(i, 210, 590, 0, 1);
         color c = lerpColor( color(130, 28, 72),color(10), inter);
         stroke(c);
-        line(250, i, 750, i);
+        line(260, i, 740, i);
     }
+    
   }
   if (screen.getMode() == 3) exit();
 }
