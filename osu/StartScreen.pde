@@ -139,7 +139,7 @@ class StartScreen{
     rect(660,370,40,40,5); //exit
     rect(400,430,40,40,5); // click
     ellipse(530,450,50,50); // click
-    //image(pointer, 400,400);
+    image(pointer, 560,475,45,45);
   
     //button
     rect(470,530,70,40,5); 

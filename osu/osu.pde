@@ -135,7 +135,16 @@ void keyPressed() {
 
   if (k == 'P' && screen.getMode() == 1)
     pause = !pause;
-
+  
+  if (k == 'R'){
+   play();
+   screen.setMode(1);
+  }
+  if (k == ENTER || k == RETURN) {
+    play();
+    screen.setMode(1);
+  }
+  if (k == ESC) exit();
 }
 
 
