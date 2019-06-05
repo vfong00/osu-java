@@ -137,9 +137,9 @@ class StartScreen{
     rect(625,300,60,40,5); //exit
     rect(400,370,40,40,5); //pause
     rect(660,370,40,40,5); //exit
-    rect(400,430,40,40,5); // click
-    ellipse(530,450,50,50); // click
-    image(pointer, 560,475,45,45);
+    //rect(400,430,40,40,5); // click
+    ellipse(400,450,50,50); // click
+    image(pointer, 430,475,45,45);
   
     //button
     rect(470,530,70,40,5); 
@@ -160,9 +160,9 @@ class StartScreen{
     text("Esc", 635, 330);
     text("P", 413, 400);
     text("R", 673, 400);
-    text("X", 413, 460);
-    text("or", 455, 460);
-    text("1", 523, 458);
+    //text("X", 413, 460);
+    //text("or", 455, 460);
+    text("1", 393, 458);
 
     popStyle(); 
     
