@@ -57,7 +57,6 @@ class Slider extends Circle implements Displayable{
       boolean last = i == numTicks - 1;
       ticks[i] = new SliderTick(start.x + (dir.normalize().x * tickDist * i), start.y + (dir.normalize().y * tickDist * i), last);
     }
-    
   }
 
   void displayClicky(boolean number){
@@ -98,15 +97,15 @@ class Slider extends Circle implements Displayable{
     }
   }
 
+  // buggy, only works when going from bottom left to top right.
   void drawSlider(){
     PVector n = new PVector(10, 0);
     float angle = PVector.angleBetween(n,dir);
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-
+    
     line(start.x - (r/2)*cos(PI/2-angle), start.y-(r/2)*sin(PI/2-angle), end.x- (r/2)*cos(PI/2-angle), end.y-(r/2)*sin(PI/2-angle)); //top
-    line(start.x - (r/2)*cos(PI/2+angle), start.y+(r/2)*sin(PI/2+angle), end.x - (r/2)*cos(PI/2+angle), end.y+(r/2)*sin(PI/2+angle)); //bottom
     arc(start.x, start.y, r, r,  PI/2-angle, 3 * PI / 2 - angle);
     arc(end.x, end.y, r, r, 3 * (PI / 2 )- angle , 2*PI);
     arc(end.x, end.y, r, r, 0, PI/2-angle);
@@ -114,20 +113,24 @@ class Slider extends Circle implements Displayable{
     fill(20);
   }
   
+  void moveSlider(int reverse) {
+    x += ((int) Math.pow(-1, reverse)) * dir.normalize().x * 2;
+    y += ((int) Math.pow(-1, reverse)) * dir.normalize().y * 2;
+  }
+  
   void funcSlider() {
     if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && (end.x - x > 1 || end.y - y > 1 )){
-          x += dir.normalize().x * 2;
-          y += dir.normalize().y * 2;
+        if (!complete && (end.x - x > 1 || end.y - y > 1 )) {
+          moveSlider(reversesDone);
         } else {
-           //if (!reverse) {
-           //  dead = true;
-           //} else {
-           //  complete = true;
-           //  if (x > start.x) x -= dir.normalize().x ;
-           //}
+           if (numReverses != reversesDone) {
+             reversesDone++;
+             moveSlider(reversesDone);
+           } else {
+             dead = true;
+           }
         }
         if (!lastTicked) checkTicked(ticks);
         else onTick = false;
