@@ -34,10 +34,12 @@ ArrayList<Object> dead;
 boolean ran;
 boolean end;
 boolean pause;
+boolean first;
 
 void setup() {
   size(1000, 800);
   screen = new StartScreen(1000,800);
+  first = true;
   play();
 }
 
@@ -59,6 +61,7 @@ void varReset() {
 
 void play() {
   varReset();
+  screen.setStart();
   pointer = loadImage("Images/pointer.png");
 
   clickies = new ArrayList<Object>();
@@ -229,8 +232,8 @@ void endScreen(){
   popStyle();
   
   if (mousePressed && (580 < mouseX && mouseX < 755) && (515 < mouseY && mouseY < 585)){
-   play();
-   screen.setMode(1);
+    play();
+    screen.setMode(1);
   }
   if (mousePressed && (785 < mouseX && mouseX < 950) && 515 < mouseY && mouseY < 585){
     screen.setMode(0);
@@ -356,22 +359,29 @@ void draw() {
   background(10);
   noCursor();
   p.display();
+  text(screen.getMode(), 50, 160);
   if (screen.getMode() == 0) {
      screen.display();
      p.display();
-  } else if (screen.getMode() == 1 && !pause && !end) {
-    timer++;
-    displayClickies();
-    accuracy = (float) rawScore * 100 / rawMaxScore;
-    if (dead.size() == 0) accuracy = 0;
-    fill(255);
-    p.display();
-
-    // text(timer + "", 50, 160);
-    textSize(32);
-    text("Streak: " + streak + "x", 15, 790);
-    text("Score: " + score, 770, 35);
-    text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
+  } else if (screen.getMode() == 1 && !pause) {
+    if (first && screen.getStart()) screen.setStart();
+    if (!end) { 
+      first = false;
+      timer++;
+      displayClickies();
+      accuracy = (float) rawScore * 100 / rawMaxScore;
+      if (dead.size() == 0) accuracy = 0;
+      fill(255);
+      p.display();
+  
+      // text(timer + "", 50, 160);
+      textSize(32);
+      text("Streak: " + streak + "x", 15, 790);
+      text("Score: " + score, 770, 35);
+      text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
+    } else {
+      if (screen.getStart()) play();
+    }
   }
   pause();
   if (screen.getMode() == 2) {
