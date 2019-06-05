@@ -1,7 +1,7 @@
 class Slider extends Circle implements Displayable{
   float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist;
   String num;
-  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete, forward;
   int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone;
   ApproachCircle c;
   SliderTick[] ticks, reverseTicks;
@@ -43,6 +43,7 @@ class Slider extends Circle implements Displayable{
     notChecked = true;
     complete = false;
     moving = false;
+    forward = true;
     
     initializeTicks();
   }
@@ -119,6 +120,25 @@ class Slider extends Circle implements Displayable{
     y += ((int) Math.pow(-1, reverse)) * dir.normalize().y * 2;
   }
   
+  void updateTicks(boolean forward) {
+    boolean end;
+    if (forward) {
+      for (int i = 1; i < ticks.length; i++) {
+        end = i == ticks.length - 1;
+        ticks[i].setTicked(false);
+        ticks[i].setAlive(true);
+        ticks[i].setEnd(end);
+      }
+    } else {
+      for (int i = 0; i < ticks.length - 1; i++) {
+        end = i == 0;
+        ticks[i].setTicked(false);
+        ticks[i].setAlive(true);
+        ticks[i].setEnd(end);
+      }
+    }
+  }
+  
   void funcSlider() {
     if (c.getRadius() < r) {
         moving = true;
@@ -127,6 +147,8 @@ class Slider extends Circle implements Displayable{
           moveSlider(reversesDone);
         } else {
            if (numReverses != reversesDone) {
+             forward = !forward;
+             updateTicks(forward);
              reversesDone++;
              moveSlider(reversesDone);
            } else {
