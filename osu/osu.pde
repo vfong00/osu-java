@@ -41,11 +41,24 @@ void setup() {
   play();
 }
 
-void play() {
+void varReset() {
   pause = false;
   end = false;
   ran = false;
   timer = 0;
+  score = 0;
+  streak = 0;
+  rawScore = 0;
+  rawMaxScore = 0;
+  accuracy = 0;
+  three = 0;
+  one = 0;
+  fifty = 0;
+  miss = 0;
+}
+
+void play() {
+  varReset();
   pointer = loadImage("Images/pointer.png");
 
   clickies = new ArrayList<Object>();
