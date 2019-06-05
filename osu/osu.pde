@@ -8,6 +8,7 @@ int score = 0;
 int rawScore = 0;
 int rawMaxScore = 0;
 float accuracy = 0;
+
 int three = 0; //300s
 int one = 0; //100s
 int fifty = 0; //50s
@@ -27,6 +28,7 @@ Slider j;
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
 ArrayList<Slider> sliders;
+ArrayList<Spinner> spinners;
 ArrayList<Object> dead;
 
 boolean ran;
@@ -39,16 +41,17 @@ void setup() {
   play();
 }
 
-void play(){
+void play() {
   pause = false;
-  end= false;
+  end = false;
   ran = false;
-  timer =0;
+  timer = 0;
   pointer = loadImage("Images/pointer.png");
 
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
+  spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
   a = new Circle(100, 400, 80, 0, 1);
@@ -72,6 +75,7 @@ void play(){
   //sliders.add(j);
 
   sp = new Spinner(250, 650, 10);
+  spinners.add(sp);
   clickies.add(sp);
   
   p = new Cursor(width / 2, height / 2);
@@ -137,33 +141,62 @@ void scoreSpinner(Spinner spinner) {
   } 
 }
 
+void countClickyScores() {
+  for (Circle c : circles){
+    if (c.getScore() == 300) three++;
+    if (c.getScore() == 100) one++;
+    if (c.getScore() == 50) fifty++;
+    if (c.getScore() == 0) miss++;
+  }
+    
+  for (Slider s : sliders){
+    if (s.getScore() == 300) three++;
+    if (s.getScore() == 100) one++;
+    if (s.getScore() == 50) fifty++;
+    if (s.getScore() == 0) miss++;
+  }
+  
+  for (Spinner s : spinners) {
+    if (s.getScore() == 300) three++;
+    if (s.getScore() == 100) one++;
+    if (s.getScore() == 50) fifty++;
+    if (s.getScore() == 0) miss++;
+  }
+}
+
+void displayGrade() {
+  String grade = "";
+  
+  // enclosing circle
+  pushStyle();
+  stroke(204, 44, 113);
+  strokeWeight(20);
+  ellipse(770,300,350,350);
+  
+  // determining letter
+  if (accuracy == 100) grade = "S";
+  else if (accuracy > 90) grade = "A";
+  else if (accuracy > 80) grade = "B";
+  else if (accuracy > 70) grade = "C";
+  else if (accuracy > 60) grade = "D";
+  else grade = "F";
+  
+  fill(204, 44, 113);
+  textSize(300);
+  if (grade.equals("A") || grade.equals("C") || grade.equals("D")) text(grade, 665, 405);
+  else text(grade, 695, 405);
+  popStyle();
+}
+
 
 void endScreen(){
-  if (!ran){
-    for(Circle c : circles){
-      if (c.getScore() == 300) three++;
-      if (c.getScore() == 100) one++;
-      if (c.getScore() == 50) fifty++;
-      if (c.getScore() == 0) miss++;
-    }
-    for(Slider s : sliders){
-      if (c.getScore() == 300) three++;
-      if (c.getScore() == 100) one++;
-      if (c.getScore() == 50) fifty++;
-      if (c.getScore() == 0) miss++;
-    }
-  
-    if (sp.getScore() == 300) three++;
-    if (sp.getScore() == 100) one++;
-    if (sp.getScore() == 50) fifty++;
-    if (sp.getScore() == 0) miss++;
-    
+  if (!ran) {
+    countClickyScores();
     ran = true;
   }
   
-  
-  text(mouseX+"", 50, 70);
-  text(mouseY+"", 50, 100);
+  text(mouseX + "", 50, 70);
+  text(mouseY + "", 50, 100);
     
   fill(204, 44, 113);
   rect(40,200,500,70,10);
@@ -188,6 +221,7 @@ void endScreen(){
   }
   if (mousePressed && (785 < mouseX && mouseX < 950) && 515 < mouseY && mouseY < 585){
     screen.setMode(0);
+    clickies.clear();
     dead.clear();
   } 
   fill(255);
@@ -201,36 +235,17 @@ void endScreen(){
   text("X", 320, 440);
   
   textSize(40);
-  text(score + "            "+ (int) (accuracy * 100) / 100.0  + "%", 70, 560);
+  text(streak + "x                  "+ (int) (accuracy * 100) / 100.0  + "%", 70, 560);
   text(three, 150, 360);
   text(one, 150, 440);
   text(fifty, 390, 360);
   text(miss, 390, 440);
   
   
-  
   textSize(44);
   text("Streak        Accuracy" , 60, 510);
   
-  String grade = "";
-  println(accuracy);
-  if(accuracy == 100) grade = "S";
-  else if(accuracy > 90) grade = "A";
-  else if(accuracy > 80) grade = "B";
-  else if(accuracy > 70) grade = "C";
-  else if(accuracy > 60) grade = "D";
-  else grade = "F";
-  
-  
-  pushStyle();
-  stroke(204, 44, 113);
-  strokeWeight(20);
-  ellipse(770,300,350,350);
-  fill(204, 44, 113);
-  textSize(370);
-  text(grade, 660,440);
-  
-  popStyle();
+  displayGrade();
   p.display();
 }
 
@@ -283,8 +298,8 @@ void keyPressed() {
 
 
 
-void pause(){
-    if(pause){
+void pause() {
+    if (pause) {
       fill(166, 255, 43);
       rect(300,200,400,100);
       fill(255, 130, 28);
@@ -327,12 +342,12 @@ void pause(){
 void draw() { 
   background(10);
   noCursor();
-  timer++;
   p.display();
-  if (screen.getMode() == 0){
+  if (screen.getMode() == 0) {
      screen.display();
      p.display();
-  }else if(screen.getMode() == 1 && !pause && !end){
+  } else if (screen.getMode() == 1 && !pause && !end) {
+    timer++;
     displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
@@ -346,14 +361,14 @@ void draw() {
     text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
   }
   pause();
-  if (screen.getMode() == 2){
+  if (screen.getMode() == 2) {
     screen.helpMenu();
     p.display();
     if (mousePressed && 470 < mouseX && mouseX < 540 && 530 < mouseY && mouseY < 570) screen.setMode(0);
   }
   if (screen.getMode() == 3) exit();
 
-  if (clickies.size() == dead.size()){
+  if (clickies.size() == dead.size() && clickies.size() != 0){
     end = true;
     endScreen();
   }
