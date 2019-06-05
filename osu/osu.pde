@@ -129,35 +129,50 @@ void scoreSpinner(Spinner spinner) {
 
 boolean end;
 void endScreen(){
-  background(10);
   text(mouseX+"", 50, 70);
   text(mouseY+"", 50, 100);
     
   fill(204, 44, 113);
   rect(40,200,500,70,10);
-  rect(40,300,500,350,10);
+  rect(40,300,500,300,10);
   
   fill(255);
   textSize(50);
-  text("Score           " + 666, 50, 255);
+  text("Score           " + score, 50, 255);
   
   textSize(27);
   text("300x", 60, 360);
-  text("100x", 60, 460);
+  text("100x", 60, 440);
   text("50x", 320, 360);
-  text("X", 320, 460);
+  text("X", 320, 440);
   
   textSize(40);
-  text("Streak          Accuracy" , 60, 580);
+  text(score + "            "+ (int) (accuracy * 100) / 100.0  + "%", 70, 560);
   text("300x", 150, 360);
-  text("100x", 150, 460);
+  text("100x", 150, 440);
   text("50x", 390, 360);
-  text("X", 390, 460);
+  text("X", 390, 440);
+  
+  textSize(44);
+  text("Streak        Accuracy" , 60, 510);
+  
+  String grade = "";
+  println(accuracy);
+  if(accuracy > 98) grade = "S";
+  else if(accuracy > 90) grade = "A";
+  else if(accuracy > 80) grade = "B";
+  else if(accuracy > 70) grade = "C";
+  else if(accuracy > 60) grade = "D";
+  else grade = "F";
+  
   
   pushStyle();
   stroke(204, 44, 113);
   strokeWeight(20);
   ellipse(770,400,350,350);
+  fill(204, 44, 113);
+  textSize(380);
+  text(grade, 670,530);
   popStyle();
   p.display();
 }
