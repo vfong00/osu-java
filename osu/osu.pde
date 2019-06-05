@@ -8,6 +8,10 @@ int score = 0;
 int rawScore = 0;
 int rawMaxScore = 0;
 float accuracy = 0;
+int three = 0; //300s
+int one = 0; //100s
+int fifty = 0; //50s
+int miss = 0; //misses
 
 StartScreen screen;
 PImage pointer;
@@ -25,6 +29,10 @@ ArrayList<Circle> circles;
 ArrayList<Slider> sliders;
 ArrayList<Object> dead;
 
+boolean ran;
+boolean end;
+boolean pause;
+
 void setup() {
   size(1000, 800);
   screen = new StartScreen(1000,800);
@@ -34,6 +42,7 @@ void setup() {
 void play(){
   pause = false;
   end= false;
+  ran = false;
   timer =0;
   pointer = loadImage("Images/pointer.png");
 
@@ -67,6 +76,7 @@ void play(){
   
   p = new Cursor(width / 2, height / 2);
 }
+
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
   if (cScore < 100) streak = 0;
@@ -127,8 +137,31 @@ void scoreSpinner(Spinner spinner) {
   } 
 }
 
-boolean end;
+
 void endScreen(){
+  if (!ran){
+    for(Circle c : circles){
+      if (c.getScore() == 300) three++;
+      if (c.getScore() == 100) one++;
+      if (c.getScore() == 50) fifty++;
+      if (c.getScore() == 0) miss++;
+    }
+    for(Slider s : sliders){
+      if (c.getScore() == 300) three++;
+      if (c.getScore() == 100) one++;
+      if (c.getScore() == 50) fifty++;
+      if (c.getScore() == 0) miss++;
+    }
+  
+    if (sp.getScore() == 300) three++;
+    if (sp.getScore() == 100) one++;
+    if (sp.getScore() == 50) fifty++;
+    if (sp.getScore() == 0) miss++;
+    
+    ran = true;
+  }
+  
+  
   text(mouseX+"", 50, 70);
   text(mouseY+"", 50, 100);
     
@@ -148,17 +181,19 @@ void endScreen(){
   
   textSize(40);
   text(score + "            "+ (int) (accuracy * 100) / 100.0  + "%", 70, 560);
-  text("300x", 150, 360);
-  text("100x", 150, 440);
-  text("50x", 390, 360);
-  text("X", 390, 440);
+  text(three, 150, 360);
+  text(one, 150, 440);
+  text(fifty, 390, 360);
+  text(miss, 390, 440);
+  
+  
   
   textSize(44);
   text("Streak        Accuracy" , 60, 510);
   
   String grade = "";
   println(accuracy);
-  if(accuracy > 98) grade = "S";
+  if(accuracy == 100) grade = "S";
   else if(accuracy > 90) grade = "A";
   else if(accuracy > 80) grade = "B";
   else if(accuracy > 70) grade = "C";
@@ -196,6 +231,7 @@ void displayClickies() {
   }
   if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
     scoreSpinner(sp);
+    
     sp.display();
   } else if (timer > sp.getEndTime()) {
     sp.display();
@@ -203,12 +239,9 @@ void displayClickies() {
     if (!dead.contains(sp)) dead.add(sp);
     if (!sp.checked()) scoreSpinner(sp);
   }
-  
-  
 }
 
 
-boolean pause;
 void keyPressed() {
   final int k = keyCode;
 
