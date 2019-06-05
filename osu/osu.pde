@@ -136,6 +136,7 @@ void displayClickies() {
       dead.add(c);
     }
   }
+  
   // display all sliders. Score them (for each tick) until they die)
   for(Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
