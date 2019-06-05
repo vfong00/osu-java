@@ -50,7 +50,7 @@ class Slider extends Circle implements Displayable{
   void initializeTicks() {
     float tickDist;
     int numTicks = ((int) len / 100) + 2;
-    if (numTicks > 2) tickDist = len / numTicks;
+    if (numTicks > 2) tickDist = len / (numTicks - 1);
     else tickDist = len;
     ticks = new SliderTick[numTicks];
     for(int i = 0; i < numTicks; i++) {
