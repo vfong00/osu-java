@@ -169,6 +169,27 @@ void endScreen(){
   rect(40,200,500,70,10);
   rect(40,300,500,300,10);
   
+  pushStyle();
+  stroke(204, 44, 113);
+  fill(255);
+  strokeWeight(5);
+  rect(575,510,180,80,5); //restart
+  rect(775,510,180,80,5); //exit
+  
+  fill(204, 44, 113);
+  textSize(40);
+  text("Replay", 605,565);
+  text("Exit", 825,565);
+  popStyle();
+  
+  if (mousePressed && (580 < mouseX && mouseX < 755) && (515 < mouseY && mouseY < 585)){
+   play();
+   screen.setMode(1);
+  }
+  if (mousePressed && (785 < mouseX && mouseX < 950) && 515 < mouseY && mouseY < 585){
+    screen.setMode(0);
+    dead.clear();
+  } 
   fill(255);
   textSize(50);
   text("Score           " + score, 50, 255);
