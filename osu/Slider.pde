@@ -1,5 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore;
+  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete;
   int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone;
@@ -48,13 +48,14 @@ class Slider extends Circle implements Displayable{
   }
 
   void initializeTicks() {
-    float tickDist;
     int numTicks = ((int) len / 100) + 2;
+    ticks = new SliderTick[numTicks];
+    
     if (numTicks > 2) tickDist = len / (numTicks - 1);
     else tickDist = len;
-    ticks = new SliderTick[numTicks];
-    for(int i = 0; i < numTicks; i++) {
-      boolean last = i == numTicks - 1;
+    
+    for(int i = 0; i < ticks.length; i++) {
+      boolean last = i == ticks.length - 1;
       ticks[i] = new SliderTick(start.x + (dir.normalize().x * tickDist * i), start.y + (dir.normalize().y * tickDist * i), last);
     }
   }
@@ -104,8 +105,8 @@ class Slider extends Circle implements Displayable{
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    
     line(start.x - (r/2)*cos(PI/2-angle), start.y-(r/2)*sin(PI/2-angle), end.x- (r/2)*cos(PI/2-angle), end.y-(r/2)*sin(PI/2-angle)); //top
+    line(start.x - (r/2)*cos(PI/2+angle), start.y+(r/2)*sin(PI/2+angle), end.x - (r/2)*cos(PI/2+angle), end.y+(r/2)*sin(PI/2+angle)); //bottom
     arc(start.x, start.y, r, r,  PI/2-angle, 3 * PI / 2 - angle);
     arc(end.x, end.y, r, r, 3 * (PI / 2 )- angle , 2*PI);
     arc(end.x, end.y, r, r, 0, PI/2-angle);
