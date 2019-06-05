@@ -33,6 +33,7 @@ void setup() {
 
 void play(){
   pause = false;
+  end= false;
   timer =0;
   pointer = loadImage("Images/pointer.png");
 
@@ -62,7 +63,8 @@ void play(){
   //sliders.add(j);
 
   sp = new Spinner(250, 650, 10);
-
+  clickies.add(sp);
+  
   p = new Cursor(width / 2, height / 2);
 }
 void scoreCircle(Circle circle) {
@@ -125,6 +127,40 @@ void scoreSpinner(Spinner spinner) {
   } 
 }
 
+boolean end;
+void endScreen(){
+  background(10);
+  text(mouseX+"", 50, 70);
+  text(mouseY+"", 50, 100);
+    
+  fill(204, 44, 113);
+  rect(40,200,500,70,10);
+  rect(40,300,500,350,10);
+  
+  fill(255);
+  textSize(50);
+  text("Score           " + 666, 50, 255);
+  
+  textSize(27);
+  text("300x", 60, 360);
+  text("100x", 60, 460);
+  text("50x", 320, 360);
+  text("X", 320, 460);
+  
+  textSize(40);
+  text("Streak          Accuracy" , 60, 580);
+  text("300x", 150, 360);
+  text("100x", 150, 460);
+  text("50x", 390, 360);
+  text("X", 390, 460);
+  
+  pushStyle();
+  stroke(204, 44, 113);
+  strokeWeight(20);
+  ellipse(770,400,350,350);
+  popStyle();
+  p.display();
+}
 
 void displayClickies() {
   // display all circles. When dead, score them.
@@ -149,8 +185,11 @@ void displayClickies() {
   } else if (timer > sp.getEndTime()) {
     sp.display();
     sp.setDead();
+    if (!dead.contains(sp)) dead.add(sp);
     if (!sp.checked()) scoreSpinner(sp);
   }
+  
+  
 }
 
 
@@ -221,11 +260,9 @@ void draw() {
   timer++;
   p.display();
   if (screen.getMode() == 0){
-     
-    screen.display();
+     screen.display();
      p.display();
-  }else if(screen.getMode() == 1 && !pause){
-
+  }else if(screen.getMode() == 1 && !pause && !end){
     displayClickies();
     accuracy = (float) rawScore * 100 / rawMaxScore;
     if (dead.size() == 0) accuracy = 0;
@@ -245,4 +282,11 @@ void draw() {
     if (mousePressed && 470 < mouseX && mouseX < 540 && 530 < mouseY && mouseY < 570) screen.setMode(0);
   }
   if (screen.getMode() == 3) exit();
+  text(clickies.size(), 500,40);
+  text(dead.size(), 500,60);
+  
+  if (clickies.size() == dead.size()){
+    end = true;
+    endScreen();
+  }
 }
