@@ -122,7 +122,7 @@ class Slider extends Circle implements Displayable{
     if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && (end.x - x > 1 || end.y - y > 1 )) {
+        if (!complete && (((reversesDone % 2 == 0) && (end.x - x > 1 || end.y - y > 1 )) || ((reversesDone % 2 == 1) && (start.x - x > 1 || start.y - y > 1 )))) {
           moveSlider(reversesDone);
         } else {
            if (numReverses != reversesDone) {
