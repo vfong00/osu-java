@@ -71,27 +71,27 @@ void play() {
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  a = new Circle(100, 400, 80, 0, 1);
+  a = new Circle(100, 400, 80, 50, 1);
   clickies.add(a);
   circles.add(a);
 
-  b = new Circle(250, 480, 80, 50, 2);
+  b = new Circle(250, 480, 80, 100, 2);
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(400, 600, 80, 100, 3);
+  c = new Circle(400, 600, 80, 150, 3);
   clickies.add(c);
   circles.add(c);
 
-  d = new Slider(500, 600, 600, 500, 80, 150, 4, 2);
+  d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
   clickies.add(d);
   sliders.add(d);
 
-  j = new Slider(550, 250, 900, 170, 80, 420, 5, 0);
+  j = new Slider(550, 250, 900, 170, 80, 470, 5, 0);
   clickies.add(j);
   sliders.add(j);
 
-  sp = new Spinner(700, 1000, 10);
+  sp = new Spinner(750, 1050, 10);
   spinners.add(sp);
   clickies.add(sp);
   

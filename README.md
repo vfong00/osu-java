@@ -7,17 +7,28 @@ And for more information, use the game's own info page: https://osu.ppy.sh/help/
 TL;DR Clicker rhythm game. <br/>
 This game currently features:
 - Clickable circles that disappear upon being clicked OR when the approach circle is on the circle.
-- Sliders that slide. They do so when being clicked (regardless of timing) or when the approach circle hits the object.
+- Sliders that slide. They can go in a linear fashion, from any point to another
 - Spinners that you need to spin rapidly to clear
-- Streak counting
-- Accuracy and score counters
-- Score integrated for all objects
+- A streak multiplier
+- Accuracy and score counters (that count all objects just like osu!)
 - Cool textures
-- An actual main menu???
+- A main menu with a help screen like osu!
+- Pausing the game, and being able to restart
 
 ## But like, how do you even start the game?
 You'll need Processing!
 Simply open osu.pde, and press the play button!
+
+## Known bugs
+Slider display is messed up when certain coordinates are greater than others.
+
+## To-do list (hopefully we don't get any more sick than we need to)
+- Hit sounds
+- Stacking clickies
+- Fixing the texture bug of sliders
+- A health system and failing
+- Linking it up to a song?
+- Mods?
 
 ## devlog
 ### weekend (5-18/19-19)
