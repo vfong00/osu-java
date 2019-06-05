@@ -7,6 +7,7 @@ int streak = 0;
 int score = 0;
 int rawScore = 0;
 int rawMaxScore = 0;
+int temp = 0;
 float accuracy = 0;
 
 int three = 0; //300s
@@ -70,25 +71,25 @@ void play() {
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  //a = new Circle(100, 400, 80, 0, 1);
-  //clickies.add(a);
-  //circles.add(a);
+  a = new Circle(100, 400, 80, 0, 1);
+  clickies.add(a);
+  circles.add(a);
 
-  //b = new Circle(250, 480, 80, 50, 2);
-  //clickies.add(b);
-  //circles.add(b);
+  b = new Circle(250, 480, 80, 50, 2);
+  clickies.add(b);
+  circles.add(b);
 
-  //c = new Circle(400, 600, 80, 100, 3);
-  //clickies.add(c);
-  //circles.add(c);
+  c = new Circle(400, 600, 80, 100, 3);
+  clickies.add(c);
+  circles.add(c);
 
-  d = new Slider(500, 600, 600, 500, 80, 10, 4, 2);
+  d = new Slider(500, 600, 600, 500, 80, 150, 4, 2);
   clickies.add(d);
   sliders.add(d);
 
-  //j = new Slider(550, 250, 900, 170, 80, 150, 5, false);
-  //clickies.add(j);
-  //sliders.add(j);
+  j = new Slider(550, 250, 900, 170, 80, 420, 5, 0);
+  clickies.add(j);
+  sliders.add(j);
 
   //sp = new Spinner(350, 650, 10);
   //spinners.add(sp);
@@ -210,9 +211,6 @@ void endScreen(){
     countClickyScores();
     ran = true;
   }
-  
-  text(mouseX + "", 50, 70);
-  text(mouseY + "", 50, 100);
     
   fill(204, 44, 113);
   rect(40,200,500,70,10);
@@ -251,7 +249,7 @@ void endScreen(){
   text("X", 320, 440);
   
   textSize(40);
-  text(streak + "x                  "+ (int) (accuracy * 100) / 100.0  + "%", 70, 560);
+  text(streak + "x                "+ (int) (accuracy * 100) / 100.0  + "%", 70, 560);
   text(three, 150, 360);
   text(one, 150, 440);
   text(fifty, 390, 360);
@@ -361,7 +359,6 @@ void draw() {
   background(10);
   noCursor();
   p.display();
-  text(screen.getMode(), 50, 160);
   if (screen.getMode() == 0) {
      screen.display();
      p.display();
@@ -393,8 +390,10 @@ void draw() {
   }
   if (screen.getMode() == 3) exit();
 
-  if (clickies.size() == dead.size() && clickies.size() != 0){
+  if (clickies.size() == dead.size() && clickies.size() != 0) {
+    if (!end) temp = millis();
     end = true;
-    endScreen();
+    if (millis() - temp > 1000) endScreen();
+    else displayClickies();
   }
 }

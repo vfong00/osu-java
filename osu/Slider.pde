@@ -2,7 +2,7 @@ class Slider extends Circle implements Displayable{
   float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete, forward;
-  int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone;
+  int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone, totalTicks;
   ApproachCircle c;
   SliderTick[] ticksForward, ticksBackward;
   PVector start, end, dir;
@@ -34,7 +34,6 @@ class Slider extends Circle implements Displayable{
 
     c = new ApproachCircle(x, y, 2.5 * r);
     this.len = dist(start.x, start.y, x1, y1);
-    print(len);
 
     dead = false;
     wasClicked = false;
@@ -97,9 +96,11 @@ class Slider extends Circle implements Displayable{
       if (isClicked()) {
         tickScore = 10;
         numTicked++;
+        totalTicks++;
         tick.setTicked(true);
       } else {
         tickScore = 0;
+        totalTicks++;
         tick.setAlive(false);
       }
       if (forward) firstNotTicked++;
@@ -227,10 +228,10 @@ class Slider extends Circle implements Displayable{
     if (initScore() > 1.6) score = -1;
     else score = 0;
     
-    // final calculation of ticks ticked to total number of ticks
-    if (((float) numTicked / (ticksForward.length * numReverses)) == 1.0) score += 3;
-    else if (((float) numTicked / (ticksForward.length * numReverses)) >= 0.5) score += 2;
-    else if (((float) numTicked / (ticksForward.length * numReverses)) > 0) score++;
+    // final calculation of ticks ticked to total number of tick
+    if (((float) numTicked / totalTicks) == 1.0) score += 3;
+    else if (((float) numTicked / totalTicks) >= 0.5) score += 2;
+    else if (((float) numTicked / totalTicks) > 0) score++;
 
     // conversion to 300/100/50/X system
     if (score == 3) score = 300;
