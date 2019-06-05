@@ -101,5 +101,6 @@ Simply open osu.pde, and press the play button!
 [V] Made them spin better visually </br>
 [A] Made in-game controls like pause, restart and exit as buttons and key presses. <br />
 [A] Made the exit and help menu with icons and explanations for in-game controls <br />
+[A] Edited and changed the image we use for cursor and its trail <br />
 [A] Made the end-game window that displays the score and calculates the grade <br />
 
