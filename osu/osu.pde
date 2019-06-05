@@ -91,9 +91,9 @@ void play() {
   clickies.add(j);
   sliders.add(j);
 
-  //sp = new Spinner(350, 650, 10);
-  //spinners.add(sp);
-  //clickies.add(sp);
+  sp = new Spinner(700, 1000, 10);
+  spinners.add(sp);
+  clickies.add(sp);
   
   p = new Cursor(width / 2, height / 2);
 }
