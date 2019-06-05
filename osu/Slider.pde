@@ -102,7 +102,8 @@ class Slider extends Circle implements Displayable{
         tickScore = 0;
         tick.setAlive(false);
       }
-      firstNotTicked++;
+      if (forward) firstNotTicked++;
+      else firstNotTicked--;
       lastTicked = tick.isEnd();
     } else {
       onTick = false;
@@ -161,6 +162,8 @@ class Slider extends Circle implements Displayable{
              updateTicks(forward);
              reversesDone++;
              moveSlider(reversesDone);
+             lastTicked = false;
+             firstNotTicked = 1;
            } else {
              dead = true;
            }
