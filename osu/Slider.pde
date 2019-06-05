@@ -1,13 +1,13 @@
 class Slider extends Circle implements Displayable{
   float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore;
   String num;
-  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, reverse, complete;
-  int firstNotTicked, numTicked, tickScore, shape;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete;
+  int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone;
   ApproachCircle c;
   SliderTick[] ticks, reverseTicks;
   PVector start, end, dir;
 
-  public Slider(float x, float y, float x1, float y1, float r, float startTime, int num, boolean reverse) {
+  public Slider(float x, float y, float x1, float y1, float r, float startTime, int num, int numReverses) {
     super(x, y, r, startTime, num);
 
     this.x = x;
@@ -22,53 +22,43 @@ class Slider extends Circle implements Displayable{
     dir = new PVector(x1 - x, y1 - y);
 
     this.r = r;
-    this.reverse = reverse;
+    this.numReverses = numReverses;
     this.num =  "" + num;
     
     firstNotTicked = 0;
     numTicked = 0;
+    reversesDone = 0;
     initScore = 2.5;
+    score = 2.5;
     timeDispScore = 255;
 
     c = new ApproachCircle(x, y, 2.5 * r);
-    this.len = dist(start.x,start.y,x1,y1);
+    this.len = dist(start.x, start.y, x1, y1);
     print(len);
-
-
-    if (reverse) {
-      ticks = new SliderTick[6];
-      /*for(int i = 1; i < ticks.length/2; i++){
-        ticks[i] = new SliderTick(start.x + 75 + i*100, start.y, false);
-      }
-      for(int i = ticks.length/2; i < ticks.length -1; i++){
-        ticks[i] = new SliderTick((end-75)-(i-3)*100, 600, false);
-      }*/
-      ticks[0] = new SliderTick(625, 600, false);
-      ticks[1] = new SliderTick(725, 600, false);
-      ticks[2] = new SliderTick(825, 600, false);
-      ticks[3] = new SliderTick(825, 600, false);
-      ticks[4] = new SliderTick(725, 600, false);
-      ticks[5] = new SliderTick(625, 600, true);
-    } else {
-      ticks = new SliderTick[3];
-      ticks[0] = new SliderTick(start.x + 80, y + dir.normalize().y * 90, false);
-      ticks[1] = new SliderTick(start.x + 80 +100, y+ dir.normalize().y * 190, false);
-      ticks[2] = new SliderTick(start.x + 80 + 200, y + dir.normalize().y * 290, true);
-    }
 
     dead = false;
     wasClicked = false;
-
     lastTicked = false;
     onTick = false;
     notChecked = true;
     complete = false;
     moving = false;
-
-    score = 2.5;
-    this.reverse = reverse;
+    
+    initializeTicks();
   }
 
+  void initializeTicks() {
+    float tickDist;
+    int numTicks = ((int) len / 100) + 2;
+    if (numTicks > 2) tickDist = len / numTicks;
+    else tickDist = len;
+    ticks = new SliderTick[numTicks];
+    for(int i = 0; i < numTicks; i++) {
+      boolean last = i == numTicks - 1;
+      ticks[i] = new SliderTick(start.x + (dir.normalize().x * tickDist * i), start.y + (dir.normalize().y * tickDist * i), last);
+    }
+    
+  }
 
   void displayClicky(boolean number){
     stroke(255);
@@ -84,21 +74,9 @@ class Slider extends Circle implements Displayable{
   }
 
   void displayTicks(SliderTick[] g) {
-      if (!reverse) {
-        for (int i = 0; i < g.length; i++) {
-          g[i].display();
-        }
-      } else {
-        if (complete) {
-          for (int i = 0; i < g.length; i++) {
-            g[i].display();
-          }
-        } else {
-          for (int i = 0; i < g.length/2; i++) {
-            g[i].display();
-          }
-        }
-      }
+    for(int i = 0; i < g.length; i++) {
+      g[i].display();
+    }
   }
 
   void checkTicked(SliderTick[] g){
@@ -144,12 +122,12 @@ class Slider extends Circle implements Displayable{
           x += dir.normalize().x * 2;
           y += dir.normalize().y * 2;
         } else {
-           if (!reverse) {
-             dead = true;
-           } else {
-             complete = true;
-             if (x > start.x) x -= dir.normalize().x ;
-           }
+           //if (!reverse) {
+           //  dead = true;
+           //} else {
+           //  complete = true;
+           //  if (x > start.x) x -= dir.normalize().x ;
+           //}
         }
         if (!lastTicked) checkTicked(ticks);
         else onTick = false;
@@ -232,7 +210,7 @@ class Slider extends Circle implements Displayable{
       funcSlider();
     } else {
       if (timeDispScore > 0) {
-        if (reverse) displayScore(x + 5, y + 5);
+        if (numReverses % 2 == 1) displayScore(x + 5, y + 5);
         else displayScore(x1 + 5, y1 + 5);
       }
     }

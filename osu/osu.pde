@@ -82,15 +82,15 @@ void play() {
   clickies.add(c);
   circles.add(c);
 
-  //d = new Slider(550, 600, 900, 600, 80, 150, 4, true);
-  //clickies.add(d);
-  //sliders.add(d);
+  d = new Slider(550, 600, 900, 600, 80, 150, 4, 1);
+  clickies.add(d);
+  sliders.add(d);
 
   //j = new Slider(550, 250, 900, 170, 80, 150, 5, false);
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(250, 650, 10);
+  sp = new Spinner(350, 650, 10);
   spinners.add(sp);
   clickies.add(sp);
   
@@ -282,16 +282,18 @@ void displayClickies() {
     scoreSlider(s);
     if (s.isDead() && !dead.contains(s)) dead.add(s);
   }
-  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
-    scoreSpinner(sp);
-    
-    sp.display();
-  } else if (timer > sp.getEndTime()) {
-    sp.display();
-    sp.setDead();
-    if (!dead.contains(sp)) dead.add(sp);
-    if (!sp.checked()) scoreSpinner(sp);
-  }
+  // display all spinnners while in their active period
+  //for(Spinner s : spinners) {
+  //  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
+  //  scoreSpinner(s);
+  //  s.display();
+  //  } else if (timer > s.getEndTime())  {
+  //    s.display();
+  //    s.setDead();
+  //    if (!dead.contains(s)) dead.add(s);
+  //    if (!sp.checked()) scoreSpinner(s);
+  //  }
+  //}
 }
 
 
