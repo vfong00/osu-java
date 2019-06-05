@@ -204,10 +204,11 @@ void endScreen(){
   pushStyle();
   stroke(204, 44, 113);
   strokeWeight(20);
-  ellipse(770,400,350,350);
+  ellipse(770,300,350,350);
   fill(204, 44, 113);
   textSize(370);
-  text(grade, 670,540);
+  text(grade, 660,440);
+  
   popStyle();
   p.display();
 }
