@@ -171,8 +171,8 @@ void endScreen(){
   strokeWeight(20);
   ellipse(770,400,350,350);
   fill(204, 44, 113);
-  textSize(380);
-  text(grade, 670,530);
+  textSize(370);
+  text(grade, 670,540);
   popStyle();
   p.display();
 }
@@ -297,9 +297,7 @@ void draw() {
     if (mousePressed && 470 < mouseX && mouseX < 540 && 530 < mouseY && mouseY < 570) screen.setMode(0);
   }
   if (screen.getMode() == 3) exit();
-  text(clickies.size(), 500,40);
-  text(dead.size(), 500,60);
-  
+
   if (clickies.size() == dead.size()){
     end = true;
     endScreen();
