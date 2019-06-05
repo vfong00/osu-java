@@ -226,11 +226,11 @@ class Slider extends Circle implements Displayable{
     // initial hit score; -1 and 0 are used for later tiering
     if (initScore() > 1.6) score = -1;
     else score = 0;
-
+    
     // final calculation of ticks ticked to total number of ticks
-    if (((float) numTicked / (ticksForward.length + (ticksForward.length - 1 * numReverses))) == 1.0) score += 3;
-    else if (((float) numTicked / (ticksForward.length + (ticksForward.length - 1 * numReverses))) >= 0.5) score += 2;
-    else if (((float) numTicked / (ticksForward.length + (ticksForward.length - 1 * numReverses))) > 0) score++;
+    if (((float) numTicked / (ticksForward.length * numReverses)) == 1.0) score += 3;
+    else if (((float) numTicked / (ticksForward.length * numReverses)) >= 0.5) score += 2;
+    else if (((float) numTicked / (ticksForward.length * numReverses)) > 0) score++;
 
     // conversion to 300/100/50/X system
     if (score == 3) score = 300;
