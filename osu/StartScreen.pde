@@ -15,10 +15,7 @@ class StartScreen {
         x = 325;
         drawOptions();
         drawCircle(x,y);
-        if (mousePressed && (570 < mouseX && x < 820) && (250 < mouseY && mouseY < 330)) {
-          start = true;
-          mode = 1;
-        }
+        if (mousePressed && (570 < mouseX && x < 820) && (250 < mouseY && mouseY < 330)) mode = 1;
         if (mousePressed && (585 < mouseX && x < 820) && (350 < mouseY && mouseY < 430)) mode = 3;
         if (mousePressed && (570 < mouseX && x < 820) && (450 < mouseY && mouseY < 530)) mode = 4;
       }
@@ -195,7 +192,7 @@ class StartScreen {
     return start;
   }
   
-  void setStart() {
-    start = false;
+  void setStart(boolean a) {
+    start = a;
   }
 }

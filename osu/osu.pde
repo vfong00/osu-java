@@ -62,7 +62,7 @@ void varReset() {
 
 void play() {
   varReset();
-  screen.setStart();
+  screen.setStart(false);
   pointer = loadImage("Images/pointer.png");
 
   clickies = new ArrayList<Object>();
@@ -363,18 +363,34 @@ void draw() {
      screen.display();
      p.display();
   } if (screen.getMode() == 1){
-    if (570 < mouseX && 250< mouseY && mouseY < 340){
+    /*if (570 < mouseX && 250< mouseY && mouseY < 340){
     rect(530,230,430,110,10);
-    if(mousePressed){
-         screen.setMode(1);
-      }
+    
     }else{
       rect(570,230,450,110,10);
     }
     if (570 < mouseX && 370< mouseY && mouseY < 460) rect(530,350,430,110,10);
-    else rect(570,350,450,110,10);
+    else rect(570,350,450,110,10);*/
+    if (570 < mouseX && 250< mouseY && mouseY < 340){
+      fill(204, 44, 113);
+      rect(530,230,500,110,10);
+      fill(255);
+      textSize(40);
+      text("Tutorial", 670,300);
+      if(mousePressed){
+         screen.setMode(2);
+         screen.setStart(true);
+      }
+    }else{
+      fill(204, 44, 113);
+      rect(570,230,450,110,10);
+      fill(255);
+      textSize(40);
+      text("Tutorial", 700,300);
+    }
+    p.display();
   } else if (screen.getMode() == 2 && !pause) {
-    if (first && screen.getStart()) screen.setStart();
+    if (first && screen.getStart()) screen.setStart(false);
     if (!end) { 
       first = false;
       timer++;
@@ -394,12 +410,12 @@ void draw() {
     }
   }
   pause();
-  if (screen.getMode() == 2) {
+  if (screen.getMode() == 3) {
     screen.helpMenu();
     p.display();
     if (mousePressed && 470 < mouseX && mouseX < 540 && 530 < mouseY && mouseY < 570) screen.setMode(0);
   }
-  if (screen.getMode() == 3) exit();
+  if (screen.getMode() == 4) exit();
 
   if (clickies.size() == dead.size() && clickies.size() != 0) {
     if (!end) temp = millis();
