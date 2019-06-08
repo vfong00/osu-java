@@ -354,7 +354,7 @@ void pause() {
       }
     }
 }
-
+int counter = 0;
 void draw() { 
   background(10);
   noCursor();
@@ -363,6 +363,7 @@ void draw() {
      screen.display();
      p.display();
   } if (screen.getMode() == 1){
+    counter ++;
     /*if (570 < mouseX && 250< mouseY && mouseY < 340){
     rect(530,230,430,110,10);
     
@@ -373,20 +374,20 @@ void draw() {
     else rect(570,350,450,110,10);*/
     if (570 < mouseX && 250< mouseY && mouseY < 340){
       fill(204, 44, 113);
-      rect(530,230,500,110,10);
+      rect(570,200,450,100,10);
       fill(255);
       textSize(40);
-      text("Tutorial", 670,300);
-      if(mousePressed){
+      text("Tutorial", 670,250);
+      if(mousePressed &&counter > 10){
          screen.setMode(2);
          screen.setStart(true);
       }
     }else{
       fill(204, 44, 113);
-      rect(570,230,450,110,10);
+      rect(590,200,450,100,10);
       fill(255);
       textSize(40);
-      text("Tutorial", 700,300);
+      text("Tutorial", 700,250);
     }
     p.display();
   } else if (screen.getMode() == 2 && !pause) {
