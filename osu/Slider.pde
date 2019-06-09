@@ -1,5 +1,5 @@
 class Slider extends Circle implements Displayable{
-  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist;
+  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist, angle;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete, forward;
   int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone, totalTicks;
@@ -31,6 +31,10 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     score = 2.5;
     timeDispScore = 255;
+    
+    PVector n = new PVector(10, 0);
+    this.angle = PVector.angleBetween(n,dir);
+    if (y1 > y) angle *= -1;
 
     c = new ApproachCircle(x, y, 2.5 * r);
     this.len = dist(start.x, start.y, x1, y1);
@@ -70,7 +74,7 @@ class Slider extends Circle implements Displayable{
     fill(20);
     ellipse(x,y,r-7,r-7);
  //<>//
-    drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
+    drawLinearGradientDisc(x, y, (r / 2) - 5, (r / 2) - 5, color(204, 44, 113), color(20,20,20));
     if (number){
       fill(255);
       text(num, x-12, y+5);
@@ -113,16 +117,17 @@ class Slider extends Circle implements Displayable{
 
   // buggy, only works when going from bottom left to top right.
   void drawSlider(){
-    PVector n = new PVector(10, 0);
-    float angle = PVector.angleBetween(n,dir);
+    println((angle / (2 * PI)) * 360);
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start.x - (r/2)*cos(PI/2-angle), start.y-(r/2)*sin(PI/2-angle), end.x- (r/2)*cos(PI/2-angle), end.y-(r/2)*sin(PI/2-angle)); //top
-    line(start.x - (r/2)*cos(PI/2+angle), start.y+(r/2)*sin(PI/2+angle), end.x - (r/2)*cos(PI/2+angle), end.y+(r/2)*sin(PI/2+angle)); //bottom
-    arc(start.x, start.y, r, r,  PI/2-angle, 3 * PI / 2 - angle);
-    arc(end.x, end.y, r, r, 3 * (PI / 2 )- angle , 2*PI);
-    arc(end.x, end.y, r, r, 0, PI/2-angle);
+    //if ((angle > 0 && angle < 90 ||
+    // lines that make up sides of slider
+    line(start.x + (r / 2) * cos((PI / 2) - angle), start.y + (r / 2) * sin((PI / 2) - angle), end.x + (r / 2) * cos((PI / 2) - angle), end.y + (r / 2) * sin((PI / 2) - angle)); // top
+    line(start.x + (r / 2) * cos((PI / 2) + angle), start.y - (r / 2) * sin((PI / 2) + angle), end.x + (r / 2) * cos((PI / 2) + angle), end.y - (r / 2) * sin((PI / 2) + angle)); // bottom
+    // arcs at end of sliders
+    arc(start.x, start.y, r, r, (PI / 2) - angle, (3 * PI / 2) - angle);
+    arc(end.x, end.y, r, r, (3 * PI / 2) - angle , (2 * PI) + (PI / 2) - angle);
     noStroke();
     fill(20);
   }
@@ -259,5 +264,3 @@ class Slider extends Circle implements Displayable{
     }
   }
 }
-
-// make sure this works right

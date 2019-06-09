@@ -71,29 +71,29 @@ void play() {
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  a = new Circle(100, 400, 80, 50, 1);
-  clickies.add(a);
-  circles.add(a);
+  //a = new Circle(100, 400, 80, 50, 1);
+  //clickies.add(a);
+  //circles.add(a);
 
-  b = new Circle(250, 480, 80, 100, 2);
-  clickies.add(b);
-  circles.add(b);
+  //b = new Circle(250, 480, 80, 100, 2);
+  //clickies.add(b);
+  //circles.add(b);
 
-  c = new Circle(400, 600, 80, 150, 3);
-  clickies.add(c);
-  circles.add(c);
+  //c = new Circle(400, 600, 80, 150, 3);
+  //clickies.add(c);
+  //circles.add(c);
 
-  d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
+  d = new Slider(500, 600, 600, 500, 80, 0, 4, 5);
   clickies.add(d);
   sliders.add(d);
 
-  j = new Slider(550, 250, 900, 170, 80, 470, 5, 0);
-  clickies.add(j);
-  sliders.add(j);
+  //j = new Slider(550, 250, 900, 170, 80, 470, 5, 0);
+  //clickies.add(j);
+  //sliders.add(j);
 
-  sp = new Spinner(750, 1050, 10);
-  spinners.add(sp);
-  clickies.add(sp);
+  //sp = new Spinner(750, 1050, 10);
+  //spinners.add(sp);
+  //clickies.add(sp);
   
   p = new Cursor(width / 2, height / 2);
 }
@@ -266,13 +266,13 @@ void endScreen(){
 void displayClickies() {
   // display all circles. When dead, score them.
   textSize(32);
-  for(Circle c : circles){
-    if (timer > c.getStartTime()) c.display();
-    if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
-      scoreCircle(c);
-      dead.add(c);
-    }
-  }
+  //for(Circle c : circles){
+  //  if (timer > c.getStartTime()) c.display();
+  //  if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
+  //    scoreCircle(c);
+  //    dead.add(c);
+  //  }
+  //}
   
   // display all sliders. Score them (for each tick) until they die)
   for(Slider s : sliders){
@@ -281,17 +281,17 @@ void displayClickies() {
     if (s.isDead() && !dead.contains(s)) dead.add(s);
   }
   // display all spinnners while in their active period
-  for(Spinner s : spinners) {
-    if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
-    scoreSpinner(s);
-    s.display();
-    } else if (timer > s.getEndTime())  {
-      s.display();
-      s.setDead();
-      if (!dead.contains(s)) dead.add(s);
-      if (!sp.checked()) scoreSpinner(s);
-    }
-  }
+  //for(Spinner s : spinners) {
+  //  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
+  //  scoreSpinner(s);
+  //  s.display();
+  //  } else if (timer > s.getEndTime())  {
+  //    s.display();
+  //    s.setDead();
+  //    if (!dead.contains(s)) dead.add(s);
+  //    if (!sp.checked()) scoreSpinner(s);
+  //  }
+  //}
 }
 
 
