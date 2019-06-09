@@ -5,7 +5,7 @@ public class Spinner extends Thing {
   PImage spinnerPhoto;
   
   Spinner(float startTime, float endTime, int quota) {
-    super(width / 2, height / 2);
+    super(500, 400);
     this.startTime = startTime;
     this.endTime = endTime;
     this.spinnerPhoto = loadImage("Images/spinner-circle@2x.png");

@@ -87,47 +87,47 @@ void play() {
   clickies.add(a);
   circles.add(a);
 
-  b = new Circle(495, 175, 80, 100, 2);
+  b = new Circle(495, 175, 80, 75, 2);
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(645, 620, 80, 150, 3);
+  c = new Circle(645, 620, 80, 100, 3);
   clickies.add(c);
   circles.add(c);
   
-  d = new Circle(260, 350, 80, 200, 4);
+  d = new Circle(260, 350, 80, 125, 4);
   clickies.add(d);
   circles.add(d);
   
-  e = new Circle(730, 350, 80, 250, 5);
+  e = new Circle(730, 350, 80, 150, 5);
   clickies.add(e);
   circles.add(e);
  
-  sp = new Spinner(300, 600, 10);
+  sp = new Spinner(200, 400, 10);
   spinners.add(sp);
   clickies.add(sp);
   
-  f = new Circle(300, 600, 80, 750, 6);
+  f = new Circle(300, 600, 80, 375, 6);
   clickies.add(f);
   circles.add(f);
   
-  g = new Circle(300, 250, 80, 800, 7);
+  g = new Circle(300, 250, 80, 450, 7);
   clickies.add(g);
   circles.add(g);
   
-   h = new Circle(650, 600, 80, 850, 8);
+   h = new Circle(650, 600, 80, 475, 8);
    clickies.add(h);
    circles.add(h);
   
-   i = new Circle(500, 400, 80, 900, 9);
+   i = new Circle(500, 400, 80, 500, 9);
    clickies.add(i);
    circles.add(i);
    
-   j = new Circle(650, 250, 80, 950, 10);
+   j = new Circle(650, 250, 80, 525, 10);
    clickies.add(j);
    circles.add(j);
    
-   k = new Circle(650, 150, 80, 1000, 10);
+   k = new Circle(650, 150, 80, 550, 10);
    clickies.add(k);
    circles.add(k);
   
