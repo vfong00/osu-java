@@ -18,14 +18,24 @@ int miss = 0; //misses
 
 StartScreen screen;
 PImage pointer;
+PImage marisa;
 
 Circle a;
 Circle b;
 Circle c;
-Slider d;
+Circle d;
+Circle e;
 Spinner sp;
 Cursor p;
-Slider j;
+//Slider j;
+Circle f;
+Circle g;
+Circle h;
+Circle i;
+Circle j;
+Circle k;
+Circle l;
+Circle m;
 
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
@@ -65,25 +75,60 @@ void play() {
   varReset();
   screen.setStart(false);
   pointer = loadImage("Images/pointer.png");
-
+  marisa = loadImage("Images/marisa.png");
+  
   clickies = new ArrayList<Object>();
   circles = new ArrayList<Circle>();
   sliders = new ArrayList<Slider>();
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  a = new Circle(100, 400, 80, 50, 1);
+  a = new Circle(345, 620, 80, 50, 1);
   clickies.add(a);
   circles.add(a);
 
-  b = new Circle(250, 480, 80, 100, 2);
+  b = new Circle(495, 175, 80, 100, 2);
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(400, 600, 80, 150, 3);
+  c = new Circle(645, 620, 80, 150, 3);
   clickies.add(c);
   circles.add(c);
-
+  
+  d = new Circle(260, 350, 80, 200, 4);
+  clickies.add(d);
+  circles.add(d);
+  
+  e = new Circle(730, 350, 80, 250, 5);
+  clickies.add(e);
+  circles.add(e);
+ 
+  sp = new Spinner(300, 600, 10);
+  spinners.add(sp);
+  clickies.add(sp);
+  
+  f = new Circle(300, 600, 80, 650, 6);
+  clickies.add(f);
+  circles.add(f);
+  
+  g = new Circle(300, 250, 80, 700, 7);
+  clickies.add(g);
+  circles.add(g);
+  
+   h = new Circle(650, 600, 80, 725, 8);
+   clickies.add(h);
+   circles.add(h);
+  
+   i = new Circle(500, 400, 80, 750, 9);
+   clickies.add(i);
+   circles.add(i);
+   
+   j = new Circle(650, 250, 80, 775, 10);
+   clickies.add(j);
+   circles.add(j);
+  
+  
+/*
   d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
   clickies.add(d);
   sliders.add(d);
@@ -92,9 +137,7 @@ void play() {
   clickies.add(j);
   sliders.add(j);
 
-  sp = new Spinner(750, 1050, 10);
-  spinners.add(sp);
-  clickies.add(sp);
+  */
   
   p = new Cursor(width / 2, height / 2);
 }
@@ -356,53 +399,128 @@ void pause() {
     }
 }
 
-void draw() { 
-  background(10);
-  noCursor();
-  p.display();
-  if (screen.getMode() == 0) {
-     screen.display();
-     p.display();
-     counter = 0;
-  } if (screen.getMode() == 1){
-    counter ++;
-
-    textSize(37);
-
+void drawSongs(){
+  textSize(37);
+  noStroke();
     if (570 < mouseX && 200< mouseY && mouseY < 300){
+      
+      //drawing osu logo
+      fill(255,255,255,100);
+      ellipse(300,400,500,500);
+      fill(20);
+      ellipse(300,400,460,460);
+      fill(255,255,255,100);
+      ellipse(300,400,430,430);
+      fill(10);
+      textSize(200);
+      text("osu!", 90,450);
+      
+      noStroke();
+      textSize(30);
+      fill(255,255,255);
+      
+      noStroke();
+      
+      pushStyle();
+      
+      
+      
       fill(204, 44, 113);
       rect(570,200,450,100,10);
       fill(255);
+      textSize(40);
       text("Tutorial", 700,260);
       if(mousePressed &&counter > 10){
          screen.setMode(2);
          screen.setStart(true);
-}
-      }else{
-        fill(204, 44, 113);
-        rect(590,200,450,100,10);
-        fill(255);
-        text("Tutorial", 730,260);
       }
+      
+      //draws upper bar
+      fill(204, 44, 113,100);
+      noStroke();
+      rect(0,0,1000,100);
+      strokeWeight(5);
+      stroke(255);
+      line(0,100,1000,100);
+      
+      fill(255);
+      text("osu! Tutorial", 30,90);
+      popStyle();
+    }
     
     if (570 < mouseX && 350< mouseY && mouseY < 450){
+      marisa.resize(1000,800);
+      background(marisa);
+      //text("Silver Forest - Marisa Spark", 30,50);
+      
+      
+      
       fill(204, 44, 113);
       rect(570,320,450,100,10);
       fill(255);
       text("Silver Forest", 670,365);
       text("Marisa Spark", 670,395);
+      
+      pushStyle();
+      fill(204, 44, 113,100);
+      noStroke();
+      rect(0,0,1000,100);
+      strokeWeight(5);
+      stroke(255);
+      line(0,100,1000,100);
+      
+      noStroke();
+      textSize(30);
+      fill(255,255,255);
+      text("Silver Forest - Marisa Spark", 30,90);
+      
+      popStyle();
+      
+      
       /*/if(mousePressed &&counter > 10){
          screen.setMode(2);
          screen.setStart(true);
       }*/
-    }else{
+    }
+    
+      
+      fill(204, 44, 113);
+      rect(590,200,450,100,10);
+      fill(255);
+      text("Tutorial", 730,260);
+        
       fill(204, 44, 113);
       rect(590,320,450,100,10);
       fill(255);
  
       text("Silver Forest", 700,365);
       text("Marisa Spark", 700,395);
-    }
+      
+      fill(204, 44, 113,100);
+      noStroke();
+      rect(0,0,1000,100);
+      strokeWeight(5);
+      stroke(255);
+      line(0,100,1000,100);
+      
+    
+}
+
+void draw() { 
+  background(10);
+  noCursor();
+  p.display();
+  /*
+  if (screen.getMode() == 0) {
+     screen.display();
+     p.display();
+     counter = 0;
+  } if (screen.getMode() == 1){
+    counter ++;
+    
+    
+    
+    drawSongs();
     p.display();
   } else if (screen.getMode() == 2 && !pause) {
     if (first && screen.getStart()) screen.setStart(false);
@@ -437,5 +555,18 @@ void draw() {
     end = true;
     if (millis() - temp > 1000) endScreen();
     else displayClickies();
-  }
+  }*/
+  timer++;
+      displayClickies();
+      accuracy = (float) rawScore * 100 / rawMaxScore;
+      if (dead.size() == 0) accuracy = 0;
+      fill(255);
+      p.display();
+  
+      // text(timer + "", 50, 160);
+      textSize(32);
+      text("Streak: " + streak + "x", 15, 790);
+      text("Score: " + score, 770, 35);
+      text("Accuracy: " + (int) (accuracy * 100) / 100.0  + "%", 725, 65);
+  
 }
