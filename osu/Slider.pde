@@ -94,9 +94,9 @@ class Slider extends Circle implements Displayable{
   }
 
   void checkTicked(SliderTick[] g){
+    text(firstNotTicked, 50, 160);
     SliderTick tick = g[firstNotTicked];
-    if (dist(x,y, tick.getX(), tick.getY()) < r/4) {
-      onTick = true;
+    if (dist(x,y, tick.getX(), tick.getY()) < 1) {
       if (isClicked()) {
         tickScore = 10;
         numTicked++;
@@ -110,6 +110,7 @@ class Slider extends Circle implements Displayable{
       if (forward) firstNotTicked++;
       else firstNotTicked--;
       lastTicked = tick.isEnd();
+      onTick = true;
     } else {
       onTick = false;
     }
@@ -160,26 +161,23 @@ class Slider extends Circle implements Displayable{
     if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        // if it is not at the end of a slider
-        println("(" + forward + " && (" + (Math.abs(end.x - x) < 1) + " && " + (Math.abs(end.y - y) < 1) + ")) || " + "(" 
-                    + !forward + " && (" + (Math.abs(start.x - x) < 1) + " && " + (Math.abs(start.y - y) < 1) + "))");
+        // if it is at the end of a slider
         if ( ( forward && ( (Math.abs(end.x - x) < 1) && (Math.abs(end.y - y) < 1) ) ) || 
              ( !forward && ( (Math.abs(start.x - x) < 1) && (Math.abs(start.y - y) < 1) ) )
            ) {
           atEnd = true;
           moveSlider(reversesDone);
+          firstNotTicked = 1;
         } else {
-          println(numReverses + ", " + reversesDone);
            if (numReverses != reversesDone) {
              if (atEnd) {
                forward = !forward;
-               updateTicks(forward);
                reversesDone++;
              }
+             updateTicks(forward);
              moveSlider(reversesDone);
              atEnd = false;
              lastTicked = false;
-             firstNotTicked = 1;
            } else {
              dead = true;
            }

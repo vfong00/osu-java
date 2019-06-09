@@ -83,7 +83,7 @@ void play() {
   //clickies.add(c);
   //circles.add(c);
 
-  d = new Slider(600, 500, 500, 400, 80, 0, 4, 5);
+  d = new Slider(600, 500, 475, 375, 80, 0, 4, 5);
   clickies.add(d);
   sliders.add(d);
 
