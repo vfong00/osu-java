@@ -158,7 +158,7 @@ void play() {
    clickies.add(q);
    circles.add(q);
   
-   sp1 = new Spinner(1000, 1200, 50);
+   sp1 = new Spinner(900, 1200, 10);
    spinners.add(sp1);
    clickies.add(sp1);
 /*
@@ -359,7 +359,7 @@ void displayClickies() {
   }
   // display all spinnners while in their active period
   for(Spinner s : spinners) {
-    if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
+    if (timer > s.getStartTime() && timer < s.getEndTime()) {
     scoreSpinner(s);
     s.display();
     } else if (timer > s.getEndTime())  {
