@@ -26,6 +26,7 @@ Circle c;
 Circle d;
 Circle e;
 Spinner sp;
+Spinner sp1;
 Cursor p;
 //Slider j;
 Circle f;
@@ -113,7 +114,7 @@ void play() {
   spinners.add(sp);
   clickies.add(sp);
   
-  f = new Circle(300, 600, 80, 375, 6);
+  f = new Circle(300, 600, 80, 425, 6);
   clickies.add(f);
   circles.add(f);
   
@@ -157,6 +158,9 @@ void play() {
    clickies.add(q);
    circles.add(q);
   
+   sp1 = new Spinner(1000, 1200, 50);
+   spinners.add(sp1);
+   clickies.add(sp1);
 /*
   d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
   clickies.add(d);
@@ -586,6 +590,7 @@ void draw() {
     else displayClickies();
   }*/
   timer++;
+      text("timer: " + timer + "x", 100, 100);
       displayClickies();
       accuracy = (float) rawScore * 100 / rawMaxScore;
       if (dead.size() == 0) accuracy = 0;
