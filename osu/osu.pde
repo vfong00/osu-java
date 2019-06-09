@@ -83,7 +83,7 @@ void play() {
   //clickies.add(c);
   //circles.add(c);
 
-  d = new Slider(500, 600, 600, 500, 80, 0, 4, 5);
+  d = new Slider(600, 500, 500, 400, 80, 0, 4, 5);
   clickies.add(d);
   sliders.add(d);
 
@@ -369,7 +369,7 @@ void draw() {
       timer++;
       displayClickies();
       accuracy = (float) rawScore * 100 / rawMaxScore;
-      if (dead.size() == 0) accuracy = 0;
+      if (dead.size() == 0) accuracy = 100;
       fill(255);
       p.display();
   

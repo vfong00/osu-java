@@ -1,7 +1,7 @@
 class Slider extends Circle implements Displayable{
   float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist, angle;
   String num;
-  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete, forward;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, forward, atEnd;
   int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone, totalTicks;
   ApproachCircle c;
   SliderTick[] ticksForward, ticksBackward;
@@ -43,8 +43,8 @@ class Slider extends Circle implements Displayable{
     wasClicked = false;
     lastTicked = false;
     onTick = false;
+    atEnd = false;
     notChecked = true;
-    complete = false;
     moving = false;
     forward = true;
     
@@ -117,7 +117,6 @@ class Slider extends Circle implements Displayable{
 
   // buggy, only works when going from bottom left to top right.
   void drawSlider(){
-    println((angle / (2 * PI)) * 360);
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
@@ -133,6 +132,7 @@ class Slider extends Circle implements Displayable{
   }
   
   void moveSlider(int reverse) {
+    // println(reverse);
     x += ((int) Math.pow(-1, reverse)) * dir.normalize().x * 2;
     y += ((int) Math.pow(-1, reverse)) * dir.normalize().y * 2;
   }
@@ -160,14 +160,24 @@ class Slider extends Circle implements Displayable{
     if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && (((reversesDone % 2 == 0) && (end.x - x > 1 || end.y - y > 1 )) || ((reversesDone % 2 == 1) && (start.x - x > 1 || start.y - y > 1 )))) {
+        // if it is not at the end of a slider
+        println("(" + forward + " && (" + (Math.abs(end.x - x) < 1) + " && " + (Math.abs(end.y - y) < 1) + ")) || " + "(" 
+                    + !forward + " && (" + (Math.abs(start.x - x) < 1) + " && " + (Math.abs(start.y - y) < 1) + "))");
+        if ( ( forward && ( (Math.abs(end.x - x) < 1) && (Math.abs(end.y - y) < 1) ) ) || 
+             ( !forward && ( (Math.abs(start.x - x) < 1) && (Math.abs(start.y - y) < 1) ) )
+           ) {
+          atEnd = true;
           moveSlider(reversesDone);
         } else {
+          println(numReverses + ", " + reversesDone);
            if (numReverses != reversesDone) {
-             forward = !forward;
-             updateTicks(forward);
-             reversesDone++;
+             if (atEnd) {
+               forward = !forward;
+               updateTicks(forward);
+               reversesDone++;
+             }
              moveSlider(reversesDone);
+             atEnd = false;
              lastTicked = false;
              firstNotTicked = 1;
            } else {
