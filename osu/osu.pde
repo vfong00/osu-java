@@ -126,8 +126,10 @@ void scoreSlider(Slider slider) {
   }
   // check if on tick, and score appropiately
   if (!slider.isDead() && slider.onTick()) {
-    score += 10;
-    if (slider.tickScore() == 10) streak++;
+    if (slider.tickScore() == 10) {
+      score += 10;
+      streak++;
+    }
     else if (slider.tickScore() == 0 && !slider.lastTicked()) streak = 0;
   }
   // when slider ends, calculate the end score based on the amount of ticks ticked and add it.
