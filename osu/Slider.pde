@@ -113,7 +113,6 @@ class Slider extends Circle implements Displayable{
     } else {
       onTick = false;
     }
-    println(numTicked);
   }
 
   void drawSlider(){
@@ -164,7 +163,8 @@ class Slider extends Circle implements Displayable{
            ) {
           atEnd = true;
           moveSlider(reversesDone);
-          firstNotTicked = 1;
+          if (!forward) firstNotTicked = 1;
+          else firstNotTicked = 4;
         } else {
            if (numReverses != reversesDone) {
              if (atEnd) {
