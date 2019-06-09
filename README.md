@@ -120,3 +120,13 @@ Slider display is messed up when certain coordinates are greater than others.
 [V] Cosmetic changes, making certain things neater (both while playing game + while reading code) <br />
 [V] Slight optimization (main menu a little slow still) <br />
 [V] Reworked slider ticks to be more modular
+
+### 6-6-19
+[V] died (sick and went to doctor)
+
+### 6-7-19
+[V] Fixed some of the slider prints.
+
+### 6-8-19
+[V] Finished slider printing
+[V] Made health system.
