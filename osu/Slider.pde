@@ -94,7 +94,6 @@ class Slider extends Circle implements Displayable{
   }
 
   void checkTicked(SliderTick[] g){
-    text(firstNotTicked, 50, 160);
     SliderTick tick = g[firstNotTicked];
     if (dist(x,y, tick.getX(), tick.getY()) < 1) {
       if (isClicked()) {
@@ -114,14 +113,13 @@ class Slider extends Circle implements Displayable{
     } else {
       onTick = false;
     }
+    println(numTicked);
   }
 
-  // buggy, only works when going from bottom left to top right.
   void drawSlider(){
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    //if ((angle > 0 && angle < 90 ||
     // lines that make up sides of slider
     line(start.x + (r / 2) * cos((PI / 2) - angle), start.y + (r / 2) * sin((PI / 2) - angle), end.x + (r / 2) * cos((PI / 2) - angle), end.y + (r / 2) * sin((PI / 2) - angle)); // top
     line(start.x + (r / 2) * cos((PI / 2) + angle), start.y - (r / 2) * sin((PI / 2) + angle), end.x + (r / 2) * cos((PI / 2) + angle), end.y - (r / 2) * sin((PI / 2) + angle)); // bottom
@@ -133,7 +131,6 @@ class Slider extends Circle implements Displayable{
   }
   
   void moveSlider(int reverse) {
-    // println(reverse);
     x += ((int) Math.pow(-1, reverse)) * dir.normalize().x * 2;
     y += ((int) Math.pow(-1, reverse)) * dir.normalize().y * 2;
   }
@@ -173,8 +170,8 @@ class Slider extends Circle implements Displayable{
              if (atEnd) {
                forward = !forward;
                reversesDone++;
+               updateTicks(forward);
              }
-             updateTicks(forward);
              moveSlider(reversesDone);
              atEnd = false;
              lastTicked = false;
