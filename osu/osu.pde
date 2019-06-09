@@ -36,6 +36,12 @@ Circle j;
 Circle k;
 Circle l;
 Circle m;
+Circle n;
+Circle o;
+Circle q;
+Circle r;
+Circle s;
+Circle t;
 
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
@@ -130,7 +136,26 @@ void play() {
    k = new Circle(650, 150, 80, 550, 10);
    clickies.add(k);
    circles.add(k);
+   
+   l = new Circle(575, 200, 80, 600, 10);
+   clickies.add(l);
+   circles.add(l);
+   
+   m = new Circle(500, 150, 80, 650, 10);
+   clickies.add(m);
+   circles.add(m);
   
+   n = new Circle(425, 200, 80, 700, 10);
+   clickies.add(n);
+   circles.add(n);
+   
+   o = new Circle(350, 150, 80, 750, 10);
+   clickies.add(o);
+   circles.add(o);
+   
+   q = new Circle(275, 200, 80, 800, 10);
+   clickies.add(q);
+   circles.add(q);
   
 /*
   d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
