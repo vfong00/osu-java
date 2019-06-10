@@ -505,11 +505,11 @@ void tutorial(){
     tCircle.display();
   }else{
     if(!tSlider.isDead()){
-      text("Introducting the slider.", 425,350);
+      text("Introducting the slider.", 425,250);
       text("Click and hold on the head of the slider as the approach circle closes in!", 200,300);
       tSlider.display();
     }else{
-      text("Now, let's reverse the direction", 350,350);
+      text("Now, let's reverse the direction", 350,250);
       text("When the circle reaches the other side, change direction.", 250,300);
       tSliderRev.display();
     }
