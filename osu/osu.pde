@@ -223,7 +223,7 @@ void play() {
   xd = new HealthBar(500, 1);
 
   tCircle = new Circle(500, 400, 100, 50, 1);
-  tSlider = new Slider(300, 400, 700, 400, 80, 790, 2, 0);
+  tSlider = new Slider(300, 400, 700, 400, 80, 790, 2, 1);
   tSliderRev = new Slider(300, 400, 700, 400, 80, 790, 3, 2);
   tSpinner = new Spinner(500, 650, 10);
 
