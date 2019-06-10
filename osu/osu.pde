@@ -18,6 +18,7 @@ int fifty = 0; //50s
 int miss = 0; //misses
 
 StartScreen screen;
+HealthBar xd;
 PImage pointer;
 PImage marisa;
 SoundFile file;
@@ -222,8 +223,8 @@ void play() {
   xd = new HealthBar(500, 1);
 
   tCircle = new Circle(500, 400, 100, 50, 1);
-  tSlider= new Slider(300, 400,700,400, 80, 790, 2, 0);
-  tSliderRev = new Slider(300, 400,700,400, 80, 790, 3, 2);
+  tSlider = new Slider(300, 400, 700, 400, 80, 790, 2, 0);
+  tSliderRev = new Slider(300, 400, 700, 400, 80, 790, 3, 2);
   tSpinner = new Spinner(500, 650, 10);
 
 }
@@ -442,16 +443,7 @@ void displayClickies() {
       if (!dead.contains(s)) dead.add(s);
       if (!sp.checked()) scoreSpinner(s);
     }
-  }
-    scoreSpinner(s);
-    s.display();
-    } else if (timer > s.getEndTime())  {
-      s.display();
-      s.setDead();
-      if (!dead.contains(s)) dead.add(s);
-      if (!sp.checked()) scoreSpinner(s);
-    }
-  }
+  } 
 }
 
 
@@ -526,28 +518,24 @@ void pause(boolean dead) {
 
 void tutorial(){
   background(10);
-  if(!tCircle.isDead()){
-    fill (255);
+  if (!tCircle.isDead()) {
+    fill(255);
     text("Introducting the hit circle.", 375,250);
     text("Click on the circle as the approach circle closes in!", 275,300);
     tCircle.display();
-  }else{
-    if(!tSlider.isDead()){
-      text("Introducting the slider.", 425,250);
-      text("Click and hold on the head of the slider as the approach circle closes in!", 200,300);
-      tSlider.display();
-    }else{if (!tSliderRev.isDead()){
-        text("Now, let's reverse the direction", 350,250);
-        text("When the circle reaches the other side, change direction.", 225,300);
-        tSliderRev.display();
-      }else{
-        text("Introducing the spinner", 400,250);
-        text("You hold and drag your cursor rapidly!", 325,300);
-        tSpinner.display();
-      }
-    }
+  }else if (!tSlider.isDead()) {
+    text("Introducting the slider.", 425,250);
+    text("Click and hold on the head of the slider as the approach circle closes in!", 200,300);
+    tSlider.display();
+  }else if (!tSliderRev.isDead()) {
+    text("Now, let's reverse the direction", 350,250);
+    text("When the circle reaches the other side, change direction.", 225,300);
+    tSliderRev.display();
+  } else {
+    text("Introducing the spinner", 400,250);
+    text("You hold and drag your cursor rapidly!", 325,300);
+    tSpinner.display();
   }
-
 }
 
 void drawSongs(){
