@@ -89,7 +89,7 @@ class Circle implements Displayable {
   
   boolean isDead() {
     if (!dead){
-      clicked = dist(mouseX, mouseY, this.x, this.y) < r && mousePressed;
+      clicked = dist(mouseX, mouseY, this.x, this.y) < r/2 && mousePressed;
       if (clicked) {
         score = c.getRadius() / r;
       }
