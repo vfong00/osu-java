@@ -1,9 +1,11 @@
 class HealthBar {
   float degenRate, health, maxHealth;
+  boolean dead;
   public HealthBar(float health, float degenRate) {
     this.health = health;
     maxHealth = health;
     this.degenRate = degenRate;
+    dead = false;
   }
   
   void display() {
@@ -18,7 +20,10 @@ class HealthBar {
   
   void fillHealth() {
     health -= degenRate;
-    if (health < 0) health = 0;
+    if (health < 0) {
+      dead = true;
+      health = 0;
+    }
     fill(255);
     rect(40, 20, health, 10);
   }
@@ -27,8 +32,12 @@ class HealthBar {
     return health;
   }
   
-  void addHealth(float add) {
+  void changeHealth(float add) {
     health += add;
     if (health > maxHealth) health = maxHealth;
+    if (health < 0) {
+      dead = true;
+      health = 0;
+    }
   }
 }
