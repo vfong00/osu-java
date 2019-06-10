@@ -508,10 +508,15 @@ void tutorial(){
       text("Introducting the slider.", 425,250);
       text("Click and hold on the head of the slider as the approach circle closes in!", 200,300);
       tSlider.display();
-    }else{
-      text("Now, let's reverse the direction", 350,250);
-      text("When the circle reaches the other side, change direction.", 250,300);
-      tSliderRev.display();
+    }else{if (!tSliderRev.isDead()){
+        text("Now, let's reverse the direction", 350,250);
+        text("When the circle reaches the other side, change direction.", 225,300);
+        tSliderRev.display();
+      }else{
+        text("Introducing the spinner", 350,250);
+        text("You hold and drag your cursor rapidly!", 250,300);
+        tSpinner.display();
+      }
     }
   }
   
