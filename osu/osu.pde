@@ -33,10 +33,7 @@ ArrayList<Slider> sliders;
 ArrayList<Spinner> spinners;
 ArrayList<Object> dead;
 
-boolean ran;
-boolean end;
-boolean pause;
-boolean first;
+boolean ran, end, pause, first, over;
 
 void setup() {
   size(1000, 800);
@@ -49,6 +46,7 @@ void varReset() {
   pause = false;
   end = false;
   ran = false;
+  over = false;
   timer = 0;
   score = 0;
   streak = 0;
@@ -72,19 +70,19 @@ void play() {
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  a = new Circle(100, 400, 80, 50, 1);
-  clickies.add(a);
-  circles.add(a);
+  //a = new Circle(100, 400, 80, 50, 1);
+  //clickies.add(a);
+  //circles.add(a);
 
-  b = new Circle(250, 480, 80, 100, 2);
-  clickies.add(b);
-  circles.add(b);
+  //b = new Circle(250, 480, 80, 100, 2);
+  //clickies.add(b);
+  //circles.add(b);
 
-  c = new Circle(400, 600, 80, 150, 3);
-  clickies.add(c);
-  circles.add(c);
+  //c = new Circle(400, 600, 80, 150, 3);
+  //clickies.add(c);
+  //circles.add(c);
 
-  d = new Slider(600, 500, 375, 275, 80, 0, 4, 2);
+  d = new Slider(600, 500, 375, 275, 80, 0, 4, 5);
   clickies.add(d);
   sliders.add(d);
 
@@ -92,9 +90,9 @@ void play() {
   //clickies.add(j);
   //sliders.add(j);
 
-  sp = new Spinner(750, 1050, 10);
-  spinners.add(sp);
-  clickies.add(sp);
+  //sp = new Spinner(750, 1050, 10);
+  //spinners.add(sp);
+  //clickies.add(sp);
   
   xd = new HealthBar(500, 1);
   
@@ -336,46 +334,52 @@ void keyPressed() {
   if (k == ESC) exit();
 }
 
+void displayPauseMenu(boolean dead) {
+  if (!dead) {
+    fill(166, 255, 43);
+    rect(300,200,400,100);
+  }
+  fill(255, 130, 28);
+  rect(300,350,400,100);
+  fill(255, 33, 73);
+  rect(300,500,400,100);
+      
+  fill(10);
+  noStroke();
+  if (!dead) {
+    triangle(300,200,320,200,300,220);
+    triangle(700,300,700,280,680,300);
+  }
+      
+  triangle(300,350,320,350,300,370);
+  triangle(700,450,700,430,680,450);
+      
+  triangle(300,500,320,500,300,520);
+  triangle(700,600,700,580,680,600);
+      
+  textSize(50);
+  fill(255);
+  if (!dead) text("Continue",390,265);
+  text("Retry", 440,415);
+  text("Back to Menu", 340,565);
+      
+  p.display();
+      
+  if (!dead && mousePressed && 300 < mouseX && mouseX < 700 && 200 < mouseY && mouseY < 300) pause = false;
+  if (mousePressed && 300 < mouseX && mouseX < 700 && 350 < mouseY && mouseY < 450){
+    play();
+    screen.setMode(1);
+  }
+  if (mousePressed && 300 < mouseX && mouseX < 700 && 500 < mouseY && mouseY < 600){
+    pause = false;
+    screen.setMode(0);
+    play();
+  }
+}
 
-
-void pause() {
-    if (pause) {
-      fill(166, 255, 43);
-      rect(300,200,400,100);
-      fill(255, 130, 28);
-      rect(300,350,400,100);
-      fill(255, 33, 73);
-      rect(300,500,400,100);
-      
-      fill(10);
-      noStroke();
-      triangle(300,200,320,200,300,220);
-      triangle(700,300,700,280,680,300);
-      
-      triangle(300,350,320,350,300,370);
-      triangle(700,450,700,430,680,450);
-      
-      triangle(300,500,320,500,300,520);
-      triangle(700,600,700,580,680,600);
-      
-      textSize(50);
-      fill(255);
-      text("Continue",390,265);
-      text("Retry", 440,415);
-      text("Back to Menu", 340,565);
-      
-      p.display();
-      
-      if (mousePressed && 300 < mouseX && mouseX < 700 && 200 < mouseY && mouseY < 300) pause = false;
-      if (mousePressed && 300 < mouseX && mouseX < 700 && 350 < mouseY && mouseY < 450){
-        play();
-        screen.setMode(1);
-      }
-      if (mousePressed && 300 < mouseX && mouseX < 700 && 500 < mouseY && mouseY < 600){
-        pause = false;
-        screen.setMode(0);
-        play();
-      }
+void pause(boolean dead) {
+    if (pause || over) {
+      displayPauseMenu(dead);
     }
 }
 
@@ -397,8 +401,22 @@ void draw() {
       fill(255);
       p.display();
       xd.display();
+      
+      if (xd.getHealth() == 0) {
+        println(Math.random());
+        mousePressed = false;
+        if (!over) temp = millis();
+        over = true;
+        // i was lazy so i just reformated the pause code
+        // in osu!, dying is the exact same screen anyway
+        if (millis() - temp > 1000) {
+          pause = true;
+        }
+        else displayClickies();
+      }
   
       // text(timer + "", 50, 160);
+      fill(255);
       textSize(32);
       text("Streak: " + streak + "x", 15, 790);
       text("Score: " + score, 770, 35);
@@ -407,7 +425,7 @@ void draw() {
       if (screen.getStart()) play();
     }
   }
-  pause();
+  if (pause) pause(over);
   if (screen.getMode() == 2) {
     screen.helpMenu();
     p.display();
