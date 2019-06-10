@@ -418,20 +418,7 @@ void displayClickies() {
     scoreSlider(s);
     if (s.isDead() && !dead.contains(s)) dead.add(s);
   }
-  // display all spinnners while in their active period
-<<<<<<< HEAD
-  //for(Spinner s : spinners) {
-  //  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
-  //  scoreSpinner(s);
-  //  s.display();
-  //  } else if (timer > s.getEndTime())  {
-  //    s.display();
-  //    s.setDead();
-  //    if (!dead.contains(s)) dead.add(s);
-  //    if (!sp.checked()) scoreSpinner(s);
-  //  }
-  //}
-=======
+
   for(Spinner s : spinners) {
     if (timer > s.getStartTime() && timer < s.getEndTime()) {
     scoreSpinner(s);
@@ -443,16 +430,17 @@ void displayClickies() {
       if (!sp.checked()) scoreSpinner(s);
     }
   }
->>>>>>> 45dfbcf773ca2afd06b7dcaba6a1a6905d792d4e
+
 }
 
 
 void keyPressed() {
   final int k = keyCode;
 
-  if (k == 'P' && screen.getMode() == 2)
+  if ((k == 'P' && screen.getMode() == 2) || tutorial && k == 'P' ){
     pause = !pause;
-
+  }
+  
   if (k == 'R'){
    play();
    screen.setMode(1);
