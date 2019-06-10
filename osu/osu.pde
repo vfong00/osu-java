@@ -50,6 +50,12 @@ Circle v;
 Circle w;
 Slider sl1;
 
+
+Circle tCircle;
+Slider tSlider;
+Slider tSliderRev;
+Spinner tSpinner;
+
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
 ArrayList<Slider> sliders;
@@ -61,6 +67,7 @@ boolean end;
 boolean pause;
 boolean first;
 boolean song;
+boolean tutorial;
 
 void setup() {
   size(1000, 800);
@@ -74,6 +81,7 @@ void varReset() {
   song = false;
   end = false;
   ran = false;
+  tutorial = false;
   timer = 0;
   score = 0;
   streak = 0;
@@ -211,6 +219,19 @@ void play() {
   */
   
   p = new Cursor(width / 2, height / 2);
+  
+  tCircle = new Circle(500, 400, 100, 50, 1);
+  
+  
+  
+  tSlider= new Slider(300, 400,700,400, 80, 790, 2, 0);
+  
+  
+  tSliderRev = new Slider(300, 400,700,400, 80, 790, 3, 2);
+  
+  
+  tSpinner = new Spinner(500, 650, 10);
+  
 }
 
 void scoreCircle(Circle circle) {
@@ -454,7 +475,7 @@ void pause() {
       text("Continue",390,265);
       text("Retry", 440,415);
       text("Back to Menu", 340,565);
-      file.pause();
+      if (file.isPlaying()) file.pause();
       song = false;
       p.display();
       
@@ -472,6 +493,28 @@ void pause() {
         play();
       }
     }
+}
+
+
+void tutorial(){
+  background(10);
+  if(!tCircle.isDead()){
+    fill (255);
+    text("Introducting the hit circle.", 375,250);
+    text("Click on the circle as the approach circle closes in!", 275,300);
+    tCircle.display();
+  }else{
+    if(!tSlider.isDead()){
+      text("Introducting the slider.", 425,350);
+      text("Click and hold on the head of the slider as the approach circle closes in!", 200,300);
+      tSlider.display();
+    }else{
+      text("Now, let's reverse the direction", 350,350);
+      text("When the circle reaches the other side, change direction.", 250,300);
+      tSliderRev.display();
+    }
+  }
+  
 }
 
 void drawSongs(){
@@ -518,6 +561,10 @@ void drawSongs(){
       fill(255);
       text("osu! Tutorial", 30,90);
       popStyle();
+      
+      if(mousePressed && counter > 10){
+        tutorial= true;
+      }
     }
     
     if (570 < mouseX && 350< mouseY && mouseY < 450){
@@ -599,6 +646,7 @@ void draw() {
 
     drawSongs();
     p.display();
+    if (tutorial) tutorial();
   } else if (screen.getMode() == 2 && !pause) {
     background(marisa);
 
