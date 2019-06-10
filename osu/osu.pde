@@ -404,13 +404,13 @@ void endScreen(){
 void displayClickies() {
   // display all circles. When dead, score them.
   textSize(32);
-  //for(Circle c : circles){
-  //  if (timer > c.getStartTime()) c.display();
-  //  if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
-  //    scoreCircle(c);
-  //    dead.add(c);
-  //  }
-  //}
+  for(Circle c : circles){
+   if (timer > c.getStartTime()) c.display();
+   if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
+     scoreCircle(c);
+     dead.add(c);
+   }
+  }
 
   // display all sliders. Score them (for each tick) until they die)
   for(Slider s : sliders){
