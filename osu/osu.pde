@@ -403,16 +403,19 @@ void draw() {
       xd.display();
       
       if (xd.getHealth() == 0) {
-        println(Math.random());
         mousePressed = false;
         if (!over) temp = millis();
         over = true;
         // i was lazy so i just reformated the pause code
         // in osu!, dying is the exact same screen anyway
-        if (millis() - temp > 1000) {
+        if (millis() - temp > 2000) {
           pause = true;
         }
-        else displayClickies();
+        else {
+          delay(50); // because the rest of the game looks slow in comparison lol.
+          // Also, I guess it adds to the osu! game... the game slows down when you die
+          displayClickies();
+        }
       }
   
       // text(timer + "", 50, 160);
