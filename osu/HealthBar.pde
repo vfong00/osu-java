@@ -40,4 +40,8 @@ class HealthBar {
       health = 0;
     }
   }
+  
+  void changeDegenRate(float newRate) {
+    degenRate = newRate;
+  }
 }

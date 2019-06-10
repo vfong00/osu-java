@@ -105,23 +105,23 @@ void play() {
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  a = new Circle(345, 620, 80, 10, 1);
+  a = new Circle(345, 620, 100, 0, 1);
   clickies.add(a);
   circles.add(a);
 
-  b = new Circle(495, 175, 80, 20, 2);
+  b = new Circle(495, 175, 100, 10, 2);
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(645, 620, 80, 30, 3);
+  c = new Circle(645, 620, 100, 20, 3);
   clickies.add(c);
   circles.add(c);
 
-  d = new Circle(260, 350, 80, 40, 4);
+  d = new Circle(260, 350, 100, 30, 4);
   clickies.add(d);
   circles.add(d);
 
-  e = new Circle(730, 350, 80, 50, 5);
+  e = new Circle(730, 350, 100, 40, 5);
   clickies.add(e);
   circles.add(e);
 
@@ -220,7 +220,7 @@ void play() {
   */
 
   p = new Cursor(width / 2, height / 2);
-  xd = new HealthBar(500, 1);
+  xd = new HealthBar(500, 0.75);
 
   tCircle = new Circle(500, 400, 100, 50, 1);
   tSlider = new Slider(300, 400, 700, 400, 80, 790, 2, 1);
@@ -453,6 +453,8 @@ void keyPressed() {
   if ((k == 'P' && screen.getMode() == 2) || tutorial && k == 'P' ){
     pause = !pause;
   }
+  
+  if (k == 'M') xd.changeDegenRate(0);
 
   if (k == 'R'){
    play();
