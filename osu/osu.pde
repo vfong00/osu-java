@@ -10,6 +10,7 @@ int rawScore = 0;
 int rawMaxScore = 0;
 int temp = 0;
 int counter = 0;
+int noFail = 1;
 float accuracy = 0;
 
 int three = 0; //300s
@@ -105,23 +106,23 @@ void play() {
   spinners = new ArrayList<Spinner>();
   dead = new ArrayList<Object>();
 
-  a = new Circle(345, 620, 100, 0, 1);
+  a = new Circle(345, 620, 80, 0, 1);
   clickies.add(a);
   circles.add(a);
 
-  b = new Circle(495, 175, 100, 10, 2);
+  b = new Circle(495, 175, 80, 10, 2);
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(645, 620, 100, 20, 3);
+  c = new Circle(645, 620, 80, 20, 3);
   clickies.add(c);
   circles.add(c);
 
-  d = new Circle(260, 350, 100, 30, 4);
+  d = new Circle(260, 350, 80, 30, 4);
   clickies.add(d);
   circles.add(d);
 
-  e = new Circle(730, 350, 100, 40, 5);
+  e = new Circle(730, 350, 80, 40, 5);
   clickies.add(e);
   circles.add(e);
 
@@ -204,6 +205,8 @@ void play() {
   w = new Circle(250, 600, 80, 830, 17);
   clickies.add(w);
   circles.add(w);
+  
+  
 /*
   d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
   clickies.add(d);
@@ -232,10 +235,10 @@ void play() {
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
   // adding to health
-  if (cScore == 300) xd.changeHealth(65);
-  else if (cScore == 100) xd.changeHealth(15);
-  else if (cScore == 50) xd.changeHealth(1);
-  else xd.changeHealth(-50);
+  if (cScore == 300) xd.changeHealth(noFail * 65);
+  else if (cScore == 100) xd.changeHealth(noFail * 15);
+  else if (cScore == 50) xd.changeHealth(noFail * 1);
+  else xd.changeHealth(noFail * -50);
 
   // actually scoring the circle
   if (cScore < 100) streak = 0;
@@ -275,10 +278,10 @@ void scoreSlider(Slider slider) {
   if (slider.isDead() && !dead.contains(slider)) {
     int sScore = slider.getScore();
 
-    if (sScore == 300) xd.changeHealth(65);
-    else if (sScore == 100) xd.changeHealth(15);
-    else if (sScore == 50) xd.changeHealth(1);
-    else xd.changeHealth(-50);
+    if (sScore == 300) xd.changeHealth(noFail * 65);
+    else if (sScore == 100) xd.changeHealth(noFail * 15);
+    else if (sScore == 50) xd.changeHealth(noFail * 1);
+    else xd.changeHealth(noFail * -50);
 
     int sMult = streak;
     if (sMult > 0) sMult--;
@@ -295,10 +298,10 @@ void scoreSpinner(Spinner spinner) {
     spinner.updateScore();
     int sScore = spinner.getScore();
 
-    if (sScore == 300) xd.changeHealth(65);
-    else if (sScore == 100) xd.changeHealth(15);
-    else if (sScore == 50) xd.changeHealth(1);
-    else xd.changeHealth(-50);
+    if (sScore == 300) xd.changeHealth(noFail * 65);
+    else if (sScore == 100) xd.changeHealth(noFail * 15);
+    else if (sScore == 50) xd.changeHealth(noFail * 1);
+    else xd.changeHealth(noFail * -50);
 
     if (sScore == 0) streak = 0;
     else streak++;
@@ -454,7 +457,15 @@ void keyPressed() {
     pause = !pause;
   }
   
-  if (k == 'M') xd.changeDegenRate(0);
+  if (k == 'M') {
+    noFail = 0;
+    xd.changeDegenRate(0);
+  }
+  
+  if (k == 'N') {
+    noFail = 1;
+    xd.changeDegenRate(0.75);
+  }
 
   if (k == 'R'){
    play();
