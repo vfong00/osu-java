@@ -94,7 +94,6 @@ class Slider extends Circle implements Displayable{
   }
 
   void checkTicked(SliderTick[] g) {
-    text(forward + "", 50, 160);
     SliderTick tick = g[firstNotTicked];
     if (dist(x,y, tick.getX(), tick.getY()) < 1) {
       if (isClicked() && (forward || (firstNotTicked != ticksForward.length - 1))) {
@@ -104,7 +103,7 @@ class Slider extends Circle implements Displayable{
         tick.setTicked(true);
       } else {
         tickScore = 0;
-        totalTicks++;
+        if (forward || (firstNotTicked != ticksForward.length - 1)) totalTicks++;
         tick.setAlive(false);
       }
       if (forward) firstNotTicked++;
@@ -171,8 +170,8 @@ class Slider extends Circle implements Displayable{
              if (atEnd) {
                forward = !forward;
                reversesDone++;
-               updateTicks(forward);
              }
+             updateTicks(forward);
              moveSlider(reversesDone);
              atEnd = false;
              lastTicked = false;
@@ -180,11 +179,8 @@ class Slider extends Circle implements Displayable{
              dead = true;
            }
         }
-        if (!lastTicked) {
-          if (forward) checkTicked(ticksForward);
-          else checkTicked(ticksBackward);
-        }
-        else onTick = false;
+        if (forward) checkTicked(ticksForward);
+        else checkTicked(ticksBackward);
         displayClicky(false);
       } else {
         if (wasClicked || isClicked()) {
