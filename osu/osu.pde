@@ -90,7 +90,7 @@ void play() {
   varReset();
   screen.setStart(false);
   pointer = loadImage("Images/pointer.png");
-  marisa = loadImage("Images/marisa.png");
+  marisa = loadImage("Images/marisa1.png");
   
   file = new SoundFile(this, "marisa.mp3");
   
