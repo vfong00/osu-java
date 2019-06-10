@@ -513,8 +513,8 @@ void tutorial(){
         text("When the circle reaches the other side, change direction.", 225,300);
         tSliderRev.display();
       }else{
-        text("Introducing the spinner", 350,250);
-        text("You hold and drag your cursor rapidly!", 250,300);
+        text("Introducing the spinner", 400,250);
+        text("You hold and drag your cursor rapidly!", 325,300);
         tSpinner.display();
       }
     }
