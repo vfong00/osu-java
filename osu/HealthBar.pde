@@ -17,7 +17,10 @@ class HealthBar {
   }
   
   void fillHealth() {
-    
+    health -= degenRate;
+    if (health < 0) health = 0;
+    fill(255);
+    rect(40, 20, health, 10);
   }
   
   float getHealth() {
