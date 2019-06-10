@@ -56,11 +56,7 @@ ArrayList<Slider> sliders;
 ArrayList<Spinner> spinners;
 ArrayList<Object> dead;
 
-boolean ran;
-boolean end;
-boolean pause;
-boolean first;
-boolean song;
+boolean ran, end, pause, first, song, over;
 
 void setup() {
   size(1000, 800);
@@ -74,6 +70,7 @@ void varReset() {
   song = false;
   end = false;
   ran = false;
+  over = false;
   timer = 0;
   score = 0;
   streak = 0;
@@ -132,89 +129,101 @@ void play() {
   clickies.add(g);
   circles.add(g);
 
-   h = new Circle(650, 600, 80, 260, 8);
-   clickies.add(h);
-   circles.add(h);
+  h = new Circle(650, 600, 80, 260, 8);
+  clickies.add(h);
+  circles.add(h);
 
-   i = new Circle(500, 400, 80, 280, 9);
-   clickies.add(i);
-   circles.add(i);
+  i = new Circle(500, 400, 80, 280, 9);
+  clickies.add(i);
+  circles.add(i);
 
-   j = new Circle(650, 250, 80, 300, 10);
-   clickies.add(j);
-   circles.add(j);
+  j = new Circle(650, 250, 80, 300, 10);
+  clickies.add(j);
+  circles.add(j);
 
-   k = new Circle(650, 150, 80, 320, 11);
-   clickies.add(k);
-   circles.add(k);
+  k = new Circle(650, 150, 80, 320, 11);
+  clickies.add(k);
+  circles.add(k);
 
-   l = new Circle(575, 200, 80, 340, 12);
-   clickies.add(l);
-   circles.add(l);
+  l = new Circle(575, 200, 80, 340, 12);
+  clickies.add(l);
+  circles.add(l);
 
-   m = new Circle(500, 150, 80, 360, 13);
-   clickies.add(m);
-   circles.add(m);
+  m = new Circle(500, 150, 80, 360, 13);
+  clickies.add(m);
+  circles.add(m);
 
-   n = new Circle(425, 200, 80, 380, 14);
-   clickies.add(n);
-   circles.add(n);
+  n = new Circle(425, 200, 80, 380, 14);
+  clickies.add(n);
+  circles.add(n);
 
-   o = new Circle(350, 150, 80, 400, 15);
-   clickies.add(o);
-   circles.add(o);
+  o = new Circle(350, 150, 80, 400, 15);
+  clickies.add(o);
+  circles.add(o);
 
-   q = new Circle(275, 200, 80, 420, 16);
-   clickies.add(q);
-   circles.add(q);
+  q = new Circle(275, 200, 80, 420, 16);
+  clickies.add(q);
+  circles.add(q);
 
-   sp1 = new Spinner(500, 650, 10);
-   spinners.add(sp1);
-   clickies.add(sp1);
+  sp1 = new Spinner(500, 650, 10);
+  spinners.add(sp1);
+  clickies.add(sp1);
 
-   s = new Circle(250, 200, 80, 680, 17);
-   clickies.add(s);
-   circles.add(s);
+  s = new Circle(250, 200, 80, 680, 17);
+  clickies.add(s);
+  circles.add(s);
 
-   sl = new Slider(350,180, 600, 180, 80, 710, 18, 0);
-   clickies.add(sl);
-   circles.add(sl);
+  sl = new Slider(350,180, 600, 180, 80, 710, 18, 0);
+  clickies.add(sl);
+  circles.add(sl);
 
-   t = new Circle(700, 200, 80, 750, 17);
-   clickies.add(t);
-   circles.add(t);
+  t = new Circle(700, 200, 80, 750, 17);
+  clickies.add(t);
+  circles.add(t);
 
-   u = new Circle(700, 600, 80, 770, 17);
-   clickies.add(u);
-   circles.add(u);
+  u = new Circle(700, 600, 80, 770, 17);
+  clickies.add(u);
+  circles.add(u);
 
-   sl1 = new Slider(600, 600,350,600, 80, 790, 18, 0);
-   clickies.add(sl1);
-   circles.add(sl1);
+  sl1 = new Slider(600, 600,350,600, 80, 790, 18, 0);
+  clickies.add(sl1);
+  circles.add(sl1);
 
-   v = new Circle(700, 600, 80, 810, 17);
-   clickies.add(v);
-   circles.add(v);
+  v = new Circle(700, 600, 80, 810, 17);
+  clickies.add(v);
+  circles.add(v);
 
-   w = new Circle(250, 600, 80, 830, 17);
-   clickies.add(w);
-   circles.add(w);
+  w = new Circle(250, 600, 80, 830, 17);
+  clickies.add(w);
+  circles.add(w);
 /*
   d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
   clickies.add(d);
   sliders.add(d);
 
-  //j = new Slider(550, 250, 900, 170, 80, 470, 5, 0);
-  //clickies.add(j);
-  //sliders.add(j);
+  j = new Slider(550, 250, 900, 170, 80, 470, 5, 0);
+  clickies.add(j);
+  sliders.add(j);
+
+  sp = new Spinner(750, 1050, 10);
+  spinners.add(sp);
+  clickies.add(sp);
 
   */
 
   p = new Cursor(width / 2, height / 2);
+  xd = new HealthBar(500, 1);
 }
 
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
+  // adding to health
+  if (cScore == 300) xd.changeHealth(65);
+  else if (cScore == 100) xd.changeHealth(15);
+  else if (cScore == 50) xd.changeHealth(1);
+  else xd.changeHealth(-50);
+
+  // actually scoring the circle
   if (cScore < 100) streak = 0;
   else streak++;
   int sMult = streak;
@@ -242,6 +251,7 @@ void scoreSlider(Slider slider) {
   // check if on tick, and score appropiately
   if (!slider.isDead() && slider.onTick()) {
     if (slider.tickScore() == 10) {
+      xd.changeHealth(40);
       score += 10;
       streak++;
     }
@@ -250,6 +260,12 @@ void scoreSlider(Slider slider) {
   // when slider ends, calculate the end score based on the amount of ticks ticked and add it.
   if (slider.isDead() && !dead.contains(slider)) {
     int sScore = slider.getScore();
+
+    if (sScore == 300) xd.changeHealth(65);
+    else if (sScore == 100) xd.changeHealth(15);
+    else if (sScore == 50) xd.changeHealth(1);
+    else xd.changeHealth(-50);
+
     int sMult = streak;
     if (sMult > 0) sMult--;
     score += sScore + (sScore * sMult);
@@ -264,6 +280,12 @@ void scoreSpinner(Spinner spinner) {
   } else if (!spinner.checked()) {
     spinner.updateScore();
     int sScore = spinner.getScore();
+
+    if (sScore == 300) xd.changeHealth(65);
+    else if (sScore == 100) xd.changeHealth(15);
+    else if (sScore == 50) xd.changeHealth(1);
+    else xd.changeHealth(-50);
+
     if (sScore == 0) streak = 0;
     else streak++;
     int sMult = streak;
@@ -383,14 +405,13 @@ void endScreen(){
 void displayClickies() {
   // display all circles. When dead, score them.
   textSize(32);
-  //for(Circle c : circles){
-  //  if (timer > c.getStartTime()) c.display();
-  //  if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
-  //    scoreCircle(c);
-  //    dead.add(c);
-  //  }
-  //}
-
+  for(Circle c : circles) {
+    if (timer > c.getStartTime()) c.display();
+    if ((c.isDead() || c.isClicked()) && !dead.contains(c)) {
+      scoreCircle(c);
+      dead.add(c);
+    }
+  }
   // display all sliders. Score them (for each tick) until they die)
   for(Slider s : sliders){
     if (timer > s.getStartTime()) s.display();
@@ -399,20 +420,8 @@ void displayClickies() {
   }
   // display all spinnners while in their active period
 <<<<<<< HEAD
-  //for(Spinner s : spinners) {
-  //  if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
-  //  scoreSpinner(s);
-  //  s.display();
-  //  } else if (timer > s.getEndTime())  {
-  //    s.display();
-  //    s.setDead();
-  //    if (!dead.contains(s)) dead.add(s);
-  //    if (!sp.checked()) scoreSpinner(s);
-  //  }
-  //}
-=======
   for(Spinner s : spinners) {
-    if (timer > s.getStartTime() && timer < s.getEndTime()) {
+    if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
     scoreSpinner(s);
     s.display();
     } else if (timer > s.getEndTime())  {
@@ -422,7 +431,15 @@ void displayClickies() {
       if (!sp.checked()) scoreSpinner(s);
     }
   }
->>>>>>> 45dfbcf773ca2afd06b7dcaba6a1a6905d792d4e
+    scoreSpinner(s);
+    s.display();
+    } else if (timer > s.getEndTime())  {
+      s.display();
+      s.setDead();
+      if (!dead.contains(s)) dead.add(s);
+      if (!sp.checked()) scoreSpinner(s);
+    }
+  }
 }
 
 
@@ -443,50 +460,52 @@ void keyPressed() {
   if (k == ESC) exit();
 }
 
+void displayPauseMenu(boolean dead) {
+  if (!dead) {
+    fill(166, 255, 43);
+    rect(300,200,400,100);
+  }
+  fill(255, 130, 28);
+  rect(300,350,400,100);
+  fill(255, 33, 73);
+  rect(300,500,400,100);
 
+  fill(10);
+  noStroke();
+  if (!dead) {
+    triangle(300,200,320,200,300,220);
+    triangle(700,300,700,280,680,300);
+  }
 
-void pause() {
-    if (pause) {
-      fill(166, 255, 43);
-      rect(300,200,400,100);
-      fill(255, 130, 28);
-      rect(300,350,400,100);
-      fill(255, 33, 73);
-      rect(300,500,400,100);
+  triangle(300,350,320,350,300,370);
+  triangle(700,450,700,430,680,450);
 
-      fill(10);
-      noStroke();
-      triangle(300,200,320,200,300,220);
-      triangle(700,300,700,280,680,300);
+  triangle(300,500,320,500,300,520);
+  triangle(700,600,700,580,680,600);
 
-      triangle(300,350,320,350,300,370);
-      triangle(700,450,700,430,680,450);
+  textSize(50);
+  fill(255);
+  if (!dead) text("Continue",390,265);
+  text("Retry", 440,415);
+  text("Back to Menu", 340,565);
 
-      triangle(300,500,320,500,300,520);
-      triangle(700,600,700,580,680,600);
+  p.display();
 
-      textSize(50);
-      fill(255);
-      text("Continue",390,265);
-      text("Retry", 440,415);
-      text("Back to Menu", 340,565);
-      file.pause();
-      song = false;
-      p.display();
+  if (!dead && mousePressed && 300 < mouseX && mouseX < 700 && 200 < mouseY && mouseY < 300) pause = false;
+  if (mousePressed && 300 < mouseX && mouseX < 700 && 350 < mouseY && mouseY < 450){
+    play();
+    screen.setMode(1);
+  }
+  if (mousePressed && 300 < mouseX && mouseX < 700 && 500 < mouseY && mouseY < 600){
+    pause = false;
+    screen.setMode(0);
+    play();
+  }
+}
 
-      if (mousePressed && 300 < mouseX && mouseX < 700 && 200 < mouseY && mouseY < 300){
-        pause = false;
-
-      }
-      if (mousePressed && 300 < mouseX && mouseX < 700 && 350 < mouseY && mouseY < 450){
-        play();
-        screen.setMode(1);
-      }
-      if (mousePressed && 300 < mouseX && mouseX < 700 && 500 < mouseY && mouseY < 600){
-        pause = false;
-        screen.setMode(0);
-        play();
-      }
+void pause(boolean dead) {
+    if (pause || over) {
+      displayPauseMenu(dead);
     }
 }
 
@@ -631,8 +650,26 @@ void draw() {
       if (dead.size() == 0) accuracy = 100;
       fill(255);
       p.display();
+      xd.display();
+
+      if (xd.getHealth() == 0) {
+        mousePressed = false;
+        if (!over) temp = millis();
+        over = true;
+        // i was lazy so i just reformated the pause code
+        // in osu!, dying is the exact same screen anyway
+        if (millis() - temp > 2000) {
+          pause = true;
+        }
+        else {
+          delay(50); // because the rest of the game looks slow in comparison lol.
+          // Also, I guess it adds to the osu! game... the game slows down when you die
+          displayClickies();
+        }
+      }
 
       // text(timer + "", 50, 160);
+      fill(255);
       textSize(32);
       text("Streak: " + streak + "x", 15, 790);
       text("Score: " + score, 770, 35);
@@ -641,7 +678,7 @@ void draw() {
       if (screen.getStart()) play();
     }
   }
-  pause();
+  if (pause) pause(over);
   if (screen.getMode() == 3) {
     screen.helpMenu();
     p.display();
