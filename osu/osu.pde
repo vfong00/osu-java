@@ -22,9 +22,10 @@ Circle a;
 Circle b;
 Circle c;
 Slider d;
+Slider j;
 Spinner sp;
 Cursor p;
-Slider j;
+HealthBar xd;
 
 ArrayList<Object> clickies;
 ArrayList<Circle> circles;
@@ -94,6 +95,8 @@ void play() {
   //sp = new Spinner(750, 1050, 10);
   //spinners.add(sp);
   //clickies.add(sp);
+  
+  xd = new HealthBar(500, 1);
   
   p = new Cursor(width / 2, height / 2);
 }
@@ -374,6 +377,7 @@ void draw() {
       if (dead.size() == 0) accuracy = 100;
       fill(255);
       p.display();
+      xd.display();
   
       // text(timer + "", 50, 160);
       textSize(32);
