@@ -7,13 +7,18 @@ And for more information, use the game's own info page: https://osu.ppy.sh/help/
 TL;DR Clicker rhythm game. <br/>
 This game currently features:
 - Clickable circles that disappear upon being clicked OR when the approach circle is on the circle.
-- Sliders that slide. They can go in a linear fashion, from any point to another
-- Spinners that you need to spin rapidly to clear
+- Sliders that slide. They can go in a linear fashion, from any given point to another point.
+- Spinners that you need to spin rapidly to clear.
 - A streak multiplier
 - Accuracy and score counters (that count all objects just like osu!)
 - Cool textures
 - A main menu with a help screen like osu!
-- Pausing the game, and being able to restart
+- Basic song selection (includes a tutorial, and Silver Forest - Marisa Spark)
+- Pausing the game (with a menu), and being able to restart!
+- A health bar that makes you die if you don't keep it above 0.
+- An end screen that tells you your score!
+- MUSIC!
+
 
 ## But like, how do you even start the game?
 You'll need Processing!
@@ -119,14 +124,25 @@ Slider display is messed up when certain coordinates are greater than others.
 [V] so I'm still really sick from Saturday and I'm dying... but... <br/>
 [V] Cosmetic changes, making certain things neater (both while playing game + while reading code) <br />
 [V] Slight optimization (main menu a little slow still) <br />
-[V] Reworked slider ticks to be more modular
+[V] Reworked slider ticks to be more modular <br />
+[A] Modified the way the options menu looked <br />
 
 ### 6-6-19
-[V] died (sick and went to doctor)
+[V] died (sick and went to doctor) <br />
+[A] Worked on making a level selection <br />
 
 ### 6-7-19
-[V] Fixed some of the slider prints.
+[V] Fixed some of the slider prints. <br />
+[A] Made the level select menu so that when the mouse hovers the bars they get larger <br />
 
 ### 6-8-19
-[V] Finished slider printing
-[V] Made health system.
+[V] Fixed bug with sliders (in printing, moving, ticks for all angles as opposed to Quadrant 1 angles) <br />
+[V] Started health system. <br />
+[A] Made backgrounds change when hovering over level select <br />
+[A] Began constructing the Marisa Spark level <br />
+
+### 6-9-19
+[V] Finished health system <br />
+[V] Wrote a no-fail toggle <br />
+[A] Finished the Marisa Spark level <br />
+[A] Implemented background music and pausing and stop features <br />
