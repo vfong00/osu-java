@@ -1,7 +1,7 @@
 class Slider extends Circle implements Displayable{
-  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist;
+  float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist, angle;
   String num;
-  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, complete, forward;
+  boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, forward, atEnd;
   int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone, totalTicks;
   ApproachCircle c;
   SliderTick[] ticksForward, ticksBackward;
@@ -31,6 +31,10 @@ class Slider extends Circle implements Displayable{
     initScore = 2.5;
     score = 2.5;
     timeDispScore = 255;
+    
+    PVector n = new PVector(10, 0);
+    this.angle = PVector.angleBetween(n,dir);
+    if (y1 > y) angle *= -1;
 
     c = new ApproachCircle(x, y, 2.5 * r);
     this.len = dist(start.x, start.y, x1, y1);
@@ -39,8 +43,8 @@ class Slider extends Circle implements Displayable{
     wasClicked = false;
     lastTicked = false;
     onTick = false;
+    atEnd = false;
     notChecked = true;
-    complete = false;
     moving = false;
     forward = true;
     
@@ -70,7 +74,7 @@ class Slider extends Circle implements Displayable{
     fill(20);
     ellipse(x,y,r-7,r-7);
  //<>//
-    drawLinearGradientDisc(x, y, (r/2) - 5, (r/2) - 5, color(204, 44, 113), color(20,20,20));
+    drawLinearGradientDisc(x, y, (r / 2) - 5, (r / 2) - 5, color(204, 44, 113), color(20,20,20));
     if (number){
       fill(255);
       text(num, x-12, y+5);
@@ -89,11 +93,11 @@ class Slider extends Circle implements Displayable{
     }
   }
 
-  void checkTicked(SliderTick[] g){
+  void checkTicked(SliderTick[] g) {
+    text(forward + "", 50, 160);
     SliderTick tick = g[firstNotTicked];
-    if (dist(x,y, tick.getX(), tick.getY()) < r/4) {
-      onTick = true;
-      if (isClicked()) {
+    if (dist(x,y, tick.getX(), tick.getY()) < 1) {
+      if (isClicked() && (forward || (firstNotTicked != ticksForward.length - 1))) {
         tickScore = 10;
         numTicked++;
         totalTicks++;
@@ -106,23 +110,22 @@ class Slider extends Circle implements Displayable{
       if (forward) firstNotTicked++;
       else firstNotTicked--;
       lastTicked = tick.isEnd();
+      onTick = true;
     } else {
       onTick = false;
     }
   }
 
-  // buggy, only works when going from bottom left to top right.
   void drawSlider(){
-    PVector n = new PVector(10, 0);
-    float angle = PVector.angleBetween(n,dir);
     fill(0,0,0,0);
     stroke(255, 255);
     strokeWeight(4);
-    line(start.x - (r/2)*cos(PI/2-angle), start.y-(r/2)*sin(PI/2-angle), end.x- (r/2)*cos(PI/2-angle), end.y-(r/2)*sin(PI/2-angle)); //top
-    line(start.x - (r/2)*cos(PI/2+angle), start.y+(r/2)*sin(PI/2+angle), end.x - (r/2)*cos(PI/2+angle), end.y+(r/2)*sin(PI/2+angle)); //bottom
-    arc(start.x, start.y, r, r,  PI/2-angle, 3 * PI / 2 - angle);
-    arc(end.x, end.y, r, r, 3 * (PI / 2 )- angle , 2*PI);
-    arc(end.x, end.y, r, r, 0, PI/2-angle);
+    // lines that make up sides of slider
+    line(start.x + (r / 2) * cos((PI / 2) - angle), start.y + (r / 2) * sin((PI / 2) - angle), end.x + (r / 2) * cos((PI / 2) - angle), end.y + (r / 2) * sin((PI / 2) - angle)); // top
+    line(start.x + (r / 2) * cos((PI / 2) + angle), start.y - (r / 2) * sin((PI / 2) + angle), end.x + (r / 2) * cos((PI / 2) + angle), end.y - (r / 2) * sin((PI / 2) + angle)); // bottom
+    // arcs at end of sliders
+    arc(start.x, start.y, r, r, (PI / 2) - angle, (3 * PI / 2) - angle);
+    arc(end.x, end.y, r, r, (3 * PI / 2) - angle , (2 * PI) + (PI / 2) - angle);
     noStroke();
     fill(20);
   }
@@ -134,7 +137,7 @@ class Slider extends Circle implements Displayable{
   
   void updateTicks(boolean forward) {
     boolean end;
-    if (forward) {
+    if (!forward) {
       for (int i = 1; i < ticksForward.length; i++) {
         end = i == ticksForward.length - 1;
         ticksForward[i].setTicked(false);
@@ -155,16 +158,24 @@ class Slider extends Circle implements Displayable{
     if (c.getRadius() < r) {
         moving = true;
         fill(255);
-        if (!complete && (((reversesDone % 2 == 0) && (end.x - x > 1 || end.y - y > 1 )) || ((reversesDone % 2 == 1) && (start.x - x > 1 || start.y - y > 1 )))) {
+        // if it is at the end of a slider
+        if ( ( forward && ( (Math.abs(end.x - x) < 1) && (Math.abs(end.y - y) < 1) ) ) || 
+             ( !forward && ( (Math.abs(start.x - x) < 1) && (Math.abs(start.y - y) < 1) ) )
+           ) {
+          atEnd = true;
           moveSlider(reversesDone);
+          if (!forward) firstNotTicked = 1;
+          else firstNotTicked = ticksForward.length - 1;
         } else {
            if (numReverses != reversesDone) {
-             forward = !forward;
-             updateTicks(forward);
-             reversesDone++;
+             if (atEnd) {
+               forward = !forward;
+               reversesDone++;
+               updateTicks(forward);
+             }
              moveSlider(reversesDone);
+             atEnd = false;
              lastTicked = false;
-             firstNotTicked = 1;
            } else {
              dead = true;
            }
@@ -259,5 +270,3 @@ class Slider extends Circle implements Displayable{
     }
   }
 }
-
-// make sure this works right
