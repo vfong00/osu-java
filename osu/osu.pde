@@ -182,7 +182,7 @@ void play() {
   clickies.add(s);
   circles.add(s);
 
-  sl = new Slider(350,180, 600, 180, 80, 710, 18, 0);
+  sl = new Slider(350,180, 600, 180, 80, 710, 18, 1);
   clickies.add(sl);
   circles.add(sl);
 
@@ -194,7 +194,7 @@ void play() {
   clickies.add(u);
   circles.add(u);
 
-  sl1 = new Slider(600, 600,350,600, 80, 790, 18, 0);
+  sl1 = new Slider(600, 600,350,600, 80, 790, 18, 1);
   clickies.add(sl1);
   circles.add(sl1);
 
