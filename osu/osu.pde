@@ -130,136 +130,19 @@ void play() {
   spinners.add(sp);
   clickies.add(sp);
   
-  sl = new Slider(350,180, 600, 250, 80, 450, 6, 1);
+  sl = new Slider(350,200, 600, 300, 80, 450, 6, 1);
   clickies.add(sl);
   circles.add(sl);
   
-  f = new Circle(650, 275, 80, 650, 7);
-  clickies.add(f);
-  circles.add(f);
-
-  
-  sl1 = new Slider(600, 300,350,500, 80, 700, 18, 1);
+  sl1 = new Slider(600, 400,350,500, 80, 650, 8, 1);
   clickies.add(sl1);
   circles.add(sl1);
   
-  f = new Circle(300, 450, 80, 800, 7);
-  clickies.add(f);
-  circles.add(f);
-  
-  /*
-  f = new Circle(300, 450, 80, 625, 7);
-  clickies.add(f);
-  circles.add(f);
-
-  g = new Circle(300, 250, 80, 675, 8);
-  clickies.add(g);
-  circles.add(g);
-
-  h = new Circle(650, 450, 80, 725, 9);
-  clickies.add(h);
-  circles.add(h);*/
-  
-  
-/*
- j = new Circle(650, 250, 80, 750 , 10);
-  clickies.add(j);
-  circles.add(j);
-  
-  k = new Circle(650, 150, 80, 800, 11);
-  clickies.add(k);
-  circles.add(k);
-
-  l = new Circle(575, 200, 80, 825, 12);
-  clickies.add(l);
-  circles.add(l);
-
-  m = new Circle(500, 150, 80, 850, 13);
-  clickies.add(m);
-  circles.add(m);
-   n = new Circle(425, 200, 80, 875, 14);
-  clickies.add(n);
-  circles.add(n);
-
-  o = new Circle(350, 150, 80, 950, 15);
-  clickies.add(o);
-  circles.add(o);
-
-  q = new Circle(275, 200, 80, 1000, 16);
-  clickies.add(q);
-  circles.add(q);
-  
-  k = new Circle(650, 150, 80, 320, 11);
-  clickies.add(k);
-  circles.add(k);
-
-  l = new Circle(575, 200, 80, 340, 12);
-  clickies.add(l);
-  circles.add(l);
-
-  m = new Circle(500, 150, 80, 360, 13);
-  clickies.add(m);
-  circles.add(m);
-
-  n = new Circle(425, 200, 80, 380, 14);
-  clickies.add(n);
-  circles.add(n);
-
-  o = new Circle(350, 150, 80, 400, 15);
-  clickies.add(o);
-  circles.add(o);
-
-  q = new Circle(275, 200, 80, 420, 16);
-  clickies.add(q);
-  circles.add(q);
-
-  sp1 = new Spinner(500, 650, 10);
+  sp1 = new Spinner(759, 1200, 10);
   spinners.add(sp1);
   clickies.add(sp1);
-
-  s = new Circle(250, 200, 80, 680, 17);
-  clickies.add(s);
-  circles.add(s);
-
-  sl = new Slider(350,180, 600, 180, 80, 710, 18, 1);
-  clickies.add(sl);
-  circles.add(sl);
-
-  t = new Circle(700, 200, 80, 750, 17);
-  clickies.add(t);
-  circles.add(t);
-
-  u = new Circle(700, 600, 80, 770, 17);
-  clickies.add(u);
-  circles.add(u);
-
-  sl1 = new Slider(600, 600,350,600, 80, 790, 18, 1);
-  clickies.add(sl1);
-  circles.add(sl1);
-
-  v = new Circle(700, 600, 80, 810, 17);
-  clickies.add(v);
-  circles.add(v);
-
-  w = new Circle(250, 600, 80, 830, 17);
-  clickies.add(w);
-  circles.add(w);
-  */
   
-/*
-  d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
-  clickies.add(d);
-  sliders.add(d);
-
-  j = new Slider(550, 250, 900, 170, 80, 470, 5, 0);
-  clickies.add(j);
-  sliders.add(j);
-
-  sp = new Spinner(750, 1050, 10);
-  spinners.add(sp);
-  clickies.add(sp);
-
-  */
+  
 
   p = new Cursor(width / 2, height / 2);
   xd = new HealthBar(500, 0.75);
