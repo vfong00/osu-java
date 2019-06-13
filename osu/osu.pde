@@ -609,7 +609,7 @@ void draw() {
       first = false;
       timer++;
       displayClickies();
-      accuracy = (float) rawScore * 100 / rawMaxScore;
+      accuracy = (float) (rawScore * 100 + 600)/ rawMaxScore;
       if (dead.size() == 0) accuracy = 100;
       fill(255);
       p.display();
