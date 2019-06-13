@@ -22,6 +22,7 @@ StartScreen screen;
 HealthBar xd;
 PImage pointer;
 PImage marisa;
+PImage gravity;
 SoundFile file;
 
 Circle a;
@@ -97,6 +98,7 @@ void play() {
   screen.setStart(false);
   pointer = loadImage("Images/pointer.png");
   marisa = loadImage("Images/marisa1.png");
+  gravity = loadImage("Images/gravity.png");
 
   file = new SoundFile(this, "marisa.mp3");
 
@@ -224,11 +226,15 @@ void play() {
 
   p = new Cursor(width / 2, height / 2);
   xd = new HealthBar(500, 0.75);
-
+  
+  //totrial boys
   tCircle = new Circle(500, 400, 100, 50, 1);
   tSlider = new Slider(300, 400, 700, 400, 80, 790, 2, 1);
   tSliderRev = new Slider(300, 400, 700, 400, 80, 790, 3, 2);
   tSpinner = new Spinner(500, 650, 10);
+  
+  //gravity falls boys
+  
 
 }
 
@@ -593,6 +599,7 @@ void drawSongs(){
       line(0,100,1000,100);
 
       fill(255);
+      textSize(30);
       text("osu! Tutorial", 30,90);
       popStyle();
 
@@ -640,8 +647,35 @@ void drawSongs(){
          screen.setStart(true);
       }*/
     }
+    
+    if (570 < mouseX && 440< mouseY && mouseY < 540){
+      gravity.resize(1000,800);
+      background(gravity);
+     
+      fill(204, 44, 113);
+      rect(570,320,450,100,10);
+      fill(255);
+      
 
+      pushStyle();
+      fill(204, 44, 113,100);
+      noStroke();
+      rect(0,0,1000,100);
+      strokeWeight(5);
+      stroke(255);
+      line(0,100,1000,100);
+      text("Gravity Falls", 670,485);
 
+      noStroke();
+      textSize(30);
+      fill(255,255,255);
+      text("Gravity Falls", 30,90);
+
+      if(mousePressed && counter > 10){
+         
+      }
+
+    }
       fill(204, 44, 113);
       rect(590,200,450,100,10);
       fill(255);
@@ -653,7 +687,12 @@ void drawSongs(){
 
       text("Silver Forest", 700,365);
       text("Marisa Spark", 700,395);
-
+      
+      fill(204, 44, 113);
+      rect(590,440,450,100,10);
+      fill(255);
+      text("Gravity Falls", 700,485);
+      
       fill(204, 44, 113,100);
       noStroke();
       rect(0,0,1000,100);
