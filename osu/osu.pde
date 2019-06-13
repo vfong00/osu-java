@@ -138,7 +138,7 @@ void play() {
   clickies.add(sl1);
   circles.add(sl1);
   
-  sp1 = new Spinner(800, 800, 10);
+  sp1 = new Spinner(900, 900, 10);
   spinners.add(sp1);
   clickies.add(sp1);
   
