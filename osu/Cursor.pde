@@ -42,7 +42,7 @@ class Cursor extends Thing implements Displayable {
     fill(255);
     textSize(20);
     text(x+"", 50, 70);
-    text(y+"", 50, 100);
+    //text(y+"", 50, 100);
     //text(mousePressed+"", 50, 130);
   }
   

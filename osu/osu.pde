@@ -22,7 +22,6 @@ StartScreen screen;
 HealthBar xd;
 PImage pointer;
 PImage marisa;
-PImage gravity;
 SoundFile file;
 
 Circle a;
@@ -98,7 +97,6 @@ void play() {
   screen.setStart(false);
   pointer = loadImage("Images/pointer.png");
   marisa = loadImage("Images/marisa1.png");
-  gravity = loadImage("Images/gravity.png");
 
   file = new SoundFile(this, "marisa.mp3");
 
@@ -112,46 +110,85 @@ void play() {
   clickies.add(a);
   circles.add(a);
 
-  b = new Circle(495, 175, 80, 10, 2);
+  b = new Circle(495, 175, 80, 50, 2);
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(645, 620, 80, 20, 3);
+  c = new Circle(645, 620, 80, 75, 3);
   clickies.add(c);
   circles.add(c);
 
-  d = new Circle(260, 350, 80, 30, 4);
+  d = new Circle(260, 350, 80, 100, 4);
   clickies.add(d);
   circles.add(d);
 
-  e = new Circle(730, 350, 80, 40, 5);
+  e = new Circle(730, 350, 80, 175, 5);
   clickies.add(e);
   circles.add(e);
 
-  sp = new Spinner(70, 200, 10);
+  sp = new Spinner(200, 400, 10);
   spinners.add(sp);
   clickies.add(sp);
-
-  f = new Circle(300, 600, 80, 220, 6);
+  
+  sl = new Slider(350,180, 600, 250, 80, 450, 6, 1);
+  clickies.add(sl);
+  circles.add(sl);
+  
+  f = new Circle(650, 275, 80, 650, 7);
   clickies.add(f);
   circles.add(f);
 
-  g = new Circle(300, 250, 80, 240, 7);
+  
+  sl1 = new Slider(600, 300,350,500, 80, 700, 18, 1);
+  clickies.add(sl1);
+  circles.add(sl1);
+  
+  f = new Circle(300, 450, 80, 800, 7);
+  clickies.add(f);
+  circles.add(f);
+  
+  /*
+  f = new Circle(300, 450, 80, 625, 7);
+  clickies.add(f);
+  circles.add(f);
+
+  g = new Circle(300, 250, 80, 675, 8);
   clickies.add(g);
   circles.add(g);
 
-  h = new Circle(650, 600, 80, 260, 8);
+  h = new Circle(650, 450, 80, 725, 9);
   clickies.add(h);
-  circles.add(h);
-
-  i = new Circle(500, 400, 80, 280, 9);
-  clickies.add(i);
-  circles.add(i);
-
-  j = new Circle(650, 250, 80, 300, 10);
+  circles.add(h);*/
+  
+  
+/*
+ j = new Circle(650, 250, 80, 750 , 10);
   clickies.add(j);
   circles.add(j);
+  
+  k = new Circle(650, 150, 80, 800, 11);
+  clickies.add(k);
+  circles.add(k);
 
+  l = new Circle(575, 200, 80, 825, 12);
+  clickies.add(l);
+  circles.add(l);
+
+  m = new Circle(500, 150, 80, 850, 13);
+  clickies.add(m);
+  circles.add(m);
+   n = new Circle(425, 200, 80, 875, 14);
+  clickies.add(n);
+  circles.add(n);
+
+  o = new Circle(350, 150, 80, 950, 15);
+  clickies.add(o);
+  circles.add(o);
+
+  q = new Circle(275, 200, 80, 1000, 16);
+  clickies.add(q);
+  circles.add(q);
+  
   k = new Circle(650, 150, 80, 320, 11);
   clickies.add(k);
   circles.add(k);
@@ -207,7 +244,7 @@ void play() {
   w = new Circle(250, 600, 80, 830, 17);
   clickies.add(w);
   circles.add(w);
-  
+  */
   
 /*
   d = new Slider(500, 600, 600, 500, 80, 200, 4, 2);
@@ -226,25 +263,21 @@ void play() {
 
   p = new Cursor(width / 2, height / 2);
   xd = new HealthBar(500, 0.75);
-  
-  //totrial boys
+
   tCircle = new Circle(500, 400, 100, 50, 1);
   tSlider = new Slider(300, 400, 700, 400, 80, 790, 2, 1);
   tSliderRev = new Slider(300, 400, 700, 400, 80, 790, 3, 2);
   tSpinner = new Spinner(500, 650, 10);
-  
-  //gravity falls boys
-  
 
 }
 
 void scoreCircle(Circle circle) {
   int cScore = circle.getScore();
   // adding to health
-  if (cScore == 300) xd.changeHealth(noFail * 65);
-  else if (cScore == 100) xd.changeHealth(noFail * 15);
-  else if (cScore == 50) xd.changeHealth(noFail * 1);
-  else xd.changeHealth(noFail * -50);
+  if (cScore == 300) xd.changeHealth(noFail * 85);
+  else if (cScore == 100) xd.changeHealth(noFail * 45);
+  else if (cScore == 50) xd.changeHealth(noFail * 25);
+  else xd.changeHealth(noFail * -10);
 
   // actually scoring the circle
   if (cScore < 100) streak = 0;
@@ -373,7 +406,8 @@ void endScreen(){
     countClickyScores();
     ran = true;
   }
-
+  if (file.isPlaying()) file.stop();
+  
   fill(204, 44, 113);
   rect(40,200,500,70,10);
   rect(40,300,500,300,10);
@@ -599,7 +633,6 @@ void drawSongs(){
       line(0,100,1000,100);
 
       fill(255);
-      textSize(30);
       text("osu! Tutorial", 30,90);
       popStyle();
 
@@ -647,35 +680,8 @@ void drawSongs(){
          screen.setStart(true);
       }*/
     }
-    
-    if (570 < mouseX && 440< mouseY && mouseY < 540){
-      gravity.resize(1000,800);
-      background(gravity);
-     
-      fill(204, 44, 113);
-      rect(570,320,450,100,10);
-      fill(255);
-      
 
-      pushStyle();
-      fill(204, 44, 113,100);
-      noStroke();
-      rect(0,0,1000,100);
-      strokeWeight(5);
-      stroke(255);
-      line(0,100,1000,100);
-      text("Gravity Falls", 670,485);
 
-      noStroke();
-      textSize(30);
-      fill(255,255,255);
-      text("Gravity Falls", 30,90);
-
-      if(mousePressed && counter > 10){
-         
-      }
-
-    }
       fill(204, 44, 113);
       rect(590,200,450,100,10);
       fill(255);
@@ -687,12 +693,7 @@ void drawSongs(){
 
       text("Silver Forest", 700,365);
       text("Marisa Spark", 700,395);
-      
-      fill(204, 44, 113);
-      rect(590,440,450,100,10);
-      fill(255);
-      text("Gravity Falls", 700,485);
-      
+
       fill(204, 44, 113,100);
       noStroke();
       rect(0,0,1000,100);
@@ -777,7 +778,7 @@ void draw() {
   if (clickies.size() == dead.size() && clickies.size() != 0) {
     if (!end) temp = millis();
     end = true;
-    if (millis() - temp > 1000) endScreen();
+    if (millis() - temp > 2000) endScreen();
     else displayClickies();
   }
 
