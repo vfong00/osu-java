@@ -138,7 +138,8 @@ class StartScreen {
     rect(380,300,100,40,5); //play
     rect(625,300,60,40,5); //exit
     rect(400,370,40,40,5); //pause
-    rect(660,370,40,40,5); //exit
+    rect(660,370,40,40,5); //restart
+    rect(660,440,40,40,5); //nofail
     //rect(400,430,40,40,5); // click
     ellipse(410,450,50,50); // click
     image(pointer,440,475,45,45);
@@ -154,6 +155,7 @@ class StartScreen {
     text("Pause", 280, 400);
     text("Restart", 530,400);
     text("Click", 280,465);
+    text("No Fail", 530,465);
     text("OK", 480, 563); //button
     
     //keys
@@ -162,6 +164,7 @@ class StartScreen {
     text("Esc", 635, 330);
     text("P", 413, 400);
     text("R", 673, 400);
+    text("M", 670, 470);
     //text("X", 413, 460);
     //text("or", 455, 460);
     text("1", 403, 458);

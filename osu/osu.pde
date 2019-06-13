@@ -134,15 +134,17 @@ void play() {
   clickies.add(sl);
   circles.add(sl);
   
-  sl1 = new Slider(600, 400,350,500, 80, 650, 8, 1);
+  sl1 = new Slider(600, 450,350,550, 80, 650, 8, 1);
   clickies.add(sl1);
   circles.add(sl1);
   
-  sp1 = new Spinner(759, 1200, 10);
+  sp1 = new Spinner(800, 800, 10);
   spinners.add(sp1);
   clickies.add(sp1);
   
-  
+  f = new Circle(730, 350, 80, 900, 5);
+  clickies.add(f);
+  circles.add(f);
 
   p = new Cursor(width / 2, height / 2);
   xd = new HealthBar(500, 0.75);
@@ -454,6 +456,7 @@ void pause(boolean dead) {
 
 void tutorial(){
   background(10);
+  timer++;
   if (!tCircle.isDead()) {
     fill(255);
     text("Introducting the hit circle.", 375,250);
@@ -467,11 +470,17 @@ void tutorial(){
     text("Now, let's reverse the direction", 350,250);
     text("When the circle reaches the other side, change direction.", 225,300);
     tSliderRev.display();
-  } else {
+  } else if (!tSpinner.isComplete()) {
     text("Introducing the spinner", 400,250);
     text("You hold and drag your cursor rapidly!", 325,300);
     tSpinner.display();
+  }else{
+    screen.setMode(1);
+    tutorial = false;
+    counter = 0;
   }
+  p.display();
+  
 }
 
 void drawSongs(){
@@ -550,7 +559,7 @@ void drawSongs(){
       fill(255,255,255);
       text("Silver Forest - Marisa Spark", 30,90);
 
-      if(mousePressed && counter > 10){
+      if(mousePressed && counter > 10 && !tutorial){
          screen.setMode(2);
          screen.setStart(true);
       }
@@ -661,7 +670,7 @@ void draw() {
   if (clickies.size() == dead.size() && clickies.size() != 0) {
     if (!end) temp = millis();
     end = true;
-    if (millis() - temp > 2000) endScreen();
+    if (millis() - temp > 2200) endScreen();
     else displayClickies();
   }
 

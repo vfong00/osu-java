@@ -97,6 +97,10 @@ public class Spinner extends Thing {
     return dead;
   }
   
+  boolean isComplete() {
+    return complete;
+  }
+  
   boolean checked() {
     return checked;
   }
