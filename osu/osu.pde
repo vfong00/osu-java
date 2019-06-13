@@ -33,23 +33,7 @@ Spinner sp;
 Spinner sp1;
 Cursor p;
 Circle f;
-Circle g;
-Circle h;
-Circle i;
-Circle j;
-Circle k;
-Circle l;
-Circle m;
-Circle n;
-Circle o;
-Circle q;
-Circle r;
-Circle s;
-Circle t;
 Slider sl;
-Circle u;
-Circle v;
-Circle w;
 Slider sl1;
 
 
@@ -138,7 +122,7 @@ void play() {
   clickies.add(sl1);
   circles.add(sl1);
   
-  sp1 = new Spinner(900, 900, 10);
+  sp1 = new Spinner(900, 899, 10);
   spinners.add(sp1);
   clickies.add(sp1);
   
