@@ -24,22 +24,14 @@ PImage pointer;
 PImage marisa;
 SoundFile file;
 
-Circle a;
-Circle b;
-Circle c;
-Circle d;
-Circle e;
-Spinner sp;
-Spinner sp1;
+Circle a, b, c, d, e;
+Slider sl, sl1;
+Spinner sp, sp1;
 Cursor p;
-Circle f;
-Slider sl;
-Slider sl1;
 
 
 Circle tCircle;
-Slider tSlider;
-Slider tSliderRev;
+Slider tSlider, tSliderRev;
 Spinner tSpinner;
 
 ArrayList<Object> clickies;
@@ -111,20 +103,20 @@ void play() {
   circles.add(e);
 
   sp = new Spinner(250, 450, 10);
-  spinners.add(sp);
   clickies.add(sp);
+  spinners.add(sp);
   
   sl = new Slider(350, 200, 600, 300, 80, 500, 6, 1);
   clickies.add(sl);
-  circles.add(sl);
+  sliders.add(sl);
   
-  //sl1 = new Slider(600, 450,350,550, 80, 650, 7, 1);
-  //clickies.add(sl1);
-  //circles.add(sl1);
+  sl1 = new Slider(600, 450, 350, 550, 80, 700, 7, 1);
+  clickies.add(sl1);
+  sliders.add(sl1);
   
-  sp1 = new Spinner(900, 1000, 10);
-  spinners.add(sp1);
+  sp1 = new Spinner(950, 1150, 10);
   clickies.add(sp1);
+  spinners.add(sp1);
 
   p = new Cursor(width / 2, height / 2);
   xd = new HealthBar(500, 0.75);
@@ -161,14 +153,12 @@ void scoreSlider(Slider slider) {
     if (slider.moving()) {
       slider.setNotChecked(false);
       streak = 0;
-      println("hawo");
     }
     // check for when clicked first time. Update scores
     else if (slider.wasClicked()) {
       slider.setNotChecked(false);
       if (slider.initScore() > 1.6) streak = 0;
       else streak++;
-      println("hawo");
     }
   }
   // check if on tick, and score appropiately
