@@ -114,21 +114,17 @@ void play() {
   spinners.add(sp);
   clickies.add(sp);
   
-  sl = new Slider(350, 200, 600, 300, 80, 450, 6, 1);
+  sl = new Slider(350, 200, 600, 300, 80, 500, 6, 1);
   clickies.add(sl);
   circles.add(sl);
   
-  sl1 = new Slider(600, 450,350,550, 80, 650, 7, 1);
-  clickies.add(sl1);
-  circles.add(sl1);
+  //sl1 = new Slider(600, 450,350,550, 80, 650, 7, 1);
+  //clickies.add(sl1);
+  //circles.add(sl1);
   
   sp1 = new Spinner(900, 1000, 10);
   spinners.add(sp1);
   clickies.add(sp1);
-  
-  f = new Circle(730, 350, 80, 900, 8);
-  clickies.add(f);
-  circles.add(f);
 
   p = new Cursor(width / 2, height / 2);
   xd = new HealthBar(500, 0.75);
@@ -200,7 +196,10 @@ void scoreSlider(Slider slider) {
 }
 
 void scoreSpinner(Spinner spinner) {
-  if (!spinner.checked()) {
+  if (!spinner.isDead()) {
+    score += spinner.getScore();
+  }
+  else if (!spinner.checked()) {
     spinner.updateScore();
     int sScore = spinner.getScore();
 
@@ -346,7 +345,8 @@ void displayClickies() {
   // display all spinners while in their active period
   for(Spinner spi : spinners) {
     if (timer > spi.getStartTime() && timer < spi.getEndTime()) {
-    spi.display();
+      scoreSpinner(spi);
+      spi.display();
     } else if (timer > spi.getEndTime())  {
       spi.display();
       spi.setDead();

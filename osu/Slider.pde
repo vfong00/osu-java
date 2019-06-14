@@ -2,7 +2,7 @@ class Slider extends Circle implements Displayable{
   float x, y, x1, y1, r, in, score, len, startTime, initScore, timeDispScore, tickDist, angle;
   String num;
   boolean dead, wasClicked, lastTicked, onTick, notChecked, moving, forward, atEnd;
-  int firstNotTicked, numTicked, tickScore, shape, numReverses, reversesDone, totalTicks;
+  int firstNotTicked, numTicked, tickScore, shape, numReverses, timesGone, totalTicks;
   ApproachCircle c;
   SliderTick[] ticksForward, ticksBackward;
   PVector start, end, dir;
@@ -27,7 +27,7 @@ class Slider extends Circle implements Displayable{
     
     firstNotTicked = 1;
     numTicked = 0;
-    reversesDone = 0;
+    timesGone = 0;
     initScore = 2.5;
     score = 2.5;
     timeDispScore = 255;
@@ -162,17 +162,17 @@ class Slider extends Circle implements Displayable{
              ( !forward && ( (Math.abs(start.x - x) < 1) && (Math.abs(start.y - y) < 1) ) )
            ) {
           atEnd = true;
-          moveSlider(reversesDone);
+          moveSlider(timesGone);
           if (!forward) firstNotTicked = 1;
           else firstNotTicked = ticksForward.length - 1;
         } else {
-           if (numReverses != reversesDone) {
+           if (numReverses != timesGone) {
              if (atEnd) {
                forward = !forward;
-               reversesDone++;
+               timesGone++;
              }
              updateTicks(forward);
-             moveSlider(reversesDone);
+             moveSlider(timesGone);
              atEnd = false;
              lastTicked = false;
            } else {
