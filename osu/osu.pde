@@ -161,12 +161,14 @@ void scoreSlider(Slider slider) {
     if (slider.moving()) {
       slider.setNotChecked(false);
       streak = 0;
+      println("hawo");
     }
     // check for when clicked first time. Update scores
     else if (slider.wasClicked()) {
       slider.setNotChecked(false);
       if (slider.initScore() > 1.6) streak = 0;
       else streak++;
+      println("hawo");
     }
   }
   // check if on tick, and score appropiately
@@ -267,7 +269,7 @@ void displayGrade() {
 }
 
 
-void endScreen(){
+void endScreen() {
   if (!ran) {
     countClickyScores();
     ran = true;
@@ -327,7 +329,6 @@ void endScreen(){
 
 void displayClickies() {
   // display all circles. When dead, score them.
-  text(timer, 50, 160);
   textSize(32);
   for(Circle c : circles) {
     if (timer > c.getStartTime()) c.display();
@@ -436,7 +437,7 @@ void pause(boolean dead) {
 }
 
 
-void tutorial(){
+void tutorial() {
   background(10);
   timer++;
   if (!tCircle.isDead()) {
@@ -462,7 +463,6 @@ void tutorial(){
     counter = 0;
   }
   p.display();
-  
 }
 
 void drawSongs(){
@@ -594,7 +594,10 @@ void draw() {
 
     drawSongs();
     p.display();
-    if (tutorial) tutorial();
+    if (tutorial) {
+      tutorial();
+      timer = 0;
+    }
   } else if (screen.getMode() == 2 && !pause) {
     background(marisa);
 
@@ -607,7 +610,6 @@ void draw() {
       first = false;
       timer++;
       displayClickies();
-      println(rawScore + " / " + rawMaxScore);
       accuracy = (float) (rawScore * 100) / rawMaxScore;
       if (dead.size() == 0) accuracy = 100;
       fill(255);
