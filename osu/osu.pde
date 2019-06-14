@@ -98,23 +98,23 @@ void play() {
   clickies.add(b);
   circles.add(b);
 
-  c = new Circle(645, 620, 80, 75, 3);
+  c = new Circle(645, 620, 80, 100, 3);
   clickies.add(c);
   circles.add(c);
 
-  d = new Circle(260, 350, 80, 100, 4);
+  d = new Circle(260, 350, 80, 150, 4);
   clickies.add(d);
   circles.add(d);
 
-  e = new Circle(730, 350, 80, 175, 5);
+  e = new Circle(730, 350, 80, 200, 5);
   clickies.add(e);
   circles.add(e);
 
-  sp = new Spinner(200, 400, 10);
+  sp = new Spinner(250, 450, 10);
   spinners.add(sp);
   clickies.add(sp);
   
-  sl = new Slider(350,200, 600, 300, 80, 450, 6, 1);
+  sl = new Slider(350, 200, 600, 300, 80, 450, 6, 1);
   clickies.add(sl);
   circles.add(sl);
   
@@ -122,7 +122,7 @@ void play() {
   clickies.add(sl1);
   circles.add(sl1);
   
-  sp1 = new Spinner(900, 899, 10);
+  sp1 = new Spinner(900, 1000, 10);
   spinners.add(sp1);
   clickies.add(sp1);
   
@@ -200,9 +200,7 @@ void scoreSlider(Slider slider) {
 }
 
 void scoreSpinner(Spinner spinner) {
-  if (!spinner.isDead()) {
-    score += spinner.getScore();
-  } else if (!spinner.checked()) {
+  if (!spinner.checked()) {
     spinner.updateScore();
     int sScore = spinner.getScore();
 
@@ -330,6 +328,7 @@ void endScreen(){
 
 void displayClickies() {
   // display all circles. When dead, score them.
+  text(timer, 50, 160);
   textSize(32);
   for(Circle c : circles) {
     if (timer > c.getStartTime()) c.display();
@@ -345,15 +344,14 @@ void displayClickies() {
     if (s.isDead() && !dead.contains(s)) dead.add(s);
   }
   // display all spinners while in their active period
-  for(Spinner s : spinners) {
-    if (timer > sp.getStartTime() && timer < sp.getEndTime()) {
-    scoreSpinner(s);
-    s.display();
-    } else if (timer > s.getEndTime())  {
-      s.display();
-      s.setDead();
-      if (!dead.contains(s)) dead.add(s);
-      if (!sp.checked()) scoreSpinner(s);
+  for(Spinner spi : spinners) {
+    if (timer > spi.getStartTime() && timer < spi.getEndTime()) {
+    spi.display();
+    } else if (timer > spi.getEndTime())  {
+      spi.display();
+      spi.setDead();
+      if (!dead.contains(spi)) dead.add(spi);
+      if (!sp.checked()) scoreSpinner(spi);
     }
   } 
 }
@@ -609,7 +607,8 @@ void draw() {
       first = false;
       timer++;
       displayClickies();
-      accuracy = (float) (rawScore * 100 + 600)/ rawMaxScore;
+      println(rawScore + " / " + rawMaxScore);
+      accuracy = (float) (rawScore * 100) / rawMaxScore;
       if (dead.size() == 0) accuracy = 100;
       fill(255);
       p.display();
